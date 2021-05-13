@@ -1,6 +1,10 @@
 /* Should only contain and manage game objects */
 
-function Game(){
+class Game{
+  constructor(){
+    console.log("Game is here");
+    this.Entities = [];
+  }
 
 
 }
