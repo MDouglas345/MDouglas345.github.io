@@ -7,14 +7,22 @@ window.addEventListener('DOMContentLoaded', Init, false);
 var GameSystem;
 var RenderSystem;
 
+
+
 function Init(){
+
   GameSystem = new Game();
   RenderSystem = new Renderer();
-  
-  main();
+
+  //console.log(GameSystem.Entities);
+
+  requestAnimationFrame(mainloop);
+
 }
 
-function main(){
-  console.log("We are here.");
+function mainloop(){
+  GameSystem.Update();
 
+
+  requestAnimationFrame(mainloop);
 }
