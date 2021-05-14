@@ -2,7 +2,7 @@ class Rigidbody{
   constructor(){
     this.Pos = new Vec2(0,0);
     this.Vel = new Vec2(0,0);
-    this.Acc = new Vel(0,0);
+    this.Acc = new Vec2(0,0);
   }
 
   get Position(){
@@ -18,7 +18,7 @@ class Rigidbody{
   }
 
   set Velocity(vel){
-    this.Vel = pos;
+    this.Vel = vel;
   }
 
   get Acceleration(){
@@ -27,5 +27,16 @@ class Rigidbody{
 
   set Acceleration(acc){
     this.Acc = acc;
+  }
+
+  Update(){
+    /*Simple euler integration goes here*/
+    console.log("updating rigid");
+  }
+}
+
+class NoRigidbody extends Rigidbody{
+  Update(){
+    console.log("Not updating rigid");
   }
 }
