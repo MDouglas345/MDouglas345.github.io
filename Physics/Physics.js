@@ -1,6 +1,6 @@
 class PhysicsSystem{
   constructor(e){
-    this.m_gravity = new Vec2(0,0);
+    this.m_gravity = new Vec2(0,5);
     this.m_GlobalForces = new Vec2(0,0);
     this.entities = e;
 
@@ -30,6 +30,17 @@ class PhysicsSystem{
   }
 
   Update(elapsed){
-    
+    this.entities.forEach(item =>{
+
+      item.Rigidbody.AddAcc(this.m_gravity.rMult(elapsed));
+      item.Rigidbody.AddAcc(this.m_GlobalForces.rMult(elapsed));
+
+      item.Rigidbody.Update(elapsed);
+
+      item.Rigidbody.ResetAcc();
+
+      console.log(item);
+
+    });
   }
 }

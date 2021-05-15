@@ -1,10 +1,10 @@
 class Renderer{
-  constructor(){
-
+  constructor(e){
+    this.Entities = e;
   }
 
   Update(){
-    
+
   }
 
 }

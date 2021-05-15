@@ -3,6 +3,7 @@ class Rigidbody{
     this.Pos = new Vec2(0,0);
     this.Vel = new Vec2(0,0);
     this.Acc = new Vec2(0,0);
+
   }
 
   get Position(){
@@ -29,14 +30,36 @@ class Rigidbody{
     this.Acc = acc;
   }
 
-  Update(){
+  get Position(){
+    return [this.Pos.X,this.Pos.Y];
+  }
+
+  set Position(acc){
+    this.Pos = acc;
+  }
+
+
+  AddAcc(other){
+    this.Acc.Add(other);
+  }
+
+  ResetAcc(){
+    this.Acc.Mult(0);
+  }
+
+  Update(elapsed){
     /*Simple euler integration goes here*/
-    console.log("updating rigid");
+    //console.log("updating rigid");
+
+    this.Vel.Add(this.Acc.rMult(elapsed));
+    this.Pos.Add(this.Vel.rMult(elapsed));
+
+
   }
 }
 
 class NoRigidbody extends Rigidbody{
   Update(){
-    console.log("Not updating rigid");
+    //console.log("Not updating rigid");
   }
 }

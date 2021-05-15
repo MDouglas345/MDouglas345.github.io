@@ -5,15 +5,16 @@ class Game{
     console.log("Game is here");
     this.m_Player = new Player();
     this.Entities = [];
-    //console.log(this.Entities);
+
     this.Physics = new PhysicsSystem(this.Entities);
+
     this.Entities.push(this.m_Player);
     this.Entities.push(new GameObject());
 
 
   }
 
-  Update(){
+  Update(elapsed){
     console.log("Game is updating");
     /*
     Stages to go through in order
@@ -30,7 +31,7 @@ class Game{
     The idea being that all objects could have a rigidbody or not and will update accordingly
     */
 
-    this.Physics.Test();
+    this.Physics.Update(elapsed);
 
     /*
     Collision detection and correction
