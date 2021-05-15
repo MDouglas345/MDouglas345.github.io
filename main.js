@@ -22,6 +22,7 @@ function Init(){
 
 function mainloop(){
   GameSystem.Update();
+  RenderSystem.Update();
 
 
   requestAnimationFrame(mainloop);

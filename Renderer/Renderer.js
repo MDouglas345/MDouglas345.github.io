@@ -1,5 +1,9 @@
 class Renderer{
   constructor(){
+
+  }
+
+  Update(){
     
   }
 

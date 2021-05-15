@@ -5,8 +5,12 @@ class Game{
     console.log("Game is here");
     this.m_Player = new Player();
     this.Entities = [];
+    //console.log(this.Entities);
+    this.Physics = new PhysicsSystem(this.Entities);
     this.Entities.push(this.m_Player);
     this.Entities.push(new GameObject());
+
+
   }
 
   Update(){
@@ -21,16 +25,17 @@ class Game{
 
     /*
     Rigidbody update
+    instead, gonna create a dedicated physics class that will go through all
+    gameobjects and calling their rigidbody update and passing args
+    The idea being that all objects could have a rigidbody or not and will update accordingly
     */
-    this.Entities.forEach(item => {
 
-      item.Rigidbody.Update();
-
-   });
+    this.Physics.Test();
 
     /*
     Collision detection and correction
     */
+
 
 
 
