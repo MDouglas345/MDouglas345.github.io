@@ -6,5 +6,5 @@ class Player extends GameObject{
   }
 Update(){
   console.log("Player updating");
-}
+  }
 }

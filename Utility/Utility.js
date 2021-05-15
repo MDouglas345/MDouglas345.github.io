@@ -43,4 +43,5 @@ class Vec2{
   Dot(other){
     /* Need to freshen up my vector math.*/
   }
+  
 }

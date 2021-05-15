@@ -11,21 +11,12 @@ var PrevTime;
 var ElapsedTime;
 
 
-
 function Init(){
 
   GameSystem = new Game();
   RenderSystem = new Renderer(GameSystem.Entities);
 
   //console.log(GameSystem.Entities);
-
-  var a = new Vec2(0,0);
-  var b = new Vec2(5,5);
-
-  a.Add(b);
-
-  console.log(a);
-  console.log(b);
 
   PrevTime = 0;
   ElapsedTime = 0;

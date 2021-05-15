@@ -1,9 +1,17 @@
 /* Should only contain and manage game objects */
 
+/*
+  This File is responsibe for giving gameobjects information for their update Function
+  All internal systems will congregate here.
+  Done : PhysicsSystem
+  ToDo : ParticleSystem
+*/
+
 class Game{
   constructor(){
     console.log("Game is here");
     this.m_Player = new Player();
+    
     this.Entities = [];
 
     this.Physics = new PhysicsSystem(this.Entities);
