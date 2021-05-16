@@ -13,14 +13,29 @@
   Another idea :
   Instead of intializing and storing direct images, I have a new class called DrawRes.
   This will contain a Sprite and a function of what to do when Draw is called.
+  Draw will take a reference to the canvas and any other data relevant for the object being drawn.
+
+  A step further would be to encapsulate the methods that are used to draw since they are likely to be resued.
+  So in all, DrawRes would contain a Sprite ID and a reference to a DrawObject object, which would contain a
+  function that accepts a context and any relevant information.
 */
+
 class Renderer{
   constructor(e){
+
+    this.GameViewContext = this.GameArea = document.getElementById("GameView").getContext("2d");
     this.Entities = e;
+    this.Images = [];
   }
 
   Update(){
+    console.log("Game is rendering");
+    
+    this.Entities.forEach(item =>{
 
+      item.DrawRes.Draw();
+
+    });
   }
 
 }

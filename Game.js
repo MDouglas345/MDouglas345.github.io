@@ -11,7 +11,7 @@ class Game{
   constructor(){
     console.log("Game is here");
     this.m_Player = new Player();
-    
+
     this.Entities = [];
 
     this.Physics = new PhysicsSystem(this.Entities);
@@ -24,6 +24,7 @@ class Game{
 
   Update(elapsed){
     console.log("Game is updating");
+    
     /*
     Stages to go through in order
     1. Rigidbody Update
