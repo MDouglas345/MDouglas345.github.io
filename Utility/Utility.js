@@ -40,8 +40,20 @@ class Vec2{
     return sum;
   }
 
+  Divide(other){
+    this.X /= other;
+    this.Y /= other;
+  }
+
+  rDivide(other){
+    let sum = new Vec2(0,0);
+    sum.X = this.X / other;
+    sum.Y = this.Y / other;
+    return sum;
+  }
+
   Dot(other){
     /* Need to freshen up my vector math.*/
   }
-  
+
 }

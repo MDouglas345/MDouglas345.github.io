@@ -21,21 +21,46 @@
 */
 
 class Renderer{
-  constructor(e){
+  constructor(e, c){
 
-    this.GameViewContext = this.GameArea = document.getElementById("GameView").getContext("2d");
+    this.GameViewContext = document.getElementById("GameView").getContext("2d");
+    this.CanvasWidth = this.GameViewContext.canvas.width;
+    this.CanvasHeight = this.GameViewContext.canvas.height;
+    //this.GameViewContext.scale(0.5,0.5);
+
     this.Entities = e;
+    this.m_Camera = c;
+
     this.Images = [];
+
+    this.Images.push(new Image());
+
+    this.Images[0].src = "Resources/brave-lion.png";
   }
 
   Update(){
-    console.log("Game is rendering");
-    
+
     this.Entities.forEach(item =>{
 
-      item.DrawRes.Draw();
+      var ScreenSpace = this.WorldToScreen(item.Rigidbody);
+      item.DrawRes.Draw(this.GameViewContext, this.Images[item.DrawRes.SpriteID], ScreenSpace, this.m_Camera.Zoom);
 
     });
+  }
+
+  Debug(){
+    this.GameViewContext.fillRect(0 ,0 ,100 ,100);
+  }
+
+  Clear(){
+    this.GameViewContext.clearRect(0,0,this.CanvasWidth, this.CanvasHeight);
+  }
+
+  WorldToScreen(item){
+    let screenpos = item.Pos.rSub(this.m_Camera.Rigidbody.Pos);
+    screenpos.Mult(this.m_Camera.Zoom);
+
+    return screenpos;
   }
 
 }

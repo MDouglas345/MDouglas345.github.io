@@ -9,22 +9,29 @@
 
 class Game{
   constructor(){
-    console.log("Game is here");
     this.m_Player = new Player();
+
+    this.m_Player.Rigidbody.Position = new Vec2(50,50);
+    this.m_Camera = new Camera(this.m_Player.Rigidbody);
 
     this.Entities = [];
 
     this.Physics = new PhysicsSystem(this.Entities);
 
     this.Entities.push(this.m_Player);
-    this.Entities.push(new GameObject());
+    this.Entities.push(this.m_Camera);
+    this.Entities.push(new DebugObject());
 
+
+  }
+
+  EarlyUpdate(elapsed){
 
   }
 
   Update(elapsed){
     console.log("Game is updating");
-    
+
     /*
     Stages to go through in order
     1. Rigidbody Update
@@ -47,8 +54,10 @@ class Game{
     */
 
 
+  }
 
-
+  LateUpdate(elapsed){
+    this.m_Camera.Update(elapsed);
   }
 
 

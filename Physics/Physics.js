@@ -31,9 +31,10 @@ class PhysicsSystem{
 
   Update(elapsed){
     this.entities.forEach(item =>{
+      //console.log(item);
 
-      item.Rigidbody.AddAcc(this.m_gravity.rMult(elapsed));
-      item.Rigidbody.AddAcc(this.m_GlobalForces.rMult(elapsed));
+      item.Rigidbody.AddAcc(this.m_gravity);
+      item.Rigidbody.AddAcc(this.m_GlobalForces);
 
       item.Rigidbody.Update(elapsed);
 

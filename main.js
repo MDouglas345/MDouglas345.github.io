@@ -14,7 +14,7 @@ var ElapsedTime;
 function Init(){
 
   GameSystem = new Game();
-  RenderSystem = new Renderer(GameSystem.Entities);
+  RenderSystem = new Renderer(GameSystem.Entities, GameSystem.m_Camera);
 
   //console.log(GameSystem.Entities);
 
@@ -30,10 +30,14 @@ function mainloop(timestep){
   ElapsedTime = timestep - PrevTime;
   PrevTime = timestep;
 
-  //console.log(ElapsedTime);
+  RenderSystem.Clear();
 
+  GameSystem.EarlyUpdate(ElapsedTime);
   GameSystem.Update(ElapsedTime);
+  GameSystem.LateUpdate(ElapsedTime);
+
   RenderSystem.Update();
+  //RenderSystem.Debug();
 
 
 
