@@ -24,7 +24,6 @@ class BDrawFunction extends DrawFunction{
   }
 
   Draw(context, imageRef, Pos, scale){
-    console.log(imageRef);
-    context.drawImage(imageRef,Pos.X, Pos.Y, 50 * scale, 50 * scale);
+    context.drawImage(imageRef,Pos.X, Pos.Y, 10 * scale, 10 * scale);
   }
 }
