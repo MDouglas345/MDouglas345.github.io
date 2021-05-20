@@ -6,14 +6,35 @@ window.addEventListener('DOMContentLoaded', Init, false);
 
 var GameSystem;
 var RenderSystem;
+var InputSystem;
+
+var Global = window || global;
 
 var PrevTime;
 var ElapsedTime;
+
+document.addEventListener("keydown", function(event){
+
+  if (InputSystem){
+    InputSystem.HandleButtonEvent(event.keyCode, event.type);
+  }
+},true);
+
+document.addEventListener("keyup", function(event){
+
+  if (InputSystem){
+    InputSystem.HandleButtonEvent(event.keyCode, event.type);
+  }
+},true);
 
 
 function Init(){
 
   GameSystem = new Game();
+  InputSystem = new Controller();
+  Global.InputSystem = InputSystem;
+
+
   RenderSystem = new Renderer(GameSystem.Entities, GameSystem.m_Camera);
 
   //console.log(GameSystem.Entities);

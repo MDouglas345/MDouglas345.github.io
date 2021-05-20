@@ -13,4 +13,8 @@ class GameObject{
     this.DrawRes = new DrawRes();
 
   }
+
+  Update(){
+    
+  }
 }

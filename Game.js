@@ -49,6 +49,10 @@ class Game{
 
     this.Physics.Update(elapsed);
 
+    this.Entities.forEach(item =>{
+      item.Update();
+    });
+
     /*
     Collision detection and correction
     */
