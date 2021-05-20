@@ -47,7 +47,7 @@ function Init(){
 }
 
 function mainloop(timestep){
-  timestep = timestep / 1000;
+  timestep = timestep / 1000
   ElapsedTime = timestep - PrevTime;
   PrevTime = timestep;
 

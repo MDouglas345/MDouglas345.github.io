@@ -13,8 +13,15 @@ class GameObject{
     this.DrawRes = new DrawRes();
 
   }
+  EarlyUpdate(felapsed){
 
-  Update(){
-    
+  }
+
+  Update(felapsed){
+
+  }
+
+  LateUpdate(felapsed){
+
   }
 }

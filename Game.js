@@ -26,7 +26,9 @@ class Game{
   }
 
   EarlyUpdate(elapsed){
-
+    this.Entities.forEach(item =>{
+      item.EarlyUpdate(elapsed);
+    });
   }
 
   Update(elapsed){
@@ -50,7 +52,7 @@ class Game{
     this.Physics.Update(elapsed);
 
     this.Entities.forEach(item =>{
-      item.Update();
+      item.Update(elapsed);
     });
 
     /*
@@ -61,7 +63,9 @@ class Game{
   }
 
   LateUpdate(elapsed){
-    this.m_Camera.Update(elapsed);
+    this.Entities.forEach(item =>{
+      item.LateUpdate(elapsed);
+    });
   }
 
 

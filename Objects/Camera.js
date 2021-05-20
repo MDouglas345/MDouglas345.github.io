@@ -4,7 +4,8 @@ class Camera extends GameObject{
     this.m_FocusPoint = Focus;
     this.Zoom = 1;
   }
-  Update(felapsed){
+  LateUpdate(felapsed){
     console.log("Camera is updating");
   }
+
 }
