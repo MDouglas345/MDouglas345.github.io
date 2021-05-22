@@ -56,4 +56,9 @@ class Vec2{
     /* Need to freshen up my vector math.*/
   }
 
+  Cross(other){
+    let x = (this.X * other.Y) - (this.Y * other.X);
+    return x;
+  }
+
 }

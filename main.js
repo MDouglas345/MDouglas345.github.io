@@ -34,10 +34,7 @@ function Init(){
   InputSystem = new Controller();
   Global.InputSystem = InputSystem;
 
-
   RenderSystem = new Renderer(GameSystem.Entities, GameSystem.m_Camera);
-
-  //console.log(GameSystem.Entities);
 
   PrevTime = 0;
   ElapsedTime = 0;

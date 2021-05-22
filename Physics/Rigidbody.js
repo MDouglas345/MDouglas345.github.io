@@ -4,6 +4,10 @@ class Rigidbody{
     this.Vel = new Vec2(0,0);
     this.Acc = new Vec2(0,0);
 
+    this.Orien = 0;
+    this.AngAcc = 0;
+    this.AngVel = 0;
+
     this.Mass = 1;
 
   }
@@ -40,13 +44,20 @@ class Rigidbody{
     this.Pos = acc;
   }
 
-
+  AddGrav(g){
+    this.Acc.Add(g);
+  }
   AddAcc(other){
     this.Acc.Add(other.rDivide(this.Mass));
   }
 
+  AddTorq(other){
+    this.AngAcc += other;
+  }
+
   ResetAcc(){
     this.Acc.Mult(0);
+    this.AngAcc = 0;
   }
 
   Update(elapsed){
@@ -54,6 +65,9 @@ class Rigidbody{
 
     this.Vel.Add(this.Acc.rMult(elapsed));
     this.Pos.Add(this.Vel.rMult(elapsed));
+
+    this.AngVel += this.AngAcc * elapsed;
+    this.Orien += this.AngVel * elapsed;
 
 
   }

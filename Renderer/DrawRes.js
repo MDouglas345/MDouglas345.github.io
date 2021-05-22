@@ -2,6 +2,7 @@ class DrawRes{
   constructor(){
     this.SpriteID = -1;
     this.DrawFunc = new DrawFunction();
+    this.Dimensions = new Vec2(1,1);
   }
 
   Draw(context, imageRef, pos, scale){
@@ -23,6 +24,6 @@ class PlayerRes extends DrawRes{
   constructor(){
     super();
     this.SpriteID = 0;
-    this.DrawFunc = new BDrawFunction();
+    this.DrawFunc = new BRotatedDrawFunction();
   }
 }

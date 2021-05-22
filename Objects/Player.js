@@ -6,11 +6,14 @@ class Player extends GameObject{
     this.Name = "Player";
     this.Rigidbody = new Rigidbody();
     this.DrawRes = new PlayerRes();
-    this.Rigidbody.Mass = 0.5;
+    this.DrawRes.Dimensions = new Vec2(50,50);
+    this.Rigidbody.Mass = 5;
+  }
+  EarlyUpdate(felapsed){
+
   }
 
 Update(){
-  console.log("Player updating");
-  
+  console.log(this.Rigidbody.Orien);
   }
 }
