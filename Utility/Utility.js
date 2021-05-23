@@ -61,4 +61,12 @@ class Vec2{
     return x;
   }
 
+  static GetVectorFromAngle(other){
+    let vec = new Vec2(0,0);
+    vec.X = Math.cos(-other);
+    vec.Y = Math.sin(other);
+
+    return vec;
+  }
+
 }

@@ -11,13 +11,15 @@ class Player extends GameObject{
   }
   EarlyUpdate(felapsed){
     if (Global.InputSystem.GetKeyState('A') == "keydown"){
-      this.Rigidbody.Orien += 5 * felapsed;
-    }
-    if (Global.InputSystem.GetKeyState('D') == "keydown"){
       this.Rigidbody.Orien -= 5 * felapsed;
     }
+    if (Global.InputSystem.GetKeyState('D') == "keydown"){
+      this.Rigidbody.Orien += 5 * felapsed;
+    }
     if (Global.InputSystem.GetKeyState('W') == "keydown"){
-
+      let Dir = Vec2.GetVectorFromAngle(this.Rigidbody.Orien);
+      this.Rigidbody.AddAcc(Dir.rMult(15));
+      console.log(this.Rigidbody.Orien, this.Rigidbody.Vel);
     }
   }
 

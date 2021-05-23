@@ -1,6 +1,6 @@
 class PhysicsSystem{
   constructor(e){
-    this.m_gravity = new Vec2(0,9);
+    this.m_gravity = new Vec2(0,0);
     this.m_GlobalForces = new Vec2(0,0);
     this.entities = e;
 
