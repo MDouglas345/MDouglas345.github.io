@@ -5,7 +5,7 @@ class Camera extends GameObject{
     this.Zoom = 1;
   }
   LateUpdate(felapsed){
-    console.log("Camera is updating");
+    
   }
 
 }

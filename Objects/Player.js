@@ -10,10 +10,18 @@ class Player extends GameObject{
     this.Rigidbody.Mass = 5;
   }
   EarlyUpdate(felapsed){
+    if (Global.InputSystem.GetKeyState('A') == "keydown"){
+      this.Rigidbody.Orien += 5 * felapsed;
+    }
+    if (Global.InputSystem.GetKeyState('D') == "keydown"){
+      this.Rigidbody.Orien -= 5 * felapsed;
+    }
+    if (Global.InputSystem.GetKeyState('W') == "keydown"){
 
+    }
   }
 
 Update(){
-  console.log(this.Rigidbody.Orien);
+  //console.log(this.Rigidbody.Orien);
   }
 }

@@ -43,6 +43,7 @@ class Renderer{
     this.Entities.forEach(item =>{
 
       var ScreenSpace = this.WorldToScreen(item.Rigidbody);
+      //console.log(this.GameViewContext, this.Images[item.DrawRes.SpriteID], ScreenSpace, item.DrawRes.Dimensions.rMult(this.m_Camera.Zoom) , item.Rigidbody.Orien);
       item.DrawRes.Draw(this.GameViewContext, this.Images[item.DrawRes.SpriteID], ScreenSpace, item.DrawRes.Dimensions.rMult(this.m_Camera.Zoom) , item.Rigidbody.Orien);
 
     });

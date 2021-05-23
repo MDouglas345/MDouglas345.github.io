@@ -5,8 +5,8 @@ class DrawRes{
     this.Dimensions = new Vec2(1,1);
   }
 
-  Draw(context, imageRef, pos, scale){
-    this.DrawFunc.Draw(context, imageRef, pos, scale);
+  Draw(context, imageRef, pos, scale, rot){
+    this.DrawFunc.Draw(context, imageRef, pos, scale, rot);
   }
 }
 
@@ -16,8 +16,6 @@ class DebugSquareRes extends DrawRes{
     this.SpriteID = 0;
     this.DrawFunc = new DebugSquareFunction();
   }
-
-
 }
 
 class PlayerRes extends DrawRes{
