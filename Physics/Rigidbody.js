@@ -51,6 +51,10 @@ class Rigidbody{
     this.Acc.Add(other.rDivide(this.Mass));
   }
 
+  AddVel(other){
+    this.Vel.Add(other);
+  }
+
   AddTorq(other){
     this.AngAcc += other;
   }

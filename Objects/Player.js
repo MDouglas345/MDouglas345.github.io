@@ -18,8 +18,8 @@ class Player extends GameObject{
     }
     if (Global.InputSystem.GetKeyState('W') == "keydown"){
       let Dir = Vec2.GetVectorFromAngle(this.Rigidbody.Orien);
-      this.Rigidbody.AddAcc(Dir.rMult(15));
-      console.log(this.Rigidbody.Orien, this.Rigidbody.Vel);
+      this.Rigidbody.AddVel(Dir.rMult(15));
+
     }
   }
 
