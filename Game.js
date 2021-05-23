@@ -8,13 +8,16 @@
 */
 
 class Game{
+  static Entities = [];
   constructor(){
     this.m_Player = new Player();
 
     this.m_Player.Rigidbody.Position = new Vec2(50,50);
     this.m_Camera = new Camera(this.m_Player.Rigidbody);
 
-    this.Entities = [];
+
+
+    this.Entities = Game.Entities;
 
     this.Physics = new PhysicsSystem(this.Entities);
 
@@ -66,6 +69,11 @@ class Game{
     this.Entities.forEach(item =>{
       item.LateUpdate(elapsed);
     });
+  }
+
+  static AddObject(object){
+
+    this.Entities.push(object);
   }
 
 

@@ -13,14 +13,25 @@ var Global = window || global;
 var PrevTime;
 var ElapsedTime;
 
-document.addEventListener("keydown", function(event){
+
+
+document.addEventListener("keyup", function(event){
 
   if (InputSystem){
     InputSystem.HandleButtonEvent(event.keyCode, event.type);
   }
 },true);
 
-document.addEventListener("keyup", function(event){
+function copyInstance(original){
+  var copied = Object.assign(
+    Object.create(
+      Object.getPrototypeOf(original)
+    ), original
+  );
+  return copied;
+}
+
+document.addEventListener("keydown", function(event){
 
   if (InputSystem){
     InputSystem.HandleButtonEvent(event.keyCode, event.type);

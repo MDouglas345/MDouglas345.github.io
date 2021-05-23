@@ -34,8 +34,10 @@ class Renderer{
     this.Images = [];
 
     this.Images.push(new Image());
+    this.Images.push(new Image());
 
     this.Images[0].src = "Resources/brave-lion@3x.jpeg";
+    this.Images[1].src = "Resources/laserBullet.png";
   }
 
   Update(){

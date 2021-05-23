@@ -1,3 +1,11 @@
+/*
+  All Rendering types will go here. This encapsulation makes it easy to have many different configurations
+  for objects to swap even in runtime.
+  Consists of an ID that matches with Renderer.ImageRefs array
+  A reference to a class that handles the actual rendering keyCode
+  A Dimensions which mirrors the in game size of an object.
+*/
+
 class DrawRes{
   constructor(){
     this.SpriteID = -1;
@@ -22,6 +30,14 @@ class PlayerRes extends DrawRes{
   constructor(){
     super();
     this.SpriteID = 0;
+    this.DrawFunc = new BRotatedDrawFunction();
+  }
+}
+
+class DefaultProjectile extends DrawRes{
+  constructor(){
+    super();
+    this.SpriteID = 1;
     this.DrawFunc = new BRotatedDrawFunction();
   }
 }

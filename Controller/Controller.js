@@ -1,3 +1,7 @@
+/*
+  This class handles all input from the keyboard and makes it easily accessible anywhere else.
+  A simple map that links an easy to use string with its key code value.
+*/
 class Controller{
   constructor(){
     this.KeyStates = [];
@@ -11,6 +15,7 @@ class Controller{
     this.KeyMap.set('S' , 83);
     this.KeyMap.set('A' , 65);
     this.KeyMap.set('D' , 68);
+    this.KeyMap.set(' ' , 32);
   }
 
   HandleButtonEvent(keycode, event){
