@@ -21,11 +21,20 @@ class Game{
 
     this.Physics = new PhysicsSystem(this.Entities);
 
+    /*
     this.Entities.push(this.m_Player);
     this.Entities.push(this.m_Camera);
     this.Entities.push(new DebugObject());
+    */
 
 
+
+  }
+
+  Init(){
+    Game.AddObject(this.m_Player);
+    Game.AddObject(this.m_Camera);
+    Game.AddObject(new DebugObject());
   }
 
   EarlyUpdate(elapsed){
@@ -35,7 +44,6 @@ class Game{
   }
 
   Update(elapsed){
-    console.log("Game is updating");
 
     /*
     Stages to go through in order
@@ -74,6 +82,7 @@ class Game{
   static AddObject(object){
 
     this.Entities.push(object);
+    Renderer.AddObject(object);
   }
 
 

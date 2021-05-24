@@ -10,6 +10,7 @@ class DrawRes{
   constructor(){
     this.SpriteID = -1;
     this.DrawFunc = new DrawFunction();
+    this.Layers = 0;
     this.Dimensions = new Vec2(1,1);
   }
 
@@ -31,6 +32,7 @@ class PlayerRes extends DrawRes{
     super();
     this.SpriteID = 0;
     this.DrawFunc = new BRotatedDrawFunction();
+    this.Layer = 0;
   }
 }
 
@@ -39,5 +41,6 @@ class DefaultProjectile extends DrawRes{
     super();
     this.SpriteID = 1;
     this.DrawFunc = new BRotatedDrawFunction();
+    this.Layer = 0;
   }
 }

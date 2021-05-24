@@ -20,12 +20,28 @@
   function that accepts a context and any relevant information.
 */
 
+/*
+  Additonal changes, Layers! Instead of taking a reference to all entities, Renderer will have a multidimensional array that
+  holds all the objects sorted by which layer they are on. By convention, Layer 0 will be rendererd first, then 1.. etc
+  This means that all objects that have a DrawRes object, will also have an attribute called Layers, which is an ID
+  When a new object is created, static AddObject will Add the object to the Game.Entities and append that object to Layers[object.DrawRes.Layer]!
+*/
+
 class Renderer{
+  static Layers = [];
   constructor(e, c){
 
     this.GameViewContext = document.getElementById("GameView").getContext("2d");
     this.CanvasWidth = this.GameViewContext.canvas.width;
     this.CanvasHeight = this.GameViewContext.canvas.height;
+
+    this.Layers = Renderer.Layers;
+    this.Layers.push([]);// Layer 0
+    this.Layers.push([]);// Layer 1
+    this.Layers.push([]);// Layer 2
+
+
+    console.log(this.Layers);
     //this.GameViewContext.scale(0.5,0.5);
 
     this.Entities = e;
@@ -42,13 +58,21 @@ class Renderer{
 
   Update(){
 
-    this.Entities.forEach(item =>{
+    /*this.Entities.forEach(item =>{
 
       var ScreenSpace = this.WorldToScreen(item.Rigidbody);
       //console.log(this.GameViewContext, this.Images[item.DrawRes.SpriteID], ScreenSpace, item.DrawRes.Dimensions.rMult(this.m_Camera.Zoom) , item.Rigidbody.Orien);
       item.DrawRes.Draw(this.GameViewContext, this.Images[item.DrawRes.SpriteID], ScreenSpace, item.DrawRes.Dimensions.rMult(this.m_Camera.Zoom) , item.Rigidbody.Orien);
 
+    });*/
+
+    this.Layers.forEach(layer => {
+      layer.forEach(item =>{
+        var ScreenSpace = this.WorldToScreen(item.Rigidbody);
+        item.DrawRes.Draw(this.GameViewContext, this.Images[item.DrawRes.SpriteID], ScreenSpace, item.DrawRes.Dimensions.rMult(this.m_Camera.Zoom) , item.Rigidbody.Orien);
+      })
     });
+
   }
 
   Debug(){
@@ -64,6 +88,10 @@ class Renderer{
     screenpos.Mult(this.m_Camera.Zoom);
 
     return screenpos;
+  }
+
+  static AddObject(object){
+    this.Layers[object.DrawRes.Layers].push(object);
   }
 
 }

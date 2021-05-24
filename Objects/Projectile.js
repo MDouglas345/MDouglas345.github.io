@@ -10,14 +10,13 @@ class Projectile extends GameObject{
     this.Rigidbody.Pos = pos;
     this.Rigidbody.Orien = ori.Orien;
 
+    let dir = Vec2.GetVectorFromAngle(this.Rigidbody.Orien);
+    dir.Mult(1000);
+    this.Rigidbody.Vel = dir;
 
   }
 
   EarlyUpdate(felapsed){
 
-    let dir = Vec2.GetVectorFromAngle(this.Rigidbody.Orien);
-    dir.Mult(5);
-    console.log(dir);
-    this.Rigidbody.AddVel(dir);
   }
 }

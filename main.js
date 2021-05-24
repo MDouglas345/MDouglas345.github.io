@@ -47,6 +47,8 @@ function Init(){
 
   RenderSystem = new Renderer(GameSystem.Entities, GameSystem.m_Camera);
 
+  GameSystem.Init();
+
   PrevTime = 0;
   ElapsedTime = 0;
 
@@ -58,6 +60,7 @@ function mainloop(timestep){
   timestep = timestep / 1000
   ElapsedTime = timestep - PrevTime;
   PrevTime = timestep;
+
 
   RenderSystem.Clear();
 

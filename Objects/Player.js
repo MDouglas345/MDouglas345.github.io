@@ -14,6 +14,7 @@ class Player extends GameObject{
     this.Rigidbody.Mass = 5;
     this.Fired = false;
   }
+
   EarlyUpdate(felapsed){
     if (Global.InputSystem.GetKeyState('A') == "keydown"){
       this.Rigidbody.Orien -= 5 * felapsed;
@@ -43,10 +44,9 @@ Update(){
         //Love JS and its inability to deep copy :D
         //need to find a way to deep copy!
         let b = new Projectile(copyInstance(this.Rigidbody.Pos), copyInstance(this.Rigidbody));
-        console.log(b);
         Game.AddObject(b);
         this.Fired = false;
-      }, 2000)
+      }, 500)
     });
   }
 
