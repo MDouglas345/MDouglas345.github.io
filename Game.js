@@ -13,7 +13,7 @@ class Game{
     this.m_Player = new Player();
 
     this.m_Player.Rigidbody.Position = new Vec2(50,50);
-    this.m_Camera = new Camera(this.m_Player.Rigidbody);
+    this.m_Camera = new Camera(this.m_Player.Rigidbody.Pos);
 
     this.DebugObject = new DebugObject();
     this.DebugObject.Rigidbody.Pos = new Vec2(300,600);
