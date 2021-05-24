@@ -61,6 +61,8 @@ function mainloop(timestep){
   ElapsedTime = timestep - PrevTime;
   PrevTime = timestep;
 
+  console.log(ElapsedTime);
+
 
   RenderSystem.Clear();
 

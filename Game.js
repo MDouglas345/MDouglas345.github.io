@@ -15,6 +15,8 @@ class Game{
     this.m_Player.Rigidbody.Position = new Vec2(50,50);
     this.m_Camera = new Camera(this.m_Player.Rigidbody);
 
+    this.DebugObject = new DebugObject();
+    this.DebugObject.Rigidbody.Pos = new Vec2(300,600);
 
 
     this.Entities = Game.Entities;
@@ -34,7 +36,7 @@ class Game{
   Init(){
     Game.AddObject(this.m_Player);
     Game.AddObject(this.m_Camera);
-    Game.AddObject(new DebugObject());
+    Game.AddObject(this.DebugObject);
   }
 
   EarlyUpdate(elapsed){

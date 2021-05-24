@@ -25,6 +25,8 @@
   holds all the objects sorted by which layer they are on. By convention, Layer 0 will be rendererd first, then 1.. etc
   This means that all objects that have a DrawRes object, will also have an attribute called Layers, which is an ID
   When a new object is created, static AddObject will Add the object to the Game.Entities and append that object to Layers[object.DrawRes.Layer]!
+
+  TLDR : Objects that are meant to be in the forefront need to be at a higher Layer value i.e 3. Layer 0 is always going to be rendered first and things go on top.
 */
 
 class Renderer{
@@ -41,7 +43,6 @@ class Renderer{
     this.Layers.push([]);// Layer 2
 
 
-    console.log(this.Layers);
     //this.GameViewContext.scale(0.5,0.5);
 
     this.Entities = e;
@@ -91,7 +92,7 @@ class Renderer{
   }
 
   static AddObject(object){
-    this.Layers[object.DrawRes.Layers].push(object);
+    this.Layers[object.DrawRes.Layer].push(object);
   }
 
 }
