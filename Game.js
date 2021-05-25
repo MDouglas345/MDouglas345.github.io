@@ -6,6 +6,9 @@
   Done : PhysicsSystem
   ToDo : ParticleSystem
 */
+/*
+  Need to implement a quadtree to help with collision detection performance
+*/
 
 class Game{
   static Entities = [];
@@ -14,6 +17,7 @@ class Game{
 
     this.m_Player.Rigidbody.Position = new Vec2(50,50);
     this.m_Camera = new Camera(this.m_Player.Rigidbody.Pos);
+    this.BG1 = new DemoP1(this.m_Camera);
 
     this.DebugObject = new DebugObject();
     this.DebugObject.Rigidbody.Pos = new Vec2(300,600);
@@ -22,12 +26,7 @@ class Game{
     this.Entities = Game.Entities;
 
     this.Physics = new PhysicsSystem(this.Entities);
-
-    /*
-    this.Entities.push(this.m_Player);
-    this.Entities.push(this.m_Camera);
-    this.Entities.push(new DebugObject());
-    */
+    //this.QuadTree = new QuadTree(this.Entities);
 
 
 
@@ -37,6 +36,7 @@ class Game{
     Game.AddObject(this.m_Player);
     Game.AddObject(this.m_Camera);
     Game.AddObject(this.DebugObject);
+    Game.AddObject(this.BG1);
   }
 
   EarlyUpdate(elapsed){
@@ -63,6 +63,7 @@ class Game{
     */
 
     this.Physics.Update(elapsed);
+    //this.QuadTree.Update();
 
     this.Entities.forEach(item =>{
       item.Update(elapsed);

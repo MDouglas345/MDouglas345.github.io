@@ -52,9 +52,11 @@ class Renderer{
 
     this.Images.push(new Image());
     this.Images.push(new Image());
+    this.Images.push(new Image());
 
     this.Images[0].src = "Resources/brave-lion@3x.jpeg";
     this.Images[1].src = "Resources/laserBullet.png";
+    this.Images[2].src = "Resources/BG/Demo/l1.png";
   }
 
   Update(){

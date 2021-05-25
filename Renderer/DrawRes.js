@@ -24,7 +24,7 @@ class DebugSquareRes extends DrawRes{
     super();
     this.SpriteID = 0;
     this.DrawFunc = new DebugSquareFunction();
-    this.Layer = 1;
+    this.Layer = 0;
   }
 }
 
@@ -42,6 +42,6 @@ class DefaultProjectile extends DrawRes{
     super();
     this.SpriteID = 1;
     this.DrawFunc = new BRotatedDrawFunction();
-    this.Layer = 0;
+    this.Layer = 1;
   }
 }
