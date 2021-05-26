@@ -70,3 +70,7 @@ class Vec2{
   }
 
 }
+
+function Clamp(source, min, max){
+  return Math.min(Math.max(source, min), max);
+}

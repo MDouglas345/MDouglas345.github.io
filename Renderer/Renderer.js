@@ -37,16 +37,23 @@ class Renderer{
     this.CanvasWidth = this.GameViewContext.canvas.width;
     this.CanvasHeight = this.GameViewContext.canvas.height;
 
+    this.DetailLevel = 1000;
+    this.ScreenRatio = this.ClientWidth / this.ClientHeight;
+
+
     this.Layers = Renderer.Layers;
     this.Layers.push([]);// Layer 0
     this.Layers.push([]);// Layer 1
     this.Layers.push([]);// Layer 2
 
 
+
+
     //this.GameViewContext.scale(0.5,0.5);
 
     this.Entities = e;
     this.m_Camera = c;
+
 
     this.Images = [];
 
@@ -60,7 +67,7 @@ class Renderer{
   }
 
   Update(){
-
+    //console.log(this.GameViewContext.canvas.width, this.GameViewContext.canvas.height , this.ClientWidth, this.ClientHeight);
     /*this.Entities.forEach(item =>{
 
       var ScreenSpace = this.WorldToScreen(item.Rigidbody);
@@ -83,7 +90,7 @@ class Renderer{
   }
 
   Clear(){
-    this.GameViewContext.clearRect(0,0,this.CanvasWidth, this.CanvasHeight);
+    this.GameViewContext.clearRect(0,0,this.GameViewContext.canvas.width, this.GameViewContext.canvas.height);
   }
 
   WorldToScreen(item){
@@ -91,6 +98,14 @@ class Renderer{
     screenpos.Mult(this.m_Camera.Zoom);
 
     return screenpos;
+  }
+
+  GetCanvasWidth(){
+    return this.GameViewContext.canvas.width;
+  }
+
+  GetCanvasHeight(){
+    return this.GameViewContext.canvas.height;
   }
 
   static AddObject(object){

@@ -41,3 +41,15 @@ class BRotatedDrawFunction extends DrawFunction{
     context.restore();
   }
 }
+
+class DebugPositionDrawFunc extends DrawFunction{
+  constructor(){
+    super();
+    this.DrawFunc1 = new DebugSquareFunction();
+    this.DrawFunc2 = new BRotatedDrawFunction();
+  }
+  Draw(context, image, Pos, scale, rot){
+    this.DrawFunc2.Draw(context, image, Pos, scale, rot);
+    this.DrawFunc1.Draw(context, image, Pos, scale, rot);
+  }
+}

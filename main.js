@@ -14,6 +14,7 @@ var PrevTime;
 var ElapsedTime;
 
 
+window.addEventListener('resize', ResizeTrigger);
 
 document.addEventListener("keyup", function(event){
 
@@ -46,6 +47,8 @@ function Init(){
   Global.InputSystem = InputSystem;
 
   RenderSystem = new Renderer(GameSystem.Entities, GameSystem.m_Camera);
+  GameSystem.m_Camera.Init();
+  ResizeTrigger();
 
   GameSystem.Init();
 
@@ -61,7 +64,7 @@ function mainloop(timestep){
   ElapsedTime = timestep - PrevTime;
   PrevTime = timestep;
 
-  console.log(ElapsedTime);
+  //console.log(ElapsedTime);
 
 
   RenderSystem.Clear();
@@ -76,4 +79,17 @@ function mainloop(timestep){
 
 
   requestAnimationFrame(mainloop);
+}
+
+function Resize(){
+  return new Promise(() =>{
+    RenderSystem.GameViewContext.canvas.width = window.innerWidth;
+    RenderSystem.GameViewContext.canvas.height = window.innerHeight;
+    RenderSystem.ClientHeight = window.innerWidth;
+    RenderSystem.ClientWidth = window.innerHeight;
+  });
+}
+
+async function ResizeTrigger(){
+  await Resize();
 }
