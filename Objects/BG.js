@@ -34,6 +34,9 @@ class DemoP2 extends BackgroundGameObject{
     super(Focus, Offset);
     this.DrawRes = new DrawRes();
     this.DrawRes.Layer = 1;
+    this.DrawRes.SpriteID = 3;
+    this.DrawRes.DrawFunc = new BRotatedDrawFunction();
+    this.DrawRes.Dimensions = new Vec2(3000,3000);
   }
 }
 
@@ -41,6 +44,9 @@ class DemoP3 extends BackgroundGameObject{
   constructor(Focus, Offset){
     super(Focus, Offset);
     this.DrawRes = new DrawRes();
-    this.DrawRes = 2;
+    this.DrawRes.Layer  = 2;
+    this.DrawRes.SpriteID = 4;
+    this.DrawRes.DrawFunc = new BRotatedDrawFunction();
+    this.DrawRes.Dimensions = new Vec2(3000,3000);
   }
 }

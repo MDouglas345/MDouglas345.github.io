@@ -11,7 +11,6 @@ class Player extends GameObject{
     this.Rigidbody = new Rigidbody();
     this.DrawRes = new PlayerRes();
     this.DrawRes.Dimensions = new Vec2(50,50);
-    //this.DrawRes.DrawFunc = new DebugPositionDrawFunc();
     this.Rigidbody.Mass = 5;
     this.Fired = false;
   }

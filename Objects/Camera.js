@@ -38,7 +38,7 @@ class Camera extends GameObject{
       this.Zoom -= 0.5 * felapsed;
     }
     this.Zoom = Clamp(this.Zoom, this.ZOOMMIN, this.ZOOMMAX);
-    console.log(this.Zoom);
+
 
 
   }

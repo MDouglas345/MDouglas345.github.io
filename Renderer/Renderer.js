@@ -34,8 +34,6 @@ class Renderer{
   constructor(e, c){
 
     this.GameViewContext = document.getElementById("GameView").getContext("2d");
-    this.CanvasWidth = this.GameViewContext.canvas.width;
-    this.CanvasHeight = this.GameViewContext.canvas.height;
 
     this.DetailLevel = 1000;
     this.ScreenRatio = this.ClientWidth / this.ClientHeight;
@@ -45,6 +43,8 @@ class Renderer{
     this.Layers.push([]);// Layer 0
     this.Layers.push([]);// Layer 1
     this.Layers.push([]);// Layer 2
+    this.Layers.push([]);// Layer 3
+    this.Layers.push([]);// Layer 4
 
 
 
@@ -57,6 +57,9 @@ class Renderer{
 
     this.Images = [];
 
+    //Should make adding images a function to save space and readability
+    /*
+    this.Images.push(new Image());
     this.Images.push(new Image());
     this.Images.push(new Image());
     this.Images.push(new Image());
@@ -64,6 +67,14 @@ class Renderer{
     this.Images[0].src = "Resources/brave-lion@3x.jpeg";
     this.Images[1].src = "Resources/laserBullet.png";
     this.Images[2].src = "Resources/BG/Demo/l1.png";
+    this.Images[3].src = "Resources/BG/Demo/12.png";
+    */
+
+    this.AddImage("Resources/brave-lion@3x.jpeg");
+    this.AddImage("Resources/laserBullet.png");
+    this.AddImage("Resources/BG/Demo/l1.png");
+    this.AddImage("Resources/BG/Demo/l2.png")
+    this.AddImage("Resources/BG/Demo/l3.png")
   }
 
   Update(){
@@ -106,6 +117,12 @@ class Renderer{
 
   GetCanvasHeight(){
     return this.GameViewContext.canvas.height;
+  }
+
+  AddImage(name){
+    this.Images.push(new Image());
+    this.Images[this.Images.length-1].src = name;
+
   }
 
   static AddObject(object){

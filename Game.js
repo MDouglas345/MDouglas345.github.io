@@ -18,6 +18,8 @@ class Game{
     this.m_Player.Rigidbody.Position = new Vec2(50,50);
     this.m_Camera = new Camera(this.m_Player.Rigidbody.Pos);
     this.BG1 = new DemoP1(this.m_Camera);
+    this.BG2 = new DemoP2(this.m_Camera);
+    this.BG3 = new DemoP3(this.m_Camera);
 
     this.DebugObject = new DebugObject();
     this.DebugObject.Rigidbody.Pos = new Vec2(300,600);
@@ -37,6 +39,8 @@ class Game{
     Game.AddObject(this.m_Camera);
     Game.AddObject(this.DebugObject);
     Game.AddObject(this.BG1);
+    Game.AddObject(this.BG2);
+    Game.AddObject(this.BG3);
   }
 
   EarlyUpdate(elapsed){
@@ -80,6 +84,13 @@ class Game{
     this.Entities.forEach(item =>{
       item.LateUpdate(elapsed);
     });
+  }
+
+  static GetObjectByName(name){
+    this.Entities.forEach(item =>{
+      if (item.Name == name){return item;}
+    });
+    return null;
   }
 
   static AddObject(object){

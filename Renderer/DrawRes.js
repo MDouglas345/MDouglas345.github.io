@@ -33,7 +33,7 @@ class PlayerRes extends DrawRes{
     super();
     this.SpriteID = 0;
     this.DrawFunc = new BRotatedDrawFunction();
-    this.Layer = 2;
+    this.Layer = 3;
   }
 }
 
@@ -42,6 +42,6 @@ class DefaultProjectile extends DrawRes{
     super();
     this.SpriteID = 1;
     this.DrawFunc = new BRotatedDrawFunction();
-    this.Layer = 1;
+    this.Layer = 2;
   }
 }
