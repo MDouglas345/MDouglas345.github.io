@@ -42,12 +42,18 @@ document.addEventListener("keydown", function(event){
 
 function Init(){
 
+  RenderSystem = new Renderer();
   GameSystem = new Game();
   InputSystem = new Controller();
+
+  RenderSystem.SetCamera(GameSystem.m_Camera);
+  RenderSystem.SetEntities(GameSystem.Entities);
   Global.InputSystem = InputSystem;
 
-  RenderSystem = new Renderer(GameSystem.Entities, GameSystem.m_Camera);
+
   GameSystem.m_Camera.Init();
+
+
   ResizeTrigger();
 
   GameSystem.Init();

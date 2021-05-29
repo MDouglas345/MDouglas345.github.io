@@ -1,11 +1,65 @@
+var Global = window || global;
 class BackgroundGameObject extends GameObject{
   constructor(){
     super();
     this.DrawRes = new DrawRes();
-        this.Rigidbody = new Rigidbody();
+    this.Rigidbody = new NoRigidbody();
   }
 
   Update(felapsed){
+
+  }
+}
+
+class BackgroundMaster extends GameObject{
+  constructor(){
+    super();
+    this.BGLayers = [];
+    console.log(this.BGLayers);
+
+  }
+
+  SetDimensions(vec){
+    this.BGLayers.forEach(item =>{
+      item.DrawRes.Dimensions = vec;
+    });
+  }
+
+  SetLayerSprite(layer, id){
+    this.BGLayers[layer].DrawRes.SpriteID = id;
+  }
+
+  AddLayer(){
+    let layer = new BackgroundLayer();
+    this.BGLayers.push(layer);
+    Game.AddObject(layer);
+  }
+}
+
+class BackgroundLayer extends GameObject{
+  constructor(){
+    super();
+    this.DrawRes = new DrawRes();
+    this.Rigidbody = new NoRigidbody();
+    this.DrawRes.DrawFunc = new BRotatedDrawFunction();
+  }
+}
+
+class DemoBGMaster extends BackgroundMaster{
+  constructor(){
+    super();
+
+    this.AddLayer();
+    this.AddLayer();
+    this.AddLayer();
+
+
+
+    this.SetDimensions(new Vec2(3000,3000));
+
+    this.SetLayerSprite(0,2);
+    this.SetLayerSprite(1,3);
+    this.SetLayerSprite(2,4);
 
   }
 }
@@ -24,8 +78,6 @@ class DemoP1 extends BackgroundGameObject{
   }
 
   Update(felapsed){
-    let off = this.Rigidbody.Pos.rSub(this.Focus.Rigidbody.Pos);
-    //this.Rigidbody.Pos.Add(off.rMult(0.05));
   }
 }
 

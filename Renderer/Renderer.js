@@ -31,7 +31,7 @@
 
 class Renderer{
   static Layers = [];
-  constructor(e, c){
+  constructor(){
 
     this.GameViewContext = document.getElementById("GameView").getContext("2d");
 
@@ -50,9 +50,6 @@ class Renderer{
 
 
     //this.GameViewContext.scale(0.5,0.5);
-
-    this.Entities = e;
-    this.m_Camera = c;
 
 
     this.Images = [];
@@ -123,6 +120,14 @@ class Renderer{
     this.Images.push(new Image());
     this.Images[this.Images.length-1].src = name;
 
+  }
+
+  SetCamera(c){
+    this.m_Camera = c;
+  }
+
+  SetEntities(e){
+    this.Entities = e;
   }
 
   static AddObject(object){
