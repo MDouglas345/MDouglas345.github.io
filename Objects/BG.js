@@ -1,4 +1,5 @@
 var Global = window || global;
+
 class BackgroundGameObject extends GameObject{
   constructor(){
     super();
@@ -11,7 +12,7 @@ class BackgroundGameObject extends GameObject{
   }
 }
 
-class BackgroundMaster extends GameObject{
+class BackgroundMaster extends BackgroundGameObject{
   constructor(){
     super();
     this.BGLayers = [];
@@ -36,24 +37,21 @@ class BackgroundMaster extends GameObject{
   }
 }
 
-class BackgroundLayer extends GameObject{
+class BackgroundLayer extends BackgroundGameObject{
   constructor(){
     super();
-    this.DrawRes = new DrawRes();
-    this.Rigidbody = new NoRigidbody();
     this.DrawRes.DrawFunc = new BRotatedDrawFunction();
   }
 }
 
 class DemoBGMaster extends BackgroundMaster{
-  constructor(){
+  constructor(focus){
     super();
+    this.Focus = focus;
 
     this.AddLayer();
     this.AddLayer();
     this.AddLayer();
-
-
 
     this.SetDimensions(new Vec2(3000,3000));
 
@@ -61,44 +59,18 @@ class DemoBGMaster extends BackgroundMaster{
     this.SetLayerSprite(1,3);
     this.SetLayerSprite(2,4);
 
-  }
-}
+    this.pIndex = [];
+    this.pIndex.push(0.9);
+    this.pIndex.push(0.5);
+    this.pIndex.push(0.2);
 
-class DemoP1 extends BackgroundGameObject{
-  constructor(Focus, Offset){
-    super();
-
-    this.Focus = Focus;
-    this.Offset = Offset;
-    this.DrawRes = new DrawRes();
-    this.DrawRes.Layer = 0;
-    this.DrawRes.SpriteID = 2;
-    this.DrawRes.DrawFunc = new BRotatedDrawFunction();
-    this.DrawRes.Dimensions = new Vec2(3000,3000);
   }
 
   Update(felapsed){
-  }
-}
-
-class DemoP2 extends BackgroundGameObject{
-  constructor(Focus, Offset){
-    super(Focus, Offset);
-    this.DrawRes = new DrawRes();
-    this.DrawRes.Layer = 1;
-    this.DrawRes.SpriteID = 3;
-    this.DrawRes.DrawFunc = new BRotatedDrawFunction();
-    this.DrawRes.Dimensions = new Vec2(3000,3000);
-  }
-}
-
-class DemoP3 extends BackgroundGameObject{
-  constructor(Focus, Offset){
-    super(Focus, Offset);
-    this.DrawRes = new DrawRes();
-    this.DrawRes.Layer  = 2;
-    this.DrawRes.SpriteID = 4;
-    this.DrawRes.DrawFunc = new BRotatedDrawFunction();
-    this.DrawRes.Dimensions = new Vec2(3000,3000);
+    let i = 0;
+    this.BGLayers.forEach(layer =>{
+      layer.Rigidbody.Pos.X = -this.Focus.Rigidbody.Pos.X * this.pIndex[i];
+      i++;
+    });
   }
 }
