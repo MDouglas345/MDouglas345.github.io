@@ -52,8 +52,12 @@ class psStarParallax extends ParticleSystem{
 
   RandomizePositions(){
     this.Particles.forEach(item =>{
-      item.Rigidbody.Pos = new Vec2(getRandomInt(5000), getRandomInt(5000));
+      item.Rigidbody.Pos = new Vec2(this.Focus.Rigidbody.Pos.X + (getRandomInt(7000) - 3500), this.Focus.Rigidbody.Pos.Y + (getRandomInt(7000) - 3500));
     });
+  }
+
+  RandomizePosition(object){
+    object.Rigidbody.Pos = new Vec2(this.Focus.Rigidbody.Pos.X + (getRandomInt(7000) - 3500), this.Focus.Rigidbody.Pos.Y + (getRandomInt(7000) - 3500));
   }
 
   Update(felapsed){
@@ -61,6 +65,12 @@ class psStarParallax extends ParticleSystem{
       let vel = this.Focus.Rigidbody.Vel.rMult(-1);
       vel.Mult(1/item.DistanceToPlayer);
       item.Rigidbody.Vel = vel;
+
+      let dis = item.Rigidbody.Pos.rSub(this.Focus.Rigidbody.Pos);
+      dis = dis.Mag();
+      if (dis > 5000 * 5000){
+        this.RandomizePosition(item);
+      }
     });
   }
 

@@ -10,7 +10,7 @@ class Player extends GameObject{
     this.Name = "Player";
     this.Rigidbody = new Rigidbody();
     this.DrawRes = new PlayerRes();
-    this.DrawRes.Dimensions = new Vec2(50,50);
+    this.DrawRes.Dimensions = new Vec2(175,200);
     this.Rigidbody.Mass = 5;
     this.Fired = false;
 
@@ -20,10 +20,12 @@ class Player extends GameObject{
 
   EarlyUpdate(felapsed){
     if (Global.InputSystem.GetKeyState('A') == "keydown"){
-      this.Rigidbody.Orien -= 5 * felapsed;
+      //this.Rigidbody.Orien -= 5 * felapsed;
+      this.Rigidbody.AddAngVel(-5 * felapsed);
     }
     if (Global.InputSystem.GetKeyState('D') == "keydown"){
-      this.Rigidbody.Orien += 5 * felapsed;
+      //this.Rigidbody.Orien += 5 * felapsed;
+      this.Rigidbody.AddAngVel(5 * felapsed);
     }
     if (Global.InputSystem.GetKeyState(' ') == "keydown"){
       this.FireBullet();
@@ -33,7 +35,6 @@ class Player extends GameObject{
       this.Rigidbody.AddVel(Dir.rMult(15));
 
     }
-
 
   }
 

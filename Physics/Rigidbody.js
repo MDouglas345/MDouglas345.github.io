@@ -59,6 +59,10 @@ class Rigidbody{
     this.AngAcc += other;
   }
 
+  AddAngVel(other){
+    this.AngVel += other;
+  }
+
   ResetAcc(){
     this.Acc.Mult(0);
     this.AngAcc = 0;

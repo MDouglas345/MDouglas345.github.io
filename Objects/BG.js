@@ -47,7 +47,7 @@ class SpaceBackground extends BackgroundMaster{
   constructor(){
     super();
     this.DrawRes = new SpaceBlackRes();
-    this.DrawRes.Dimensions = new Vec2(5000,5000);
+    this.DrawRes.Dimensions = new Vec2(6000,5000);
     this.DrawRes.Layer = 0;
   }
 }

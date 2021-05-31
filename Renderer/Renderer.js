@@ -67,7 +67,8 @@ class Renderer{
     this.Images[3].src = "Resources/BG/Demo/12.png";
     */
 
-    this.AddImage("Resources/brave-lion.png");
+    //this.AddImage("Resources/brave-lion.png");
+    this.AddImage("Resources/playerv1.png");
     this.AddImage("Resources/laserBullet.png");
     this.AddImage("Resources/BG/Demo/l1.png");
     this.AddImage("Resources/BG/Demo/l2.png")

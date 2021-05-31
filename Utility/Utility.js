@@ -61,6 +61,14 @@ class Vec2{
     return x;
   }
 
+  Mag(){
+    return (this.X * this.X + this.Y + this.Y);
+  }
+
+  MagSqrt(){
+
+  }
+
   static GetVectorFromAngle(other){
     let vec = new Vec2(0,0);
     vec.X = Math.cos(-other);

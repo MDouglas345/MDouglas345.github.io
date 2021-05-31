@@ -13,7 +13,6 @@ class SpaceParticle extends Particle{
     this.DistanceToPlayer = getRandomInt(50);
     this.DrawRes.Dimensions = new Vec2(10 * (1/this.DistanceToPlayer),10 * (1/this.DistanceToPlayer));
     this.DrawRes.Layer = 1;
-    this.DistanceToPlayer = getRandomInt(50);
 
   }
 }
