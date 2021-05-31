@@ -67,11 +67,12 @@ class Renderer{
     this.Images[3].src = "Resources/BG/Demo/12.png";
     */
 
-    this.AddImage("Resources/brave-lion@3x.jpeg");
+    this.AddImage("Resources/brave-lion.png");
     this.AddImage("Resources/laserBullet.png");
     this.AddImage("Resources/BG/Demo/l1.png");
     this.AddImage("Resources/BG/Demo/l2.png")
     this.AddImage("Resources/BG/Demo/l3.png")
+    this.AddImage("Resources/star.png");
   }
 
   Update(){
@@ -90,7 +91,6 @@ class Renderer{
         item.DrawRes.Draw(this.GameViewContext, this.Images[item.DrawRes.SpriteID], ScreenSpace, item.DrawRes.Dimensions.rMult(this.m_Camera.Zoom) , item.Rigidbody.Orien);
       })
     });
-
   }
 
   Debug(){

@@ -74,3 +74,8 @@ class Vec2{
 function Clamp(source, min, max){
   return Math.min(Math.max(source, min), max);
 }
+
+function getRandomInt(max) {
+  if (!max){max = 999999;}
+  return Math.floor(Math.random() * max);
+}

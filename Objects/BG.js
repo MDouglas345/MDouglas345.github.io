@@ -16,7 +16,6 @@ class BackgroundMaster extends BackgroundGameObject{
   constructor(){
     super();
     this.BGLayers = [];
-    console.log(this.BGLayers);
 
   }
 
@@ -41,6 +40,15 @@ class BackgroundLayer extends BackgroundGameObject{
   constructor(){
     super();
     this.DrawRes.DrawFunc = new BRotatedDrawFunction();
+  }
+}
+
+class SpaceBackground extends BackgroundMaster{
+  constructor(){
+    super();
+    this.DrawRes = new SpaceBlackRes();
+    this.DrawRes.Dimensions = new Vec2(5000,5000);
+    this.DrawRes.Layer = 0;
   }
 }
 

@@ -42,6 +42,16 @@ class BRotatedDrawFunction extends DrawFunction{
   }
 }
 
+class BGBlack extends DrawFunction{
+  constructor(){
+    super();
+  }
+
+  Draw(context, image, Pos, scale, rot){
+    context.fillRect(0, 0, scale.X, scale.Y);
+  }
+}
+
 class DebugPositionDrawFunc extends DrawFunction{
   constructor(){
     super();

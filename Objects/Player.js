@@ -13,6 +13,9 @@ class Player extends GameObject{
     this.DrawRes.Dimensions = new Vec2(50,50);
     this.Rigidbody.Mass = 5;
     this.Fired = false;
+
+    this.StarSystem = new psStarParallax(5000,this);
+    Game.AddObject(this.StarSystem);
   }
 
   EarlyUpdate(felapsed){

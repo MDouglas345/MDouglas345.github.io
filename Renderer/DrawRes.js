@@ -28,6 +28,15 @@ class DebugSquareRes extends DrawRes{
   }
 }
 
+class SpaceBlackRes extends DrawRes{
+  constructor(){
+    super();
+    this.SpriteID = 0;
+    this.DrawFunc = new BGBlack();
+    this.Layer = 0;
+  }
+}
+
 class PlayerRes extends DrawRes{
   constructor(){
     super();

@@ -48,6 +48,7 @@ function Init(){
 
   RenderSystem.SetCamera(GameSystem.m_Camera);
   RenderSystem.SetEntities(GameSystem.Entities);
+
   Global.InputSystem = InputSystem;
 
 
@@ -70,7 +71,7 @@ function mainloop(timestep){
   ElapsedTime = timestep - PrevTime;
   PrevTime = timestep;
 
-  //console.log(ElapsedTime);
+  console.log(ElapsedTime);
 
 
   RenderSystem.Clear();

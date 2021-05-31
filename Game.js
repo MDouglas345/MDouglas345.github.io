@@ -17,7 +17,8 @@ class Game{
 
     this.m_Player.Rigidbody.Position = new Vec2(50,50);
     this.m_Camera = new Camera(this.m_Player.Rigidbody.Pos);
-    this.BGMaster = new DemoBGMaster(this.m_Player);
+    //this.BGMaster = new DemoBGMaster(this.m_Player);
+    this.BGMaster = new SpaceBackground();
 
     this.DebugObject = new DebugObject();
     this.DebugObject.Rigidbody.Pos = new Vec2(300,600);
@@ -37,6 +38,7 @@ class Game{
     Game.AddObject(this.m_Camera);
     Game.AddObject(this.DebugObject);
     Game.AddObject(this.BGMaster);
+
 
   }
 
