@@ -13,6 +13,9 @@ class GameObject{
     this.DrawRes = new DrawRes();
 
   }
+  Init(){
+
+  }
   EarlyUpdate(felapsed){
 
   }
@@ -23,5 +26,9 @@ class GameObject{
 
   LateUpdate(felapsed){
 
+  }
+
+  Center(){
+    return new Vec2(this.Rigidbody.Pos.X - (this.DrawRes.Dimensions.X/2), this.Rigidbody.Pos.Y - (this.DrawRes.Dimensions.Y/2));
   }
 }

@@ -14,14 +14,17 @@ class Game{
   static Entities = [];
   constructor(){
     this.m_Player = new Player();
+    console.log(this.m_Player);
+    this.m_Player.Rigidbody.Pos = new Vec2(0,0);
 
-    this.m_Player.Rigidbody.Position = new Vec2(50,50);
-    this.m_Camera = new Camera(this.m_Player.Rigidbody.Pos);
+    this.m_Camera = new Camera(this.m_Player);
+
     //this.BGMaster = new DemoBGMaster(this.m_Player);
     this.BGMaster = new SpaceBackground();
 
-    this.DebugObject = new DebugObject();
-    this.DebugObject.Rigidbody.Pos = new Vec2(300,600);
+    //this.DebugObject = new DebugObject();
+    //this.DebugObject.Rigidbody.Pos = new Vec2(0,0);
+    //this.DebugObject.DrawRes.Dimensions = new Vec2(50,50);
 
 
     this.Entities = Game.Entities;
@@ -36,8 +39,13 @@ class Game{
   Init(){
     Game.AddObject(this.m_Player);
     Game.AddObject(this.m_Camera);
-    Game.AddObject(this.DebugObject);
+    //Game.AddObject(this.DebugObject);
     Game.AddObject(this.BGMaster);
+
+    this.Entities.forEach(item =>{
+      item.Init();
+    });
+
 
 
   }
@@ -86,9 +94,17 @@ class Game{
   }
 
   static GetObjectByName(name){
+    /*
     this.Entities.forEach(item =>{
-      if (item.Name == name){return item;}
+      if (item.Name === name){console.log(item);return item;}
+
     });
+    */
+
+    for (let i = 0; i < this.Entities.length; i++){
+      if (this.Entities[i].Name === name){return this.Entities[i];}
+    }
+
     return null;
   }
 

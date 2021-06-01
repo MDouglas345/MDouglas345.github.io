@@ -15,4 +15,10 @@ class SpaceParticle extends Particle{
     this.DrawRes.Layer = 1;
 
   }
+
+  Debug(){
+    this.DistanceToPlayer = 1;
+    this.DrawRes.Dimensions = new Vec2(10,10);
+    this.Rigidbody.Pos = new Vec2(0,0);
+  }
 }

@@ -7,15 +7,23 @@ var Global = window || global;
 class Camera extends GameObject{
   constructor(Focus){
     super();
-    this.m_FocusPoint = Focus;
+    this.Name = "mCamera";
+    this.m_FocusPoint = Focus.Rigidbody.Pos;
+    this.Offset = new Vec2(Focus.DrawRes.Dimensions.X/2, Focus.DrawRes.Dimensions.Y/2)
+    //this.m_FocusPoint.Add(new Vec2(-Focus.DrawRes.Dimensions.X/2, -Focus.DrawRes.Dimensions.Y/2));
     this.Zoom = 1;
     this.ZOOMMIN = 0.25;
     this.ZOOMMAX = 1.5;
     this.RenderInstance;
     this.Dir;
+
+    this.Rigidbody.Pos = new Vec2(0,0);
+
+
   }
   Update(felapsed){
-    this.Dir = this.m_FocusPoint.rSub(new Vec2((this.RenderInstance.GetCanvasWidth() / 2) * (1/this.Zoom) , (this.RenderInstance.GetCanvasHeight() /2 * (1/this.Zoom))));
+    let point = this.m_FocusPoint.rSub(this.Offset);
+    this.Dir = point.rSub(new Vec2((this.RenderInstance.GetCanvasWidth() / 2) * (1/this.Zoom) , (this.RenderInstance.GetCanvasHeight() /2 * (1/this.Zoom))));
   }
   LateUpdate(felapsed){
     /*
@@ -28,6 +36,7 @@ class Camera extends GameObject{
     */
 
     //let dir = this.m_FocusPoint.rSub(new Vec2((this.RenderInstance.GetCanvasWidth() / 2) * (1/this.Zoom) , (this.RenderInstance.GetCanvasHeight() /2 * (1/this.Zoom))));
+
     this.Rigidbody.Pos = this.Dir;
 
 
@@ -45,6 +54,13 @@ class Camera extends GameObject{
 
   Init(){
     this.RenderInstance = Global.RenderSystem;
+  }
+
+  ObjectInView(object){
+    let offset = object.Rigidbody.Pos.rSub(this.Rigidbody.Pos);
+    if (offset.X < 0 || offset.X > this.RenderInstance.GetCanvasWidth()){return false;}
+    if (offset.Y < 0 || offset.Y > this.RenderInstance.GetCanvasHeight()){return false;}
+    return true;
   }
 
 }

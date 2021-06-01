@@ -42,12 +42,18 @@ class psStarParallax extends ParticleSystem{
 
     this.Focus = focus;
     this.ParticleType = SpaceParticle;
+    this.Camera;
 
     this.CreateParticles();
     this.SetParticleSprite(5);
     this.RandomizePositions();
     this.Enable();
+    this.Particles[0].Debug();
 
+  }
+
+  Init(){
+    this.Camera = Game.GetObjectByName("mCamera");
   }
 
   RandomizePositions(){
@@ -68,7 +74,10 @@ class psStarParallax extends ParticleSystem{
 
       let dis = item.Rigidbody.Pos.rSub(this.Focus.Rigidbody.Pos);
       dis = dis.Mag();
-      if (dis > 5000 * 5000){
+      //This check affects the quality of repositioning the star particles.
+      //Should use the camera in some way so that it checks if particle is on the screen.
+
+      if (!this.Camera.ObjectInView(item)){
         this.RandomizePosition(item);
       }
     });
