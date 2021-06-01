@@ -15,7 +15,7 @@ class Player extends GameObject{
     this.Fired = false;
     this.Camera;
 
-    this.StarSystem = new psStarParallax(100,this);
+    this.StarSystem = new psStarParallax(500,this);
     Game.AddObject(this.StarSystem);
   }
 
@@ -39,6 +39,8 @@ class Player extends GameObject{
       this.Rigidbody.AddVel(Dir.rMult(15));
 
     }
+
+    this.Rigidbody.AngVel *= 0.99;
 
   }
 
