@@ -13,10 +13,13 @@ class Player extends GameObject{
     this.DrawRes.Dimensions = new Vec2(175,200);
     this.Rigidbody.Mass = 5;
     this.Fired = false;
-    this.Camera;
 
     this.StarSystem = new psStarParallax(500,this);
     Game.AddObject(this.StarSystem);
+
+    this.LeftThruster = new psPlayerThruster(this, new Vec2(0,0));
+    Game.AddObject(this.LeftThruster);
+
   }
 
 

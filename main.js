@@ -1,3 +1,5 @@
+//Idea : find a way to dynamically include all JS files in directory
+
 /* Function is called when document is loaded*/
 
 window.addEventListener('DOMContentLoaded', Init, false);
@@ -7,6 +9,7 @@ window.addEventListener('DOMContentLoaded', Init, false);
 var GameSystem;
 var RenderSystem;
 var InputSystem;
+var OManager;
 
 var Global = window || global;
 
@@ -41,7 +44,7 @@ document.addEventListener("keydown", function(event){
 
 
 function Init(){
-
+  OManager = new ObjectManager();
   RenderSystem = new Renderer();
   GameSystem = new Game();
   InputSystem = new Controller();

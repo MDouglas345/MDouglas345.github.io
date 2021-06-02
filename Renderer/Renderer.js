@@ -28,9 +28,9 @@
 
   TLDR : Objects that are meant to be in the forefront need to be at a higher Layer value i.e 3. Layer 0 is always going to be rendered first and things go on top.
 */
+var Global = window || global;
 
 class Renderer{
-  static Layers = [];
   constructor(){
 
     this.GameViewContext = document.getElementById("GameView").getContext("2d");
@@ -38,13 +38,10 @@ class Renderer{
     this.DetailLevel = 1000;
     this.ScreenRatio = this.ClientWidth / this.ClientHeight;
 
+    this.ObjectHandleInstance = Global.OManager;
 
-    this.Layers = Renderer.Layers;
-    this.Layers.push([]);// Layer 0
-    this.Layers.push([]);// Layer 1
-    this.Layers.push([]);// Layer 2
-    this.Layers.push([]);// Layer 3
-    this.Layers.push([]);// Layer 4
+    this.Layers = Global.OManager.m_Entities;
+
 
 
 
@@ -68,12 +65,13 @@ class Renderer{
     */
 
     //this.AddImage("Resources/brave-lion.png");
-    this.AddImage("Resources/playerv1.png");
+    this.AddImage("Resources/playerv1n.png");
     this.AddImage("Resources/laserBullet.png");
     this.AddImage("Resources/BG/Demo/l1.png");
     this.AddImage("Resources/BG/Demo/l2.png")
     this.AddImage("Resources/BG/Demo/l3.png")
     this.AddImage("Resources/star.png");
+    this.AddImage("Resources/sThrust1.png");
   }
 
   Update(){
@@ -88,9 +86,9 @@ class Renderer{
 
     this.Layers.forEach(layer => {
       layer.forEach(item =>{
+    
         var ScreenSpace = this.WorldToScreen(item.Rigidbody.Pos);
-        //console.log(item.Rigidbody.Pos, this.m_Camera.Rigidbody.Pos);
-        item.DrawRes.Draw(this.GameViewContext, this.Images[item.DrawRes.SpriteID], ScreenSpace, item.DrawRes.Dimensions.rMult(this.m_Camera.Zoom) , item.Rigidbody.Orien);
+        item.DrawRes.Draw(this.GameViewContext, this.Images[item.DrawRes.SpriteID], ScreenSpace, item.DrawRes.Dimensions.rMult(this.m_Camera.Zoom) , item.Rigidbody.Orien, item.DrawRes.Opacity);
       })
     });
   }

@@ -10,11 +10,14 @@
   Need to implement a quadtree to help with collision detection performance
 */
 
+var Global = window || global;
+
 class Game{
-  static Entities = [];
+  //static Entities = ObjectManager.Entities;
   constructor(){
+    this.ObjectHandleInstance = Global.OManager;
+
     this.m_Player = new Player();
-    console.log(this.m_Player);
     this.m_Player.Rigidbody.Pos = new Vec2(0,0);
 
     this.m_Camera = new Camera(this.m_Player);
@@ -22,14 +25,7 @@ class Game{
     //this.BGMaster = new DemoBGMaster(this.m_Player);
     this.BGMaster = new SpaceBackground();
 
-    //this.DebugObject = new DebugObject();
-    //this.DebugObject.Rigidbody.Pos = new Vec2(0,0);
-    //this.DebugObject.DrawRes.Dimensions = new Vec2(50,50);
-
-
-    this.Entities = Game.Entities;
-
-    this.Physics = new PhysicsSystem(this.Entities);
+    this.Physics = new PhysicsSystem();
     //this.QuadTree = new QuadTree(this.Entities);
 
 
@@ -42,8 +38,10 @@ class Game{
     //Game.AddObject(this.DebugObject);
     Game.AddObject(this.BGMaster);
 
-    this.Entities.forEach(item =>{
-      item.Init();
+    this.ObjectHandleInstance.m_Entities.forEach(layer =>{
+      layer.forEach(item =>{
+        item.Init();
+      });
     });
 
 
@@ -51,13 +49,15 @@ class Game{
   }
 
   EarlyUpdate(elapsed){
-    this.Entities.forEach(item =>{
-      item.EarlyUpdate(elapsed);
+    this.ObjectHandleInstance.m_Entities.forEach(layer =>{
+      layer.forEach(item =>{
+        item.EarlyUpdate(elapsed);
+      });
     });
   }
 
   Update(elapsed){
-
+    //console.log(this.ObjectHandleInstance.m_Entities[2]);
     /*
     Stages to go through in order
     1. Rigidbody Update
@@ -76,8 +76,10 @@ class Game{
     this.Physics.Update(elapsed);
     //this.QuadTree.Update();
 
-    this.Entities.forEach(item =>{
-      item.Update(elapsed);
+    this.ObjectHandleInstance.m_Entities.forEach(layer =>{
+      layer.forEach(item =>{
+        item.Update(elapsed);
+      });
     });
 
     /*
@@ -88,10 +90,20 @@ class Game{
   }
 
   LateUpdate(elapsed){
-    this.Entities.forEach(item =>{
-      item.LateUpdate(elapsed);
+    this.ObjectHandleInstance.m_Entities.forEach(layer =>{
+      layer.forEach(item =>{
+        item.LateUpdate();
+      });
     });
+
+    //Delete cycle
+  //console.log(this.ObjectHandleInstance.m_Entities);
+  this.ObjectHandleInstance.CleanUp();
+  //console.log(this.ObjectHandleInstance.m_Entities);
+
+
   }
+
 
   static GetObjectByName(name){
     /*
@@ -101,17 +113,25 @@ class Game{
     });
     */
 
-    for (let i = 0; i < this.Entities.length; i++){
+    /*for (let i = 0; i < this.Entities.length; i++){
       if (this.Entities[i].Name === name){return this.Entities[i];}
     }
 
     return null;
+    */
+
+    return ObjectManager.GetObjectByName(name);
   }
 
   static AddObject(object){
-
+    /*
     this.Entities.push(object);
     Renderer.AddObject(object);
+    */
+    ObjectManager.AddObject(object);
+
+
+
   }
 
 

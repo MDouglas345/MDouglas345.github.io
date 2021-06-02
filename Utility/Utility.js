@@ -87,3 +87,7 @@ function getRandomInt(max) {
   if (!max){max = 999999;}
   return Math.floor(Math.random() * max);
 }
+
+function Lerp(x, y, a){
+  return x * (1 - a) + y * a;
+}

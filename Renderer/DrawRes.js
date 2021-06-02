@@ -12,10 +12,11 @@ class DrawRes{
     this.DrawFunc = new DrawFunction();
     this.Layer = 0;
     this.Dimensions = new Vec2(1,1);
+    this.Opacity = 1;
   }
 
-  Draw(context, imageRef, pos, scale, rot){
-    this.DrawFunc.Draw(context, imageRef, pos, scale, rot);
+  Draw(context, imageRef, pos, scale, rot, opacity){
+    this.DrawFunc.Draw(context, imageRef, pos, scale, rot, opacity);
   }
 }
 
@@ -51,6 +52,25 @@ class DefaultProjectile extends DrawRes{
     super();
     this.SpriteID = 1;
     this.DrawFunc = new BRotatedDrawFunction();
+    this.Layer = 2;
+  }
+}
+
+class DebugObjectSprite extends DrawRes{
+  constructor(){
+    super();
+    this.SpriteID = 1;
+    this.DrawFunc = new BRotatedDrawFunction();
+    this.Layer  = 2;
+  }
+}
+
+class PlayerThrusterRes extends DrawRes{
+  constructor(){
+    super();
+    this.SpriteID = 6;
+    this.DrawFunc = new RotatedOpacityDrawFunction();
+    this.Dimensions =new Vec2(10,10);
     this.Layer = 2;
   }
 }

@@ -20,6 +20,14 @@ class Camera extends GameObject{
 
   }
   Update(felapsed){
+    if (Global.InputSystem.GetKeyState('-') == "keydown"){
+      this.Zoom += 0.5 * felapsed;
+    }
+    if (Global.InputSystem.GetKeyState('+') == "keydown"){
+      this.Zoom -= 0.5 * felapsed;
+    }
+    this.Zoom = Clamp(this.Zoom, this.ZOOMMIN, this.ZOOMMAX);
+    
     let point = this.m_FocusPoint.Center();
     this.Dir = point.rSub(new Vec2((this.RenderInstance.GetCanvasWidth() / 2) * (1/this.Zoom) , (this.RenderInstance.GetCanvasHeight() /2 * (1/this.Zoom))));
   }
@@ -39,13 +47,7 @@ class Camera extends GameObject{
     //this.Rigidbody.Orien = this.m_FocusPoint.Rigidbody.Orien;
 
 
-    if (Global.InputSystem.GetKeyState('-') == "keydown"){
-      this.Zoom += 0.5 * felapsed;
-    }
-    if (Global.InputSystem.GetKeyState('+') == "keydown"){
-      this.Zoom -= 0.5 * felapsed;
-    }
-    this.Zoom = Clamp(this.Zoom, this.ZOOMMIN, this.ZOOMMAX);
+
 
 
 

@@ -1,8 +1,10 @@
+Global = window || global;
+
 class PhysicsSystem{
-  constructor(e){
+  constructor(){
     this.m_gravity = new Vec2(0,0);
     this.m_GlobalForces = new Vec2(0,0);
-    this.entities = e;
+    this.ObjectHandleInstance = Global.OManager;
 
   }
 
@@ -30,7 +32,7 @@ class PhysicsSystem{
   }
 
   Update(elapsed){
-    this.entities.forEach(item =>{
+    /*this.entities.forEach(item =>{
       //console.log(item);
 
       item.Rigidbody.AddGrav(this.m_gravity);
@@ -40,6 +42,18 @@ class PhysicsSystem{
 
       item.Rigidbody.ResetAcc();
 
+    });
+    */
+
+    this.ObjectHandleInstance.m_Entities.forEach(layer =>{
+      layer.forEach(item =>{
+        item.Rigidbody.AddGrav(this.m_gravity);
+        item.Rigidbody.AddAcc(this.m_GlobalForces);
+
+        item.Rigidbody.Update(elapsed);
+
+        item.Rigidbody.ResetAcc();
+      });
     });
   }
 }

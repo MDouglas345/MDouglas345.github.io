@@ -42,37 +42,21 @@ class BRotatedDrawFunction extends DrawFunction{
   }
 }
 
-class BRotatedDrawFunction2 extends DrawFunction{
+class RotatedOpacityDrawFunction extends DrawFunction{
   constructor(){
     super();
   }
 
-  Draw(context, image, Pos, scale, rot){
-    console.log(Pos, scale);
-    context.fillRect(Pos.X-(scale.X / 2), Pos.Y-(scale.Y / 2), scale.X, scale.Y);
+  Draw(context, image, Pos, scale, rot, opacity){
     context.save();
+    context.globalAlpha = opacity;
     context.translate(Pos.X - (scale.X / 2), Pos.Y - (scale.Y / 2));
     context.rotate(rot);
     context.drawImage(image ,-scale.X/2, -scale.Y/2, scale.X, scale.Y);
     context.restore();
   }
-}
 
-class BRotatedDrawFunction3 extends DrawFunction{
-  constructor(){
-    super();
-  }
 
-  Draw(context, image, Pos, scale, rot){
-    //console.log(Pos, scale);
-    //context.fillRect(Pos.X-(scale.X / 2), Pos.Y-(scale.Y / 2), scale.X, scale.Y);
-    context.fillRect(Pos.X,Pos.Y, 50,50);
-    context.save();
-    context.translate(Pos.X - (scale.X / 2), Pos.Y - (scale.Y / 2));
-    context.rotate(rot);
-    context.drawImage(image ,-scale.X/2, -scale.Y/2, scale.X, scale.Y);
-    context.restore();
-  }
 }
 
 class BGBlack extends DrawFunction{
