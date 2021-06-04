@@ -3,6 +3,7 @@ class Projectile extends GameObject{
     super();
     this.Name = "Projectile";
     this.Rigidbody = new Rigidbody();
+    this.Rigidbody.Enable();
     this.DrawRes = new DefaultProjectile();
     this.DrawRes.Dimensions = new Vec2(25,10);
 
@@ -10,7 +11,7 @@ class Projectile extends GameObject{
     this.Rigidbody.Pos = pos;
     this.Rigidbody.Orien = ori.Orien;
 
-    let dir = Vec2.GetVectorFromAngle(this.Rigidbody.Orien);
+    let dir = GetVectorFromAngle(this.Rigidbody.Orien);
     dir.Mult(1000);
     this.Rigidbody.Vel = dir;
 

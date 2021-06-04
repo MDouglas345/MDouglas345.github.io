@@ -18,7 +18,6 @@ class Game{
     this.ObjectHandleInstance = Global.OManager;
 
     this.m_Player = new Player();
-    this.m_Player.Rigidbody.Pos = new Vec2(0,0);
 
     this.m_Camera = new Camera(this.m_Player);
 
@@ -28,7 +27,7 @@ class Game{
     this.Physics = new PhysicsSystem();
     //this.QuadTree = new QuadTree(this.Entities);
 
-
+    console.log(this.ObjectHandleInstance);
 
   }
 

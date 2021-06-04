@@ -9,6 +9,7 @@ class Player extends GameObject{
     super();
     this.Name = "Player";
     this.Rigidbody = new Rigidbody();
+    this.Rigidbody.Enable();
     this.DrawRes = new PlayerRes();
     this.DrawRes.Dimensions = new Vec2(175,200);
     this.Rigidbody.Mass = 5;
@@ -17,8 +18,14 @@ class Player extends GameObject{
     this.StarSystem = new psStarParallax(500,this);
     Game.AddObject(this.StarSystem);
 
-    this.LeftThruster = new psPlayerThruster(this, new Vec2(0,0));
+    this.LeftThruster = new psPlayerThruster(this, new Vec2(-40,-43));
+    this.RightThruster = new psPlayerThruster(this, new Vec2(-40,43));
+
+    this.LeftThruster.Rigidbody.SetParent(this);
+    this.RightThruster.Rigidbody.SetParent(this);
+
     Game.AddObject(this.LeftThruster);
+    Game.AddObject(this.RightThruster);
 
   }
 
@@ -38,7 +45,7 @@ class Player extends GameObject{
       this.FireBullet();
     }
     if (Global.InputSystem.GetKeyState('W') == "keydown"){
-      let Dir = Vec2.GetVectorFromAngle(this.Rigidbody.Orien);
+      let Dir = GetVectorFromAngle(this.Rigidbody.Orien);
       this.Rigidbody.AddVel(Dir.rMult(15));
 
     }

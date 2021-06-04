@@ -11,7 +11,7 @@ class Camera extends GameObject{
     this.m_FocusPoint = Focus;
     this.Zoom = 1;
     this.ZOOMMIN = 0.25;
-    this.ZOOMMAX = 1.5;
+    this.ZOOMMAX = 3;
     this.RenderInstance;
     this.Dir;
 
@@ -27,7 +27,7 @@ class Camera extends GameObject{
       this.Zoom -= 0.5 * felapsed;
     }
     this.Zoom = Clamp(this.Zoom, this.ZOOMMIN, this.ZOOMMAX);
-    
+
     let point = this.m_FocusPoint.Center();
     this.Dir = point.rSub(new Vec2((this.RenderInstance.GetCanvasWidth() / 2) * (1/this.Zoom) , (this.RenderInstance.GetCanvasHeight() /2 * (1/this.Zoom))));
   }

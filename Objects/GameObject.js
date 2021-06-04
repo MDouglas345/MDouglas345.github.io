@@ -9,7 +9,8 @@
 class GameObject{
   constructor(){
     this.Name = "Basic Object";
-    this.Rigidbody = new NoRigidbody();
+    this.Rigidbody = new Rigidbody();
+    this.Rigidbody.Disable();
     this.DrawRes = new DrawRes();
     this.Children = [];
     this.ParentOffset = new Vec2(0,0);
@@ -38,8 +39,19 @@ class GameObject{
 
   }
 
+  GetRelativePos(pos){
+
+  }
+
+  GetRelativePosWithOff(off){
+    let baseVec = GetVectorFromAngle(this.Rigidbody.Orien).rMult(off);
+    let pos = this.Rigidbody.Pos.rAdd(baseVec);
+    return pos;
+  }
+
   Center(){
-    return new Vec2(this.Rigidbody.Pos.X - (this.DrawRes.Dimensions.X/2), this.Rigidbody.Pos.Y - (this.DrawRes.Dimensions.Y/2));
+    //return new Vec2(this.Rigidbody.Pos.X - (this.DrawRes.Dimensions.X/2), this.Rigidbody.Pos.Y - (this.DrawRes.Dimensions.Y/2));
+    return new Vec2(this.Rigidbody.Pos.X, this.Rigidbody.Pos.Y );
   }
 
   Delete(){

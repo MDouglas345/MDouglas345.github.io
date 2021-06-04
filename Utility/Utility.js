@@ -62,20 +62,18 @@ class Vec2{
   }
 
   Mag(){
-    return (this.X * this.X + this.Y + this.Y);
+    return Math.sqrt(this.X * this.X + this.Y * this.Y);
   }
 
   MagSqrt(){
-
+    return Math.sqrt(this.Mag());
   }
 
-  static GetVectorFromAngle(other){
-    let vec = new Vec2(0,0);
-    vec.X = Math.cos(-other);
-    vec.Y = Math.sin(other);
-
-    return vec;
+  Normal(){
+    return this.rDivide(this.MagSqrt());
   }
+
+
 
 }
 
@@ -88,6 +86,36 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
+function getRandomFloat(max){
+  if (!max){max = 999999;}
+  return (Math.random() * max);
+}
+
 function Lerp(x, y, a){
   return x * (1 - a) + y * a;
+}
+
+function GetVectorFromAngle(other){
+  let vec = new Vec2(0,0);
+  vec.X = Math.cos(-other);
+  vec.Y = Math.sin(other);
+
+  return vec;
+}
+
+function GetAngleFromVector(vec){
+  return Math.atan2(vec.Y, vec.X);
+}
+
+function RotateVecByAngle(vec, angle){
+    let dir = new Vec2(0,0);
+    dir.X = vec.X * Math.cos(angle) - vec.Y * Math.sin(angle);
+    dir.Y = vec.X * Math.sin(angle) + vec.X * Math.cos(angle);
+    //console.log(dir, vec, angle);
+    return dir
+}
+
+function AngleBetweenVec(vec1, vec2){
+  let res = Math.atan2(vec2.Y, vec2.X) - Math.atan2(vec1.Y, vec1.X);
+  return res;
 }

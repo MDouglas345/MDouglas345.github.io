@@ -18,6 +18,7 @@ class Controller{
     this.KeyMap.set(' ' , 32);
     this.KeyMap.set('+' , 187)
     this.KeyMap.set('-' , 189)
+    this.KeyMap.set('G' , 71);
   }
 
   HandleButtonEvent(keycode, event){

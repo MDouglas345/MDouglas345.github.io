@@ -2,6 +2,11 @@
   Particle systems need to manage whether particles get deleted.
 */
 
+/*
+  Depending on the type of effect you are trying to achieve (a stream or just an expanse) you will either only AddParticles in the Update()(for a stream) or call CreateParticles() in the constructor, or some blend of both
+*/
+
+
 class ParticleSystem extends GameObject{
   constructor(starAmount){
     super();
@@ -9,6 +14,7 @@ class ParticleSystem extends GameObject{
     this.ParticleLimit = starAmount;
     this.Active = true;
     this.DrawRes = new DrawRes();
+    this.ParticleCount = 0;
 
     this.ParticleType = Particle;
 
@@ -21,6 +27,16 @@ class ParticleSystem extends GameObject{
       this.Particles.push(p);
       Game.AddObject(p);
     }
+  }
+
+  AddParticle(){
+    if (this.ParticleCount < this.ParticleLimit){
+      let p = new this.ParticleType();
+      this.Particles.push(p);
+      Game.AddObject(p);
+      this.ParticleCount++;
+    }
+
   }
 
   SetParticleSprite(id){

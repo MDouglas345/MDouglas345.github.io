@@ -35,12 +35,14 @@ class BRotatedDrawFunction extends DrawFunction{
 
   Draw(context, image, Pos, scale, rot){
     context.save();
-    context.translate(Pos.X - (scale.X / 2), Pos.Y - (scale.Y / 2));
+    context.translate(Pos.X , Pos.Y );
     context.rotate(rot);
     context.drawImage(image ,-scale.X/2, -scale.Y/2, scale.X, scale.Y);
     context.restore();
   }
 }
+
+
 
 class RotatedOpacityDrawFunction extends DrawFunction{
   constructor(){
@@ -50,7 +52,7 @@ class RotatedOpacityDrawFunction extends DrawFunction{
   Draw(context, image, Pos, scale, rot, opacity){
     context.save();
     context.globalAlpha = opacity;
-    context.translate(Pos.X - (scale.X / 2), Pos.Y - (scale.Y / 2));
+    context.translate(Pos.X , Pos.Y );
     context.rotate(rot);
     context.drawImage(image ,-scale.X/2, -scale.Y/2, scale.X, scale.Y);
     context.restore();
