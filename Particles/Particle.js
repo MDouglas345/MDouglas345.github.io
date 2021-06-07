@@ -29,15 +29,18 @@ class PlayerThrusterParticle extends Particle{
     super();
     this.Name = "Player Thrust Particle";
     this.DrawRes = new PlayerThrusterRes();
-    this.Life = 2;
+    this.Life = 0.25;
     this.Lifetime = this.Life;
   }
 
   Restart(locate, vel){
     this.Lifetime = this.Life;
     this.Rigidbody.Pos = locate;
-    this.Rigidbody.Vel = vel.Normal();
-    this.Rigidbody.Vel.Mult(getRandomFloat(5.0));
+    this.Rigidbody.Vel.Mult(0);
+    //this.Rigidbody.Vel = vel.Normal();
+    //this.Rigidbody.Vel.Mult(getRandomFloat(1));
+    this.Rigidbody.Vel = vel.rMult(getRandomFloat(1));
+    //this.Rigidbody.Vel = vel;
 
   }
 }

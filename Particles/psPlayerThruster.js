@@ -6,7 +6,7 @@ class psPlayerThruster extends ParticleSystem{
     this.Offset = offset;
     //this.Rigidbody.Pos = this.Player.Center();
     this.Rigidbody.Pos = this.Player.Rigidbody.Pos.rAdd(this.Offset);
-    this.ParticleLimit = 500;
+    this.ParticleLimit = 50;
 
     this.ParticleType = PlayerThrusterParticle;
 
@@ -15,14 +15,13 @@ class psPlayerThruster extends ParticleSystem{
 
     //this.CreateParticles();
   }
-
-  Update(felapsed){
+  EarlyUpdate(felapsed){
     this.AddParticle();
 
     let vec = GetVectorFromAngle(this.Player.Rigidbody.Orien);
 
-    vec.Mult(-1 *  this.Player.Rigidbody.Vel.Mag());
-    console.log(vec);
+    vec.Mult(-1 * this.Player.Rigidbody.Vel.Mag());
+    //console.log(vec);
 
     for (let i = 0; i < this.Particles.length; i++){
       let item = this.Particles[i];
@@ -33,6 +32,16 @@ class psPlayerThruster extends ParticleSystem{
       if (item.Lifetime < 0){item.Restart(this.Rigidbody.Pos, vec);}
 
     }
+
+      //console.log(this.Particles[0].Rigidbody.Vel, this.Player.Rigidbody.Vel);
+  }
+
+  Update(felapsed){
+
+  }
+
+  LateUpdate(felapsed){
+
   }
 
   Debug(){
@@ -45,6 +54,8 @@ class psPlayerThruster extends ParticleSystem{
     this.Rigidbody.Pos = this.Player.Center();
     this.Rigidbody.Pos.Add(this.Offset);
   }
+
+
 
 
 

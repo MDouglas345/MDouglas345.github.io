@@ -33,8 +33,8 @@ class psStarParallax extends ParticleSystem{
       vel.Mult(1/item.DistanceToPlayer);
       item.Rigidbody.Vel = vel;
 
-      let dis = item.Rigidbody.Pos.rSub(this.Focus.Rigidbody.Pos);
-      dis = dis.Mag();
+      //let dis = item.Rigidbody.Pos.rSub(this.Focus.Rigidbody.Pos);
+      //dis = dis.Mag();
       //This check affects the quality of repositioning the star particles.
       //Should use the camera in some way so that it checks if particle is on the screen.
 
