@@ -29,7 +29,7 @@ class psStarParallax extends ParticleSystem{
 
   Update(felapsed){
     this.Particles.forEach(item =>{
-      let vel = this.Focus.Rigidbody.Vel.rMult(-1);
+      let vel = this.Focus.Rigidbody.Vel.rMult(-0.2);
       vel.Mult(1/item.DistanceToPlayer);
       item.Rigidbody.Vel = vel;
 

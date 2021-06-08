@@ -19,15 +19,16 @@ class Game{
 
     this.m_Player = new Player();
 
+    this.PlanetDemo = new Earth();
+
     this.m_Camera = new Camera(this.m_Player);
 
     //this.BGMaster = new DemoBGMaster(this.m_Player);
     this.BGMaster = new SpaceBackground();
 
     this.Physics = new PhysicsSystem();
-    //this.QuadTree = new QuadTree(this.Entities);
 
-    console.log(this.ObjectHandleInstance);
+    this.QuadTree = new QuadTree(this.m_Player);
 
   }
 
@@ -36,6 +37,7 @@ class Game{
     Game.AddObject(this.m_Camera);
     //Game.AddObject(this.DebugObject);
     Game.AddObject(this.BGMaster);
+    Game.AddObject(this.PlanetDemo);
 
     this.ObjectHandleInstance.m_Entities.forEach(layer =>{
       layer.forEach(item =>{
@@ -73,7 +75,9 @@ class Game{
     */
 
     this.Physics.Update(elapsed);
-    //this.QuadTree.Update();
+
+    this.QuadTree.CreateTree();
+    console.log(this.QuadTree);
 
     this.ObjectHandleInstance.m_Entities.forEach(layer =>{
       layer.forEach(item =>{
@@ -84,6 +88,7 @@ class Game{
     /*
     Collision detection and correction
     */
+
 
 
   }
@@ -98,6 +103,8 @@ class Game{
     //Delete cycle
   //console.log(this.ObjectHandleInstance.m_Entities);
   this.ObjectHandleInstance.CleanUp();
+  this.QuadTree.ClearTree();
+
   //console.log(this.ObjectHandleInstance.m_Entities);
 
 

@@ -139,8 +139,7 @@ class ConnectedToParent extends PhysicsState{
     this.AngleOffset = GetAngleFromVector(angdiff);
 
 
-    this.MagnitudeDiff = angdiff.Mag();
-    console.log(this.RigidMaster.Pos, this.RigidMaster.Parent.Rigidbody.Pos, this.AngleOffset, this.MagnitudeDiff);
+    this.MagnitudeDiff = angdiff.MagSqrt();
   }
   Update(elapsed){
     let currentangle = this.RigidMaster.Parent.Rigidbody.Orien  - this.AngleOffset ;

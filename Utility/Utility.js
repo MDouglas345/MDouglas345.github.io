@@ -62,7 +62,7 @@ class Vec2{
   }
 
   Mag(){
-    return Math.sqrt(this.X * this.X + this.Y * this.Y);
+    return (this.X * this.X + this.Y * this.Y);
   }
 
   MagSqrt(){
@@ -72,9 +72,6 @@ class Vec2{
   Normal(){
     return this.rDivide(this.MagSqrt());
   }
-
-
-
 }
 
 function Clamp(source, min, max){

@@ -6,7 +6,7 @@ class psPlayerThruster extends ParticleSystem{
     this.Offset = offset;
     //this.Rigidbody.Pos = this.Player.Center();
     this.Rigidbody.Pos = this.Player.Rigidbody.Pos.rAdd(this.Offset);
-    this.ParticleLimit = 50;
+    this.ParticleLimit = 15;
 
     this.ParticleType = PlayerThrusterParticle;
 
@@ -20,11 +20,13 @@ class psPlayerThruster extends ParticleSystem{
 
     let vec = GetVectorFromAngle(this.Player.Rigidbody.Orien);
 
-    vec.Mult(-1 * this.Player.Rigidbody.Vel.Mag());
+    vec.Mult(-1 * this.Player.Rigidbody.Vel.MagSqrt());
     //console.log(vec);
 
     for (let i = 0; i < this.Particles.length; i++){
       let item = this.Particles[i];
+
+      //console.log(this.Particles);
 
       item.DrawRes.Opacity = Lerp(0,1,item.Lifetime);
       item.Lifetime -= felapsed;

@@ -31,6 +31,7 @@
 var Global = window || global;
 
 class Renderer{
+  static Gizmos = [];
   constructor(){
 
     this.GameViewContext = document.getElementById("GameView").getContext("2d");
@@ -41,6 +42,8 @@ class Renderer{
     this.ObjectHandleInstance = Global.OManager;
 
     this.Layers = Global.OManager.m_Entities;
+
+    this.Gizmos = Renderer.Gizmos;
 
 
 
@@ -72,6 +75,7 @@ class Renderer{
     this.AddImage("Resources/BG/Demo/l3.png")
     this.AddImage("Resources/star.png");
     this.AddImage("Resources/sThrust1.png");
+    this.AddImage("Resources/earth.png");
   }
 
   Update(){
@@ -91,6 +95,15 @@ class Renderer{
         item.DrawRes.Draw(this.GameViewContext, this.Images[item.DrawRes.SpriteID], ScreenSpace, item.DrawRes.Dimensions.rMult(this.m_Camera.Zoom) , item.Rigidbody.Orien, item.DrawRes.Opacity);
       })
     });
+    this.GameViewContext.save();
+    this.GameViewContext.strokeStyle = "#FF0000";
+
+    this.Gizmos.forEach(item =>{
+      var ScreenSpace = this.WorldToScreen(item.Rigidbody.Pos);
+      item.DrawRes.Draw(this.GameViewContext, this.Images[item.DrawRes.SpriteID], ScreenSpace, item.DrawRes.Dimensions.rMult(this.m_Camera.Zoom) , item.Rigidbody.Orien, item.DrawRes.Opacity);
+    });
+    this.GameViewContext.restore();
+
   }
 
   Debug(){
@@ -132,6 +145,10 @@ class Renderer{
 
   static AddObject(object){
     this.Layers[object.DrawRes.Layer].push(object);
+  }
+
+  static AddGizmo(object){
+    this.Gizmos.push(object);
   }
 
 }

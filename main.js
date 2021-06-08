@@ -74,6 +74,11 @@ function mainloop(timestep){
   ElapsedTime = timestep - PrevTime;
   PrevTime = timestep;
 
+  /*
+  if (Global.InputSystem.GetKeyState(' ') == "keydown"){
+    ElapsedTime = 0;
+  }
+  */
   //console.log(ElapsedTime);
 
 

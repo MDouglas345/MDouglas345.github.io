@@ -18,6 +18,17 @@ class DebugSquareFunction extends DrawFunction{
   }
 }
 
+class NodeDrawFunction extends DrawFunction{
+  constructor(){
+    super();
+  }
+
+  Draw(context, imageRef, pos, scale, rot){
+    //console.log(pos);
+    context.strokeRect(pos.X-(scale.X / 2), pos.Y-(scale.Y / 2), scale.X, scale.Y);
+  }
+}
+
 class BDrawFunction extends DrawFunction{
   constructor(){
     super();

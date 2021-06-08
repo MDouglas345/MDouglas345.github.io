@@ -74,3 +74,13 @@ class PlayerThrusterRes extends DrawRes{
     this.Layer = 2;
   }
 }
+
+class QuadTreeNodeRes extends DrawRes{
+  constructor(dim){
+    super();
+    this.SpriteID = 0;
+    this.DrawFunc = new NodeDrawFunction();
+    this.Dimensions = dim;
+    this.Layer = 5;
+  }
+}

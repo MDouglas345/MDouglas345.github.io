@@ -10,6 +10,7 @@ class Player extends GameObject{
     this.Name = "Player";
     this.Rigidbody = new Rigidbody();
     this.Rigidbody.Enable();
+    this.CollisionType = new CollisionType();
     this.DrawRes = new PlayerRes();
     this.DrawRes.Dimensions = new Vec2(175,200);
     this.Rigidbody.Mass = 5;
@@ -55,7 +56,7 @@ class Player extends GameObject{
   }
 
 Update(){
-  //console.log(this.Rigidbody.Vel);
+  //console.log(this.Rigidbody.Pos);
   }
 
   Firing(){
