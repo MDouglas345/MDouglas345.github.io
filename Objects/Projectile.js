@@ -6,6 +6,7 @@ class Projectile extends GameObject{
     this.Rigidbody.Enable();
     this.DrawRes = new DefaultProjectile();
     this.DrawRes.Dimensions = new Vec2(25,10);
+    this.CollisionType = new CircleCollider()
 
     this.Rigidbody.Mass = 1;
     this.Rigidbody.Pos = pos;

@@ -20,6 +20,7 @@ class Game{
     this.m_Player = new Player();
 
     this.PlanetDemo = new Earth();
+    this.Cryptopolid = new Cryptopolid();
 
     this.m_Camera = new Camera(this.m_Player);
 
@@ -30,6 +31,8 @@ class Game{
 
     this.QuadTree = new QuadTree(this.m_Player);
 
+    this.CollisionHandler = new CollisionHandler(this.QuadTree);
+
   }
 
   Init(){
@@ -37,7 +40,8 @@ class Game{
     Game.AddObject(this.m_Camera);
     //Game.AddObject(this.DebugObject);
     Game.AddObject(this.BGMaster);
-    Game.AddObject(this.PlanetDemo);
+    Game.AddObject(this.PlanetDemo)
+    Game.AddObject(this.Cryptopolid);
 
     this.ObjectHandleInstance.m_Entities.forEach(layer =>{
       layer.forEach(item =>{
@@ -58,6 +62,7 @@ class Game{
   }
 
   Update(elapsed){
+    console.log(this.m_Player.Rigidbody.Pos);
     //console.log(this.ObjectHandleInstance.m_Entities[2]);
     /*
     Stages to go through in order
@@ -77,7 +82,8 @@ class Game{
     this.Physics.Update(elapsed);
 
     this.QuadTree.CreateTree();
-    console.log(this.QuadTree);
+    //console.log(this.QuadTree);
+    this.CollisionHandler.CheckCollisions();
 
     this.ObjectHandleInstance.m_Entities.forEach(layer =>{
       layer.forEach(item =>{

@@ -1,0 +1,8 @@
+class Shootable{
+  constructor(){
+
+  }
+  OnHit(){
+    
+  }
+}

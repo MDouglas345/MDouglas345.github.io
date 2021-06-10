@@ -76,6 +76,7 @@ class Renderer{
     this.AddImage("Resources/star.png");
     this.AddImage("Resources/sThrust1.png");
     this.AddImage("Resources/earth.png");
+    this.AddImage("Resources/Cryptopolidv1.png")
   }
 
   Update(){
@@ -90,6 +91,7 @@ class Renderer{
 
     this.Layers.forEach(layer => {
       layer.forEach(item =>{
+        if (item.Rigidbody == null){console.log(item);}
 
         var ScreenSpace = this.WorldToScreen(item.Rigidbody.Pos);
         item.DrawRes.Draw(this.GameViewContext, this.Images[item.DrawRes.SpriteID], ScreenSpace, item.DrawRes.Dimensions.rMult(this.m_Camera.Zoom) , item.Rigidbody.Orien, item.DrawRes.Opacity);

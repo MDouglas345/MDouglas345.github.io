@@ -4,13 +4,16 @@ var Global = window || global;
   Script that controls the player. Lots of magic can happen here. Especially with encapsulation!
 */
 
-class Player extends GameObject{
+class Player extends GameObject
+{
   constructor(){
     super();
     this.Name = "Player";
     this.Rigidbody = new Rigidbody();
     this.Rigidbody.Enable();
-    this.CollisionType = new CollisionType();
+
+    this.CollisionType = new CircleCollider();
+
     this.DrawRes = new PlayerRes();
     this.DrawRes.Dimensions = new Vec2(175,200);
     this.Rigidbody.Mass = 5;

@@ -25,6 +25,7 @@ class NodeDrawFunction extends DrawFunction{
 
   Draw(context, imageRef, pos, scale, rot){
     //console.log(pos);
+    context.strokeStyle = "#FF0000";
     context.strokeRect(pos.X-(scale.X / 2), pos.Y-(scale.Y / 2), scale.X, scale.Y);
   }
 }

@@ -4,8 +4,14 @@ class NodeState{
     this.NodeMaster = Parent;
   }
 
+  GetChildren(array, index){
 
+  }
   Insert(object){
+
+  }
+
+  Clear(){
 
   }
 }
@@ -24,16 +30,31 @@ class NodeEmptyState extends NodeState{
     //console.log(this.NodeMaster.ObjectCount, Node.ObjectLimit);
 
     //console.log(this.NodeMaster.Bounds.Dimensions.Mag());
-    if (this.NodeMaster.ObjectCount >= Node.ObjectLimit && this.NodeMaster.Bounds.Dimensions.Mag() > 100){
+    if (this.NodeMaster.ObjectCount > Node.ObjectLimit && this.NodeMaster.Bounds.Dimensions.Mag() > 10000){
       //console.log("here");
       this.NodeMaster.AllocateChildren();
       this.NodeMaster.RelocateEntities();
       this.NodeMaster.SetState(1);
+      this.NodeMaster.ObjectCount = 0;
     }
+  }
+
+  GetChildren(array, index){
+    if (this.NodeMaster.ObjectCount == 0){return;}
+
+    array.push([]);
+    array[index] = [];
+    //console.log(copyInstance(this.NodeMaster.SubEntities));
+    this.NodeMaster.SubEntities.forEach(object => {
+      array[index].push(object);
+    });
+
+    index++;
   }
 
   Clear(){
     this.NodeMaster.SubEntities = null;
+    this.NodeMaster.ObjectCount = null;
   }
 }
 
@@ -71,12 +92,23 @@ class NodeFillState extends NodeState{
     this.NodeMaster.UpperRightNode = null;
     this.NodeMaster.LowerLeftNode = null;
     this.NodeMaster.LowerRightNode = null;
+
+    this.NodeMaster.SubEntities = null;
+    this.NodeMaster.ObjectCount = null;
+  }
+
+  GetChildren(array, index){
+    this.NodeMaster.UpperRightNode.GetChildren(array,index);
+    this.NodeMaster.UpperLeftNode.GetChildren(array,index);
+    this.NodeMaster.LowerRightNode.GetChildren(array,index);
+    this.NodeMaster.LowerLeftNode.GetChildren(array,index);
+    return;
   }
 
 }
 
 class Node{
-  static ObjectLimit = 10;
+  static ObjectLimit = 5;
   constructor(orig, Dim){
     //console.log(orig);
 
@@ -93,6 +125,10 @@ class Node{
 
     this.SubEntities = [];
 
+    //this.ObjectRepresentative = new NodeRep(orig.rAdd(Dim.rDivide(2)), Dim);
+
+    //Game.AddObject(this.ObjectRepresentative)
+
 
   }
 
@@ -104,18 +140,26 @@ class Node{
   GetQuadrant(pos){
     let Dim = this.Bounds.Dimensions.rDivide(2);
     let center = this.Bounds.Origin.rAdd(Dim);
+    //console.log(center);
     let Diff = center.rSub(pos);
+    //console.log(Diff);
 
-    if (Diff.X < 0 && Diff.Y > 0){ //LowerLeft Quadrant
+    if (Math.abs(Diff.X) > QuadTree.CoveredArea.X || Math.abs(Diff.Y) > QuadTree.CoveredArea.Y){ return -1;}
+
+    if (Diff.X > 0 && Diff.Y < 0){ //LowerLeft Quadrant
+      //console.log("LowerLeft, center : " + center);
       return 2;
     }
-    if (Diff.X > 0 && Diff.Y > 0){ //LowerRight Quadrant
+    if (Diff.X < 0 && Diff.Y < 0){ //LowerRight Quadrant
+      //console.log("lowerRight, center : " + center);
       return 3;
     }
-    if (Diff.X > 0 && Diff.Y < 0){ //UpperRight Quadrant
+    if (Diff.X < 0 && Diff.Y > 0){ //UpperRight Quadrant
+      //console.log("upperRight, center : " + center);
       return 1;
     }
-    if (Diff.X < 0 && Diff.Y < 0){ //UpperLeft Quadrant
+    if (Diff.X > 0 && Diff.Y > 0){ //UpperLeft Quadrant
+      //console.log("upperLeft, center : " + center);
       return 0;
     }
   }
@@ -123,6 +167,8 @@ class Node{
   Clear(){
     this.State.Clear();
     this.ObjectCount = null;
+    this.SubEntities = null;
+    //this.ObjectRepresentative.NeedsDelete = true;
   }
 
   AllocateChildren(){
@@ -130,9 +176,9 @@ class Node{
     let center = this.Bounds.Origin.rAdd(Dim);
 
     this.UpperLeftNode = new Node(center.rSub(Dim), Dim);
-    this.UpperRightNode = new Node(new Vec2(center.X + Dim.X, center.Y), Dim);
-    this.LowerLeftNode = new Node(new Vec2(center.X, center.Y + Dim.Y), Dim);
-    this.LowerRightNode = new Node(center.rAdd(Dim), Dim);
+    this.UpperRightNode = new Node(new Vec2(center.X, center.Y - Dim.Y), Dim);
+    this.LowerLeftNode = new Node(new Vec2(center.X - Dim.X, center.Y), Dim);
+    this.LowerRightNode = new Node(center, Dim);
   }
 
   RelocateEntities(){
@@ -156,6 +202,7 @@ class Node{
     });
 
     this.SubEntities = null;
+    this.SubEntities = [];
   }
 
   SetState(i){
@@ -169,4 +216,25 @@ class Node{
         break;
     }
   }
+
+  GetChildren(array, index){
+    this.State.GetChildren(array,index);
+    /*
+    if (this.State instanceof NodeFillState){
+      this.UpperRightNode.GetChildren(array,index);
+      this.UpperLeftNode.GetChildren(array,index);
+      this.LowerRightNode.GetChildren(array,index);
+      this.LowerLeftNode.GetChildren(array,index);
+      return;
+    }
+
+    array.push([]);
+    array[index] = [];
+    this.SubEntities.forEach(object =>{
+      array[index].push(object);
+    });
+    index++;
+    */
+  }
+
 }

@@ -1,4 +1,4 @@
-class CircleCT extends CollisionType{
+class CircleCollider extends CollisionType{
   constructor(){
     super();
   }

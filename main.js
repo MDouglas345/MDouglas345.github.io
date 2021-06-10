@@ -79,7 +79,7 @@ function mainloop(timestep){
     ElapsedTime = 0;
   }
   */
-  //console.log(ElapsedTime);
+  //console.log(1/ElapsedTime);
 
 
   RenderSystem.Clear();
