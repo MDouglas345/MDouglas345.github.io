@@ -4,12 +4,14 @@
 var Global = window || global;
 
 class QuadTree{
+
   static CoveredArea = new Vec2(100000,100000);
 
   constructor(Target){
     this.Target = Target;
     this.Entities = Global.OManager.m_Entities;
     this.Root;
+
   }
 
   CreateTree(){
@@ -30,8 +32,11 @@ class QuadTree{
   }
 
   GetRegionalData(){
-    let Data = [];
-    this.Root.GetChildren(Data, 0);
-    return Data;
+    let Combine = {
+      Data : [],
+      Index : 0
+    };
+    this.Root.GetChildren(Combine);
+    return Combine.Data;
   }
 }

@@ -21,6 +21,8 @@ class psPlayerThruster extends ParticleSystem{
     let vec = GetVectorFromAngle(this.Player.Rigidbody.Orien);
 
     vec.Mult(-1 * this.Player.Rigidbody.Vel.MagSqrt());
+
+    vec.Add(this.Player.Rigidbody.Vel);
     //vec.Add(this.Player.Rigidbody.Vel);
     //console.log(vec);
 

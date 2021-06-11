@@ -62,7 +62,7 @@ class Game{
   }
 
   Update(elapsed){
-    console.log(this.m_Player.Rigidbody.Pos);
+    //console.log(this.m_Player.Rigidbody.Pos);
     //console.log(this.ObjectHandleInstance.m_Entities[2]);
     /*
     Stages to go through in order
@@ -82,6 +82,8 @@ class Game{
     this.Physics.Update(elapsed);
 
     this.QuadTree.CreateTree();
+    //if (this.m_Player.Shots > 5){debugger;}
+    //console.log(this.m_Player.Shots);
     //console.log(this.QuadTree);
     this.CollisionHandler.CheckCollisions();
 

@@ -4,7 +4,7 @@ class NodeState{
     this.NodeMaster = Parent;
   }
 
-  GetChildren(array, index){
+  GetChildren(combine){
 
   }
   Insert(object){
@@ -39,17 +39,18 @@ class NodeEmptyState extends NodeState{
     }
   }
 
-  GetChildren(array, index){
+  GetChildren(combine){
+
     if (this.NodeMaster.ObjectCount == 0){return;}
 
-    array.push([]);
-    array[index] = [];
+    combine.Data.push([]);
+    combine.Data[combine.Index] = [];
     //console.log(copyInstance(this.NodeMaster.SubEntities));
     this.NodeMaster.SubEntities.forEach(object => {
-      array[index].push(object);
+      combine.Data[combine.Index].push(object);
     });
 
-    index++;
+    combine.Index++;
   }
 
   Clear(){
@@ -97,11 +98,11 @@ class NodeFillState extends NodeState{
     this.NodeMaster.ObjectCount = null;
   }
 
-  GetChildren(array, index){
-    this.NodeMaster.UpperRightNode.GetChildren(array,index);
-    this.NodeMaster.UpperLeftNode.GetChildren(array,index);
-    this.NodeMaster.LowerRightNode.GetChildren(array,index);
-    this.NodeMaster.LowerLeftNode.GetChildren(array,index);
+  GetChildren(combine){
+    this.NodeMaster.UpperRightNode.GetChildren(combine);
+    this.NodeMaster.UpperLeftNode.GetChildren(combine);
+    this.NodeMaster.LowerRightNode.GetChildren(combine);
+    this.NodeMaster.LowerLeftNode.GetChildren(combine);
     return;
   }
 
@@ -190,19 +191,20 @@ class Node{
           this.UpperLeftNode.Insert(object)
           break;
         case 1: //UpperRight
-        this.UpperRightNode.Insert(object)
+          this.UpperRightNode.Insert(object)
           break;
         case 2: //LowerLeft
-        this.LowerLeftNode.Insert(object)
+          this.LowerLeftNode.Insert(object)
           break;
         case 3: //LowerRight
-        this.LowerRightNode.Insert(object)
+          this.LowerRightNode.Insert(object)
           break;
       }
     });
 
     this.SubEntities = null;
     this.SubEntities = [];
+    this.ObjectCount = 0;
   }
 
   SetState(i){
@@ -217,8 +219,8 @@ class Node{
     }
   }
 
-  GetChildren(array, index){
-    this.State.GetChildren(array,index);
+  GetChildren(combine){
+    this.State.GetChildren(combine);
     /*
     if (this.State instanceof NodeFillState){
       this.UpperRightNode.GetChildren(array,index);

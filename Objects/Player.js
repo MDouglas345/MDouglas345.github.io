@@ -12,6 +12,8 @@ class Player extends GameObject
     this.Rigidbody = new Rigidbody();
     this.Rigidbody.Enable();
 
+    this.Shots = 0;
+
     this.CollisionType = new CircleCollider();
 
     this.DrawRes = new PlayerRes();
@@ -72,6 +74,8 @@ Update(){
         let b = new Projectile(this.Center(), copyInstance(this.Rigidbody));
         Game.AddObject(b);
         this.Fired = false;
+        this.Shots++;
+        //console.log(this.Shots);
       }, 500)
     });
   }
