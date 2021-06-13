@@ -11,6 +11,7 @@ class Player extends GameObject
     this.Name = "Player";
     this.Rigidbody = new Rigidbody();
     this.Rigidbody.Enable();
+    this.Rigidbody.Pos = new Vec2(0,300);
 
     this.Shots = 0;
 

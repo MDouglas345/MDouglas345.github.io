@@ -9,6 +9,7 @@ class CollisionMatrix{
         let point = PosDifference.Normal();
         point.Mult(Difference - objectA.CollisionType.Radius);
         point = objectB.Rigidbody.Pos.rAdd(point);
+        
         return new CollisionIdentifier(objectA,objectB, point)
       }
     }

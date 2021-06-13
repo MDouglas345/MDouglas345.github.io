@@ -48,6 +48,10 @@ class GameObject{
     return new Vec2(this.Rigidbody.Pos.X, this.Rigidbody.Pos.Y );
   }
 
+  OnCollide(){
+    
+  }
+
   Delete(){
     this.Name = null;
     this.Rigidbody = null;

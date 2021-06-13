@@ -11,8 +11,16 @@ class CollisionHandler{
     let ObjectZones = this.QuadTreeRef.GetRegionalData();
 
     this.CollisionsDetected = this.CollisionMode.CheckCollisions(ObjectZones);
-    
-    console.log(this.CollisionsDetected);
+
+    this.CollisionsDetected.forEach(collision => {
+      collision.ObjectA.OnCollide();
+      collision.ObjectB.OnCollide();
+
+      collision.ObjectA.Rigidbody.Vel.Mult(-1);
+      collision.ObjectB.Rigidbody.Vel.Mult(-1);
+    });
+
+
   }
 
 }
