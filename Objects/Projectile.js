@@ -6,7 +6,7 @@ class Projectile extends GameObject{
     this.Rigidbody.Enable();
     this.DrawRes = new DefaultProjectile();
     this.DrawRes.Dimensions = new Vec2(25,10);
-    this.CollisionType = new CircleCollider()
+    this.CollisionType = new CircleCollider(20)
 
     this.Rigidbody.Mass = 1;
     this.Rigidbody.Pos = pos;
@@ -15,10 +15,6 @@ class Projectile extends GameObject{
     let dir = GetVectorFromAngle(this.Rigidbody.Orien);
     dir.Mult(1000);
     this.Rigidbody.Vel = dir;
-
-  }
-
-  EarlyUpdate(felapsed){
 
   }
 }

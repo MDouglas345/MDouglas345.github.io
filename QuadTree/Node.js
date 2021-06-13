@@ -30,7 +30,7 @@ class NodeEmptyState extends NodeState{
     //console.log(this.NodeMaster.ObjectCount, Node.ObjectLimit);
 
     //console.log(this.NodeMaster.Bounds.Dimensions.Mag());
-    if (this.NodeMaster.ObjectCount > Node.ObjectLimit && this.NodeMaster.Bounds.Dimensions.Mag() > 10000){
+    if (this.NodeMaster.ObjectCount > Node.ObjectLimit && this.NodeMaster.Bounds.Dimensions.Mag() > 1000){
       //console.log("here");
       this.NodeMaster.AllocateChildren();
       this.NodeMaster.RelocateEntities();

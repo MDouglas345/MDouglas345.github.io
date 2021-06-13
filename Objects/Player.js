@@ -14,7 +14,7 @@ class Player extends GameObject
 
     this.Shots = 0;
 
-    this.CollisionType = new CircleCollider();
+    this.CollisionType = new CircleCollider(100);
 
     this.DrawRes = new PlayerRes();
     this.DrawRes.Dimensions = new Vec2(175,200);
@@ -24,6 +24,7 @@ class Player extends GameObject
     this.StarSystem = new psStarParallax(500,this);
     Game.AddObject(this.StarSystem);
 
+/*
     this.LeftThruster = new psPlayerThruster(this, new Vec2(-40,-40));
     this.RightThruster = new psPlayerThruster(this, new Vec2(-40,43));
 
@@ -32,6 +33,7 @@ class Player extends GameObject
 
     Game.AddObject(this.LeftThruster);
     Game.AddObject(this.RightThruster);
+    */
 
   }
 

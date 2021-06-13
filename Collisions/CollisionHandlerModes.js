@@ -32,8 +32,9 @@ class CHSingleThreaded extends CollisionMode{
           if (checked.length > y && checked[y].includes(x)){ continue;}
           checked[x].push(y);
           perfcounter++;
-          //let func = this.CollisionMatrixRef[x][y];
-          //func(x,y, DetectedCollisions);
+          let f = this.CollisionMatrixRef[objectzones[s][x].CollisionType.TypeID][objectzones[s][y].CollisionType.TypeID];
+          
+          f(objectzones[s][x],objectzones[s][y]);
         }
       }
       checked = null;

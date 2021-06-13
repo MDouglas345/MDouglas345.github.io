@@ -5,7 +5,7 @@ var Global = window || global;
 
 class QuadTree{
 
-  static CoveredArea = new Vec2(100000,100000);
+  static CoveredArea = new Vec2(10000,10000);
 
   constructor(Target){
     this.Target = Target;

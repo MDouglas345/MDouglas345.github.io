@@ -6,6 +6,7 @@ class Earth extends Planet{
     this.DrawRes.Dimensions = new Vec2(700,600);
     this.DrawRes.SpriteID = 7;
     this.DrawRes.DrawFunc = new BRotatedDrawFunction();
-  }
 
+    this.CollisionType = new CircleCollider(250);
+  }
 }

@@ -104,7 +104,7 @@ class Game{
   LateUpdate(elapsed){
     this.ObjectHandleInstance.m_Entities.forEach(layer =>{
       layer.forEach(item =>{
-        item.LateUpdate();
+        item.LateUpdate(elapsed);
       });
     });
 

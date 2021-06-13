@@ -2,7 +2,8 @@ class CollisionHandler{
   constructor(QuadTree){
     this.QuadTreeRef = QuadTree;
     this.CollisionsDetected = [];
-
+    this.CollisionMatrix = new CollisionMatrix()
+  
     this.CollisionMode = new CHSingleThreaded();
   }
 
