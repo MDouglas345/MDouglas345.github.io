@@ -3,10 +3,13 @@ class CollisionMatrix{
   constructor(){
 
     const CircleCirclCol = function(objectA, objectB){
-      let Difference = objectA.Rigidbody.Pos.rSub(objectB.Rigidbody.Pos);
-      Difference = Difference.MagSqrt();
+      var PosDifference = objectA.Rigidbody.Pos.rSub(objectB.Rigidbody.Pos);
+      let Difference = PosDifference.MagSqrt();
       if (Difference < (objectA.CollisionType.Radius + objectB.CollisionType.Radius)){
-        console.log("Colliding");
+        let point = PosDifference.Normal();
+        point.Mult(Difference - objectA.CollisionType.Radius);
+        point = objectB.Rigidbody.Pos.rAdd(point);
+        return new CollisionIdentifier(objectA,objectB, point)
       }
     }
 

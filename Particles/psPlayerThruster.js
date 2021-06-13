@@ -18,20 +18,13 @@ class psPlayerThruster extends ParticleSystem{
   Update(felapsed){
     this.AddParticle();
 
-    //let vec = GetVectorFromAngle(this.Player.Rigidbody.Orien);
 
-  //  vec.Mult(-1 * 50);
+    let vec = GetVectorFromAngle(this.Player.Rigidbody.Orien);
+    vec.Mult(-1 * 50);
+    vec = this.Player.Rigidbody.Vel.rAdd(vec);
 
-    //vec.Add(this.Player.Rigidbody.Vel);
-    //vec.Add(this.Player.Rigidbody.Vel);
-    //console.log(vec);
-
-    let vec = new Vec2(0,0);
-    
     for (let i = 0; i < this.Particles.length; i++){
       let item = this.Particles[i];
-
-      //console.log(this.Particles);
 
       item.DrawRes.Opacity = Lerp(0,1,item.Lifetime);
       item.Lifetime -= felapsed;

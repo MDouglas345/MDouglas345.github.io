@@ -23,24 +23,27 @@ class CHSingleThreaded extends CollisionMode{
 
     for (let s = 0; s < objectzones.length; s++){
         var checked = []
-        var cindex = -1;
       for (let x = 0; x < objectzones[s].length; x++){
         checked.push([]);
-        cindex++;
         for (let y = 0; y < objectzones[s].length; y++){
           if (x == y){continue;}
           if (checked.length > y && checked[y].includes(x)){ continue;}
           checked[x].push(y);
           perfcounter++;
           let f = this.CollisionMatrixRef[objectzones[s][x].CollisionType.TypeID][objectzones[s][y].CollisionType.TypeID];
+
+          let Col = f(objectzones[s][x],objectzones[s][y]);
+
+          if (Col){
+            DetectedCollisions.push(Col);
+          }
           
-          f(objectzones[s][x],objectzones[s][y]);
         }
       }
       checked = null;
     }
     //console.log(perfcounter);
 
-
+    return DetectedCollisions;
   }
 }

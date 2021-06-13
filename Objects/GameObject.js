@@ -21,13 +21,6 @@ class GameObject{
   Init(){
 
   }
-  HandleChildren(){
-    this.Children.forEach(item =>{
-      //Need to rotate the object based on the parent offset
-      //Post pone
-      item.Rigidbody.Pos = this.Rigidbody.Pos.rAdd(this.ParentOffset);
-    });
-  }
   EarlyUpdate(felapsed){
 
   }

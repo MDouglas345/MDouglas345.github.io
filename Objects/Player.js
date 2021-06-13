@@ -24,7 +24,7 @@ class Player extends GameObject
     this.StarSystem = new psStarParallax(500,this);
     Game.AddObject(this.StarSystem);
 
-/*
+
     this.LeftThruster = new psPlayerThruster(this, new Vec2(-40,-40));
     this.RightThruster = new psPlayerThruster(this, new Vec2(-40,43));
 
@@ -33,7 +33,6 @@ class Player extends GameObject
 
     Game.AddObject(this.LeftThruster);
     Game.AddObject(this.RightThruster);
-    */
 
   }
 
