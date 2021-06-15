@@ -15,7 +15,9 @@ class GameObject{
     this.Children = [];
     this.ParentOffset = new Vec2(0,0);
     this.NeedsDelete = false;
+
     this.CollisionType = new NoCollider();
+    this.CollisionLayer = -1;
 
   }
   Init(){
@@ -49,7 +51,7 @@ class GameObject{
   }
 
   OnCollide(){
-    
+
   }
 
   Delete(){

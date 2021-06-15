@@ -8,5 +8,6 @@ class Earth extends Planet{
     this.DrawRes.DrawFunc = new BRotatedDrawFunction();
 
     this.CollisionType = new CircleCollider(200);
+    this.CollisionLayer = 1;
   }
 }

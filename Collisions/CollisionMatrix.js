@@ -1,5 +1,8 @@
 class CollisionMatrix{
-  static Matrix = null;
+  static FuncMatrix = null;
+
+  static LayersMatrix = null;
+
   constructor(){
 
     const CircleCirclCol = function(objectA, objectB){
@@ -9,12 +12,12 @@ class CollisionMatrix{
         let point = PosDifference.Normal();
         point.Mult(Difference - objectA.CollisionType.Radius);
         point = objectB.Rigidbody.Pos.rAdd(point);
-        
+
         return new CollisionIdentifier(objectA,objectB, point)
       }
     }
 
-    CollisionMatrix.Matrix = {
+    CollisionMatrix.FuncMatrix = {
 
       1 : {
         0 : function(){},
@@ -27,6 +30,18 @@ class CollisionMatrix{
       },
 
 
+    };
+
+    //Needs to be customied per game Needs
+    CollisionMatrix.LayersMatrix = {
+      0 : {
+        0 : false,
+        1 : true
+      },
+      1 : {
+        0 : true,
+        1 : true
+      }
     };
 
   }

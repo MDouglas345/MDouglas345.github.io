@@ -16,6 +16,7 @@ class Player extends GameObject
     this.Shots = 0;
 
     this.CollisionType = new CircleCollider(100);
+    this.CollisionLayer = 0;
 
     this.DrawRes = new PlayerRes();
     this.DrawRes.Dimensions = new Vec2(175,200);
