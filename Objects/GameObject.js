@@ -50,7 +50,7 @@ class GameObject{
     return new Vec2(this.Rigidbody.Pos.X, this.Rigidbody.Pos.Y );
   }
 
-  OnCollide(){
+  OnCollide(object){
 
   }
 

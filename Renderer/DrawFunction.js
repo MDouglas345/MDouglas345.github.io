@@ -94,3 +94,20 @@ class DebugPositionDrawFunc extends DrawFunction{
     this.DrawFunc1.Draw(context, image, Pos, scale, rot);
   }
 }
+
+class PlaceHolderDrawFunction extends DrawFunction{
+  constructor(color){
+    super();
+    this.Color = color;
+    console.log(this.Color)
+  }
+
+  Draw(context, image, Pos, scale, rot){
+    context.save();
+    context.translate(Pos.X , Pos.Y );
+    context.rotate(rot);
+    context.fillStyle = this.Color;
+    context.fillRect(-scale.X/2, -scale.Y/2, scale.X, scale.Y);
+    context.restore();
+  }
+}

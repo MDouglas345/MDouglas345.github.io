@@ -84,3 +84,15 @@ class QuadTreeNodeRes extends DrawRes{
     this.Layer = 5;
   }
 }
+
+class PlaceholderRes extends DrawRes{
+  constructor(dim, layer, color){
+    super();
+    this.SpriteID = 0;
+    this.DrawFunc = new PlaceHolderDrawFunction(color);
+    this.Dimensions = dim;
+    this.Layer = layer;
+
+
+  }
+}

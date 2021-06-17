@@ -116,3 +116,8 @@ function AngleBetweenVec(vec1, vec2){
   let res = Math.atan2(vec2.Y, vec2.X) - Math.atan2(vec1.Y, vec1.X);
   return res;
 }
+
+function RandomVecInCircle(){
+  let theta = getRandomFloat();
+  return GetVectorFromAngle(theta);
+}

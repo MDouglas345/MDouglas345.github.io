@@ -4,7 +4,7 @@ var Global = window || global;
   Script that controls the player. Lots of magic can happen here. Especially with encapsulation!
 */
 
-class Player extends GameObject
+class Player extends Shootable
 {
   constructor(){
     super();
@@ -23,7 +23,7 @@ class Player extends GameObject
     this.Rigidbody.Mass = 5;
     this.Fired = false;
 
-    this.StarSystem = new psStarParallax(500,this);
+    this.StarSystem = new psStarParallax(100,this);
     Game.AddObject(this.StarSystem);
 
 
@@ -74,10 +74,7 @@ Update(){
         //need to find a way to deep copy!
         //let b = new Projectile(copyInstance(this.Rigidbody.Pos), copyInstance(this.Rigidbody));
         //let b = new Projectile(this.Rigidbody.Pos.rSub(new Vec2(this.DrawRes.Dimensions.X/2, this.DrawRes.Dimensions.Y/2)), copyInstance(this.Rigidbody));
-        let b = new Projectile(this.Center(), copyInstance(this.Rigidbody));
-        Game.AddObject(b);
         this.Fired = false;
-        this.Shots++;
         //console.log(this.Shots);
       }, 500)
     });
@@ -86,6 +83,9 @@ Update(){
   async FireBullet(){
     if (!this.Fired){
       this.Fired = true;
+      let b = new Projectile(this.Center(), copyInstance(this.Rigidbody));
+      Game.AddObject(b);
+      this.Shots++;
       let r = await this.Firing();
     }
   }

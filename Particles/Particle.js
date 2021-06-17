@@ -11,7 +11,7 @@ class SpaceParticle extends Particle{
   constructor(){
     super();
     this.Name = "Space Particle";
-    this.DistanceToPlayer = getRandomInt(50);
+    this.DistanceToPlayer = getRandomInt(10);
     this.DrawRes.Dimensions = new Vec2(10 * (1/this.DistanceToPlayer),10 * (1/this.DistanceToPlayer));
     this.DrawRes.Layer = 1;
 

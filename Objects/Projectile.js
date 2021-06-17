@@ -1,4 +1,4 @@
-class Projectile extends GameObject{
+class Projectile extends Shootable{
   constructor(pos, ori){
     super();
     this.Name = "Projectile";
@@ -8,7 +8,7 @@ class Projectile extends GameObject{
     this.DrawRes.Dimensions = new Vec2(25,10);
 
     this.CollisionType = new CircleCollider(20);
-    this.CollisionLayer = 0;
+    this.CollisionLayer = 1;
 
     this.Rigidbody.Mass = 1;
     this.Rigidbody.Pos = pos;
@@ -18,5 +18,17 @@ class Projectile extends GameObject{
     dir.Mult(1000);
     this.Rigidbody.Vel = dir;
 
+  }
+
+  OnHit(object){
+    console.log(object);
+    if (object instanceof Shootable){
+      this.NeedsDelete = true;
+      object.OnHit(this)
+    }
+  }
+
+  OnCollide(object){
+   this.OnHit(object);
   }
 }

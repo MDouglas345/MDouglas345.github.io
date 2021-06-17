@@ -15,7 +15,10 @@ class QuadTree{
   }
 
   CreateTree(){
-    this.Root = new Node(this.Target.Rigidbody.Pos.rSub(QuadTree.CoveredArea.rDivide(2)), QuadTree.CoveredArea);
+    let pos = copyInstance(this.Target.Rigidbody.Pos);
+    pos.Add(new Vec2(300,300));
+    //console.log(pos);
+    this.Root = new Node(pos.rSub(QuadTree.CoveredArea.rDivide(2)), QuadTree.CoveredArea);
     this.Entities.forEach(layer =>{
       layer.forEach(item =>{
         if (!(item.CollisionType instanceof NoCollider)){

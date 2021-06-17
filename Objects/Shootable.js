@@ -1,8 +1,8 @@
-class Shootable{
+class Shootable extends GameObject{
   constructor(){
-
+    super();
   }
   OnHit(){
-    
+
   }
 }

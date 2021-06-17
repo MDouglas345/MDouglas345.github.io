@@ -24,8 +24,11 @@ class Game{
 
     this.m_Camera = new Camera(this.m_Player);
 
-    //this.BGMaster = new DemoBGMaster(this.m_Player);
+    this.BGMaster = new DemoBGMaster(this.m_Player);
+
     this.BGMaster = new SpaceBackground();
+
+    this.Astroids = new AstroidSystem(this.m_Player);
 
     this.Physics = new PhysicsSystem();
 
@@ -42,6 +45,7 @@ class Game{
     Game.AddObject(this.BGMaster);
     Game.AddObject(this.PlanetDemo)
     Game.AddObject(this.Cryptopolid);
+    Game.AddObject(this.Astroids);
 
     this.ObjectHandleInstance.m_Entities.forEach(layer =>{
       layer.forEach(item =>{

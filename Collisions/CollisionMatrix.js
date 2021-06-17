@@ -36,11 +36,18 @@ class CollisionMatrix{
     CollisionMatrix.LayersMatrix = {
       0 : {
         0 : false,
-        1 : true
+        1 : false,
+        2 : true
       },
       1 : {
-        0 : true,
-        1 : true
+        0 : false,
+        1 : false,
+        2 : true
+      },
+      2 : {
+        0 : false,
+        1 : true,
+        2 : false
       }
     };
 
