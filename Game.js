@@ -36,6 +36,8 @@ class Game{
 
     this.CollisionHandler = new CollisionHandler(this.QuadTree);
 
+    this.EnemyDemo = new EnemyScouter();
+
   }
 
   Init(){
@@ -46,6 +48,7 @@ class Game{
     Game.AddObject(this.PlanetDemo)
     Game.AddObject(this.Cryptopolid);
     Game.AddObject(this.Astroids);
+    Game.AddObject(this.EnemyDemo);
 
     this.ObjectHandleInstance.m_Entities.forEach(layer =>{
       layer.forEach(item =>{
