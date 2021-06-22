@@ -23,8 +23,7 @@ class Player extends Shootable
     this.Rigidbody.Mass = 5;
     this.Fired = false;
 
-    this.StarSystem = new psStarParallax(100,this);
-    Game.AddObject(this.StarSystem);
+  
 
 
     this.LeftThruster = new psPlayerThruster(this, new Vec2(-40,-40));
@@ -60,6 +59,7 @@ class Player extends Shootable
     }
 
     this.Rigidbody.AngVel *= 0.99;
+    this.Rigidbody.Vel.Mult(0.99);
 
   }
 

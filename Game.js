@@ -22,7 +22,7 @@ class Game{
     this.PlanetDemo = new Earth();
     this.Cryptopolid = new Cryptopolid();
 
-    this.m_Camera = new Camera(this.m_Player);
+
 
     this.BGMaster = new DemoBGMaster(this.m_Player);
 
@@ -38,6 +38,11 @@ class Game{
 
     this.EnemyDemo = new EnemyScouter();
 
+    this.m_Camera = new Camera(this.m_Player);
+
+    this.StarSystem = new psStarParallax(100,this.m_Player);
+
+
   }
 
   Init(){
@@ -49,6 +54,7 @@ class Game{
     Game.AddObject(this.Cryptopolid);
     Game.AddObject(this.Astroids);
     Game.AddObject(this.EnemyDemo);
+    Game.AddObject(this.StarSystem);
 
     this.ObjectHandleInstance.m_Entities.forEach(layer =>{
       layer.forEach(item =>{

@@ -1,13 +1,24 @@
 
 class Astroid extends Shootable{
-  constructor(){
+  constructor(size){
     super();
+    this.size;
+
+    if (size){this.size = size;}
+    else{this.size = getRandomFloat(5) + 1;}
+
     this.Name = "Astroid";
     this.Rigidbody.Enable();
-    let RandomSize = new Vec2(getRandomFloat(200) + 100, getRandomFloat(200) + 100);
-    this.DrawRes = new PlaceholderRes(RandomSize, 4, '#BFB123');
-    this.CollisionType = new CircleCollider(RandomSize.MagSqrt() * 0.6);
+
+    let RandomSize = new Vec2(100, 100);
+    RandomSize.Mult(this.size);
+
+    this.DrawRes = new AstroidRes(RandomSize);
+
+    this.CollisionType = new CircleCollider(RandomSize.MagSqrt() * 0.4);
+
     this.CollisionLayer = 2;
+
     this.Rigidbody.Orien = getRandomInt();
     this.RotSpeed = 2;
 
@@ -19,22 +30,28 @@ class Astroid extends Shootable{
   }
 
   OnHit(object){
-    if (this.DrawRes.Dimensions.Mag() < 10000){this.NeedsDelete = true; return;}
+    if (this.DrawRes.Dimensions.Mag() < 99999){this.NeedsDelete = true; return;}
 
     let force = this.Rigidbody.Vel.rSub(object.Rigidbody.Vel);
     force = force.MagSqrt();
 
     for (let i = 0; i < 4; i++){
-      var p = new Astroid();
+
+      let randomsize = getRandomFloat(0.4) + 0.2;
+      randomsize *= this.size;
+
+      var p = new Astroid(randomsize);
       let f = RandomVecInCircle();
       f.Mult(force);
-      p.DrawRes = new PlaceholderRes(this.DrawRes.Dimensions.rDivide(2), 4, '#BFB123');
+
+
       p.Rigidbody.Pos = copyInstance(this.Rigidbody.Pos);
       p.Rigidbody.Vel = f.rMult(0.4);
       p.Rigidbody.AngVel = getRandomFloat(10) - 5;
 
       Game.AddObject(p);
     }
+
     this.NeedsDelete = true;
   }
 }

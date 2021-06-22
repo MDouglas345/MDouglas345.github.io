@@ -8,6 +8,9 @@ class Rigidbody{
     this.AngAcc = 0;
     this.AngVel = 0;
 
+    this.PrevAcc;
+    this.PrevVel;
+
     this.Mass = 1;
 
     this.Parent = null;

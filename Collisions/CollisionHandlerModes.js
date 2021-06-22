@@ -44,7 +44,7 @@ class CHSingleThreaded extends CollisionMode{
       }
       checked = null;
     }
-    console.log(perfcounter);
+    //console.log(perfcounter);
 
     return DetectedCollisions;
   }
