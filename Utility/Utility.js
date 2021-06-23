@@ -124,3 +124,17 @@ function RandomVecInCircle(){
   let theta = getRandomFloat();
   return GetVectorFromAngle(theta);
 }
+
+function Truncate(vector, maxlength){
+  if (vector.MagSqrt() > maxlength){
+    vector.Normalize();
+    vector.Mult(maxlength);
+  }
+}
+function rTruncate(vector, maxlength){
+  if (vector.MagSqrt() > maxlength){
+    let vec = vector.Normal();
+    vec.Mult(maxlength);
+    return vec;
+  }
+}

@@ -61,7 +61,7 @@ class AstroidRes extends DrawRes{
     super();
     this.SpriteID = 9;
     this.DrawFunc = new BRotatedDrawFunction();
-    this.Layer = 2;
+    this.Layer = 3;
     this.Dimensions = dim;
   }
 }

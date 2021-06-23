@@ -23,7 +23,7 @@ class Player extends Shootable
     this.Rigidbody.Mass = 5;
     this.Fired = false;
 
-  
+
 
 
     this.LeftThruster = new psPlayerThruster(this, new Vec2(-40,-40));
@@ -54,7 +54,7 @@ class Player extends Shootable
     }
     if (Global.InputSystem.GetKeyState('W') == "keydown"){
       let Dir = GetVectorFromAngle(this.Rigidbody.Orien);
-      this.Rigidbody.AddVel(Dir.rMult(15));
+      this.Rigidbody.AddVel(Dir.rMult(5));
 
     }
 

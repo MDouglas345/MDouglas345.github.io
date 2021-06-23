@@ -41,6 +41,7 @@ class Astroid extends Shootable{
       randomsize *= this.size;
 
       var p = new Astroid(randomsize);
+      p.DrawRes.SpriteID = 10;
       let f = RandomVecInCircle();
       f.Mult(force);
 
