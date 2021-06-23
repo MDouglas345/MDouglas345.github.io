@@ -6,7 +6,7 @@ class NPCAIState {
   EnterState(felapsed){
 
   }
-  Execute(felapsed){
+  Update(felapsed){
 
   }
   ExitState(felapsed){

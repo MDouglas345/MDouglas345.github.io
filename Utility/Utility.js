@@ -72,6 +72,9 @@ class Vec2{
   Normal(){
     return this.rDivide(this.MagSqrt());
   }
+  Normalize(){
+    this.Divide(this.MagSqrt());
+  }
 }
 
 function Clamp(source, min, max){

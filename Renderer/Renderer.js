@@ -77,6 +77,7 @@ class Renderer{
     this.AddImage("Resources/sThrust1.png");
     this.AddImage("Resources/earth.png");
     this.AddImage("Resources/Cryptopolidv1.png")
+    this.AddImage("Resources/Astroid V1.png");
   }
 
   Update(){

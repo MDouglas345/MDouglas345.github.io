@@ -16,12 +16,13 @@ class Projectile extends Shootable{
 
     let dir = GetVectorFromAngle(this.Rigidbody.Orien);
     dir.Mult(1000);
-    this.Rigidbody.Vel = dir;
+
+    this.Rigidbody.Vel = dir.rAdd(ori.Vel);
 
   }
 
   OnHit(object){
-    console.log(object);
+    //console.log(object);
     if (object instanceof Shootable){
       this.NeedsDelete = true;
       object.OnHit(this)

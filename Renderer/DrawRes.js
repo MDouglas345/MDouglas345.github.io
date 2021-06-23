@@ -56,12 +56,22 @@ class DefaultProjectile extends DrawRes{
   }
 }
 
+class AstroidRes extends DrawRes{
+  constructor(dim){
+    super();
+    this.SpriteID = 9;
+    this.DrawFunc = new BRotatedDrawFunction();
+    this.Layer = 2;
+    this.Dimensions = dim;
+  }
+}
+
 class DebugObjectSprite extends DrawRes{
   constructor(){
     super();
     this.SpriteID = 1;
     this.DrawFunc = new BRotatedDrawFunction();
-    this.Layer  = 2;
+    this.Layer = 2;
   }
 }
 
