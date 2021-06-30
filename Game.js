@@ -19,7 +19,7 @@ class Game{
 
     this.m_Player = new Player();
 
-    this.PlanetDemo = new Earth();
+  //  this.PlanetDemo = new Earth();
     this.Cryptopolid = new Cryptopolid();
 
 
@@ -51,7 +51,7 @@ class Game{
     Game.AddObject(this.m_Camera);
     //Game.AddObject(this.DebugObject);
     Game.AddObject(this.BGMaster);
-    Game.AddObject(this.PlanetDemo)
+    //Game.AddObject(this.PlanetDemo)
     Game.AddObject(this.Cryptopolid);
     Game.AddObject(this.Astroids);
     Game.AddObject(this.EnemyDemo);

@@ -125,3 +125,13 @@ class ShieldRes extends DrawRes{
     this.Opacity = 0;
   }
 }
+
+class BulletRes extends DrawRes{
+  constructor(id){
+    super();
+    this.SpriteID = id;
+    this.DrawFunc = new BRotatedDrawFunction();
+    this.Dimensions = new Vec2(30,10);
+    this.Layer = 3;
+  }
+}

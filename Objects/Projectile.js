@@ -65,6 +65,7 @@ class Projectile extends Shootable{
 class pPlayerBlasterT1 extends Projectile{
   constructor(pos, ori){
     super(pos, ori, 10, 1000);
+    this.DrawRes = new BulletRes(14);
 
   }
 }
@@ -74,6 +75,7 @@ class pBlasterT1 extends Projectile{
     super(pos, ori, 5, 1000);
 
     this.CollisionLayer = 3;
-    this.DrawRes = new PlaceholderRes(new Vec2(15,5), 3, "#FF0000");
+    //this.DrawRes = new PlaceholderRes(new Vec2(15,5), 3, "#FF0000");
+    this.DrawRes = new BulletRes(15);
   }
 }

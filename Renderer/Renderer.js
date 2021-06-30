@@ -82,6 +82,8 @@ class Renderer{
     this.AddImage("Resources/AstroidCrystal V1.png");
     this.AddImage("Resources/scouterv1.png");
     this.AddImage("Resources/shield.png");
+    this.AddImage("Resources/b1.png");
+    this.AddImage("Resources/b2.png");
   }
 
   Update(){
