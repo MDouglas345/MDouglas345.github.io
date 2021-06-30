@@ -44,8 +44,6 @@ class ScouterWanderState extends ScouterAIState{
     super(Master);
     this.TargetLocation;
 
-
-    console.log(this.Master.PatrolSpeed);
     this.RandomDistance;
 
     this.FindNewTargetLocation();

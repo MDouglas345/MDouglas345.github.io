@@ -23,6 +23,12 @@ class Player extends Shootable
     this.Rigidbody.Mass = 5;
     this.Fired = false;
 
+    this.Shield = new PlayerShieldV1(new Vec2(300,300), 0);
+    this.Shield.Rigidbody.ConnectToParent(this);
+
+  //  this.Shield.Rigidbody = this.Rigidbody;
+    Game.AddObject(this.Shield);
+
 
 
     /*
@@ -96,6 +102,6 @@ Update(){
   }
 
   OnCollide(){
-    
+
   }
 }

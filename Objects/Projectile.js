@@ -64,7 +64,7 @@ class Projectile extends Shootable{
 
 class pPlayerBlasterT1 extends Projectile{
   constructor(pos, ori){
-    super(pos, ori, 25, 1000);
+    super(pos, ori, 10, 1000);
 
   }
 }

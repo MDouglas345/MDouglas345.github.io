@@ -51,10 +51,22 @@ class EnemyShieldV1 extends Shield{
   constructor(dim, ColLayer){
     super(dim, ColLayer);
 
-    this.MaxHP = 100;
+    this.MaxHP = 25;
     this.HP = this.MaxHP;
-    this.RechargeRate = 100;
-    this.TimeToFade = 2;
+    this.RechargeRate = 1;
+    this.TimeToFade = 1;
+  }
+}
+
+class PlayerShieldV1 extends Shield{
+  constructor(dim, ColLayer){
+    super(dim, ColLayer);
+
+    this.MaxHP = 50;
+    this.HP = this.MaxHP;
+    this.RechargeRate = 4;
+    this.TimeToFade = 1;
+
   }
 }
 

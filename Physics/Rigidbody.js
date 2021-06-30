@@ -94,6 +94,11 @@ class Rigidbody{
     this.State = new ConnectedToParent(this);
   }
 
+  ConnectToParent(other){
+    this.Parent = other;
+    this.State = new PartOfPartent(this);
+  }
+
   Enable(){
     this.State = new ActivePhysicsState(this);
   }
@@ -151,6 +156,18 @@ class ConnectedToParent extends PhysicsState{
     this.RigidMaster.Pos = pos.rAdd(this.RigidMaster.Parent.Rigidbody.Pos);
 
 
+  }
+}
+
+class PartOfPartent extends PhysicsState{
+  constructor(Rigid){
+    super(Rigid);
+
+  }
+
+  Update(elapsed){
+    this.RigidMaster.Pos = this.RigidMaster.Parent.Rigidbody.Pos;
+    this.RigidMaster.Orien = this.RigidMaster.Parent.Rigidbody.Orien;
   }
 }
 
