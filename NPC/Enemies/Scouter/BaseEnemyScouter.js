@@ -3,7 +3,7 @@ class EnemyScouter extends Enemy{
     super();
     this.Rigidbody.Enable();
     this.Rigidbody.Mass = 2;
-    this.DrawRes = new PlaceholderRes(new Vec2(200,200), 3, "#FF44AA");
+    this.DrawRes = new ScouterRes();
     this.MotherShip = mom;
     this.ThrustForce = 300;
     this.MaxVel = 500;
@@ -16,12 +16,26 @@ class EnemyScouter extends Enemy{
 
     this.SwitchStates("Wander");
 
-    this.PatrolSpeed = 500;
-    this.ChaseSpeed = 300;
-    this.FleeSpeed = 700;
+    this.PatrolSpeed = 100;
+    this.ChaseSpeed = 200;
+    this.FleeSpeed = 300;
 
+    this.FireRate = 0.7;
 
-    this.DetectPlayerRadius = 3000;
+    this.ShootersSpot;
+    this.Shields = new EnemyShieldV1(new Vec2(300,300), 3);
+    this.Shields.Rigidbody.Pos = copyInstance(this.Rigidbody.Pos);
+
+    //this.Shields.Rigidbody.SetParent(this);
+    this.Shields.Rigidbody= this.Rigidbody;
+
+    Game.AddObject(this.Shields);
+    console.log(this.Shields);
+
+    this.CollisionType = new CircleCollider(100);
+    this.CollisionLayer = 3;
+
+    this.DetectPlayerRadius = 2500;
     this.Target;
   }
 
@@ -34,14 +48,27 @@ class EnemyScouter extends Enemy{
   }
 
   Update(felapsed){
-    console.log(this.ActiveState);
+    //console.log(this.ActiveState);
     this.ActiveState.Update(felapsed);
 
     this.Rigidbody.Vel.Mult(0.99);
   }
 
-FaceVelocity(){
-  this.Rigidbody.Orien = GetAngleFromVector(this.Rigidbody.Vel);
-}
+  FaceVelocity(){
+    this.Rigidbody.Orien = GetAngleFromVector(this.Rigidbody.Vel);
+  }
+
+  FaceTarget(){
+    let lookAt = this.Target.Rigidbody.Pos.rSub(this.Rigidbody.Pos);
+    this.Rigidbody.Orien = GetAngleFromVector(lookAt);
+  }
+
+  OnHit(object){
+    let MassRatio = object.Rigidbody.Mass / this.Rigidbody.Mass;
+    let Dir = object.Rigidbody.Vel.Normal();
+    let DesiredVel = Dir.rMult(50);
+    this.Rigidbody.AddVel(DesiredVel);
+    console.log("hit");
+  }
 
 }

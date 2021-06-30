@@ -19,13 +19,13 @@ class Player extends Shootable
     this.CollisionLayer = 0;
 
     this.DrawRes = new PlayerRes();
-    this.DrawRes.Dimensions = new Vec2(175,200);
+    this.DrawRes.Dimensions = new Vec2(275,300);
     this.Rigidbody.Mass = 5;
     this.Fired = false;
 
 
 
-
+    /*
     this.LeftThruster = new psPlayerThruster(this, new Vec2(-40,-40));
     this.RightThruster = new psPlayerThruster(this, new Vec2(-40,43));
 
@@ -34,6 +34,11 @@ class Player extends Shootable
 
     Game.AddObject(this.LeftThruster);
     Game.AddObject(this.RightThruster);
+    */
+
+    this.Thruster = new psPlayerThruster(this, new Vec2(-40,0));
+    this.Thruster.Rigidbody.SetParent(this);
+    Game.AddObject(this.Thruster);
 
   }
 
@@ -54,7 +59,7 @@ class Player extends Shootable
     }
     if (Global.InputSystem.GetKeyState('W') == "keydown"){
       let Dir = GetVectorFromAngle(this.Rigidbody.Orien);
-      this.Rigidbody.AddVel(Dir.rMult(5));
+      this.Rigidbody.AddVel(Dir.rMult(8));
 
     }
 
@@ -83,10 +88,14 @@ Update(){
   async FireBullet(){
     if (!this.Fired){
       this.Fired = true;
-      let b = new Projectile(this.Center(), copyInstance(this.Rigidbody));
+      let b = new pPlayerBlasterT1(this.Center(), copyInstance(this.Rigidbody));
       Game.AddObject(b);
       this.Shots++;
       let r = await this.Firing();
     }
+  }
+
+  OnCollide(){
+    
   }
 }

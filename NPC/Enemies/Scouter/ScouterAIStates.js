@@ -16,7 +16,16 @@ class ScouterAIState extends NPCAIState{
   }
 
   Seek(){
+    let toTarget = this.TargetLocation.rSub(this.PosRef);
+    let DesiredVel = toTarget.Normal();
+    DesiredVel.Mult(this.StateSpeed);
+
+    return DesiredVel;
+  }
+
+  Seek2(){
     let toTarget = this.PosRef.rSub(this.TargetLocation);
+    //let toTarget = this.TargetLocation.rSub(this.PosRef);
     //console.log(this.PosRef, this.TargetLocation);
     let DesiredVel = toTarget.Normal();
     //console.log(this.StateSpeed);
@@ -51,7 +60,7 @@ class ScouterWanderState extends ScouterAIState{
 
     let steering = this.Seek();
 
-    this.RigidbodyRef.AddAcc(steering);
+    this.RigidbodyRef.AddVel(steering.rMult(felapsed));
 
     if (Math.abs(AngleBetweenVec(steering, this.VelRef)) > 3){
       this.VelRef.Mult(0.99);
@@ -67,7 +76,6 @@ class ScouterWanderState extends ScouterAIState{
     let dist = this.PosRef.rSub(this.Target);
 
     if (dist.MagSqrt() < this.Master.DetectPlayerRadius){
-      console.log("here");
       this.Master.SwitchStates("Attack");
     }
   }
@@ -97,10 +105,38 @@ class ScouterWanderState extends ScouterAIState{
   }
 }
 
+class ScouterAttackStateAlt extends ScouterAIState{
+  constructor(Master){
+    super(Master);
+    this.ShootingRange = 700;
+    this.TurnSpeed = 0.5;
+    this.Angle = this.Master.Rigidbody.Orien;
+    this.TargetAngle;
+
+  }
+
+  Init(){
+    super.Init();
+    this.StateSpeed = this.Master.ChaseSpeed;
+  }
+
+  Update(felapsed){
+    let toTarget = this.Target.rSub(this.PosRef);
+    let TargetAngle = GetAngleFromVector(toTarget)
+    let AngleDiff = this.Angle - TargetAngle;
+        console.log(AngleDiff);
+    AngleDiff *= (1/AngleDiff) * this.TurnSpeed * felapsed;
+
+    //this.RigidbodyRef.AddAngVel(AngleDiff);
+  }
+
+}
+
 class ScouterAttackState extends ScouterAIState{
   constructor(Master){
     super(Master);
-    this.ShootingRange = 500;
+    this.ShootingRange = 700;
+    this.Fired = false;
 
   }
 
@@ -118,21 +154,45 @@ class ScouterAttackState extends ScouterAIState{
     let steering = this.Seek();
 
 
-
-    if (Math.abs(AngleBetweenVec(steering, this.VelRef)) > 0.2){
+    let angle = Math.abs(AngleBetweenVec(steering, this.VelRef));
+    //console.log(angle, steering);
+    if (angle > 0.2){
       this.VelRef.Mult(0.99);
-      steering.Mult(1.5);
+      steering.Mult(3);
     }
 
-    this.RigidbodyRef.AddAcc(steering);
+    this.RigidbodyRef.AddVel(steering.rMult(felapsed));
 
+    this.Firing();
 
-
-    this.Master.FaceVelocity();
+    this.Master.FaceTarget();
 
     let dist = this.PosRef.rSub(this.Target);
     if (dist.MagSqrt() > this.Master.DetectPlayerRadius){
       this.Master.SwitchStates("Wander");
+    }
+  }
+
+   ShootAtPlayer (){
+    return new Promise ( resolve => {
+      setTimeout(() =>{
+        //Love JS and its inability to deep copy :D
+        //need to find a way to deep copy!
+        //let b = new Projectile(copyInstance(this.Rigidbody.Pos), copyInstance(this.Rigidbody));
+        //let b = new Projectile(this.Rigidbody.Pos.rSub(new Vec2(this.DrawRes.Dimensions.X/2, this.DrawRes.Dimensions.Y/2)), copyInstance(this.Rigidbody));
+        this.Fired = false;
+        //console.log(this.Shots);
+      }, 750)
+    });
+  }
+
+  async Firing(){
+    if (!this.Fired){
+      this.Fired = true;
+      let b = new pBlasterT1(this.Master.Center(), copyInstance(this.Master.Rigidbody));
+      Game.AddObject(b);
+      this.Shots++;
+      let r = await this.ShootAtPlayer();
     }
   }
 }

@@ -80,8 +80,8 @@ class PlayerThrusterRes extends DrawRes{
     super();
     this.SpriteID = 6;
     this.DrawFunc = new RotatedOpacityDrawFunction();
-    this.Dimensions =new Vec2(10,10);
-    this.Layer = 2;
+    this.Dimensions =new Vec2(15,15);
+    this.Layer = 3;
   }
 }
 
@@ -102,7 +102,26 @@ class PlaceholderRes extends DrawRes{
     this.DrawFunc = new PlaceHolderDrawFunction(color);
     this.Dimensions = dim;
     this.Layer = layer;
+  }
+}
 
+class ScouterRes extends DrawRes{
+  constructor(){
+    super();
+    this.SpriteID = 12;
+    this.DrawFunc = new BRotatedDrawFunction();
+    this.Dimensions = new Vec2(250, 275);
+    this.Layer = 3;
+  }
+}
 
+class ShieldRes extends DrawRes{
+  constructor(dim){
+    super();
+    this.SpriteID = 13;
+    this.DrawFunc = new RotatedOpacityDrawFunction();
+    this.Dimensions = dim;
+    this.Layer = 3;
+    this.Opacity = 0;
   }
 }

@@ -43,6 +43,7 @@ class Game{
     this.StarSystem = new psStarParallax(100,this.m_Player);
 
 
+
   }
 
   Init(){
@@ -55,6 +56,7 @@ class Game{
     Game.AddObject(this.Astroids);
     Game.AddObject(this.EnemyDemo);
     Game.AddObject(this.StarSystem);
+
 
     this.ObjectHandleInstance.m_Entities.forEach(layer =>{
       layer.forEach(item =>{

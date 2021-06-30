@@ -21,7 +21,7 @@ class QuadTree{
     this.Root = new Node(pos.rSub(QuadTree.CoveredArea.rDivide(2)), QuadTree.CoveredArea);
     this.Entities.forEach(layer =>{
       layer.forEach(item =>{
-        if (!(item.CollisionType instanceof NoCollider)){
+        if (item.CollisionType.IsActive()){
                   this.Root.Insert(item);
         }
       });
