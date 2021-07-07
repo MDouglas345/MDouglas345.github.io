@@ -54,4 +54,12 @@ class ParticleSystem extends GameObject{
       item.DrawRes.DrawFunc = new BRotatedDrawFunction();
     });
   }
+
+  Delete(){
+    this.Particles.forEach( item =>{
+      item.NeedsDelete = true;
+    });
+    this.Particles = null;
+    this.DrawRes = null;
+  }
 }

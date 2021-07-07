@@ -11,20 +11,23 @@ class psPlayerThruster extends ParticleSystem{
     this.ParticleType = PlayerThrusterParticle;
 
     //this.DrawRes = new PlayerThrusterRes();
-    this.DrawRes.Layer = 4;
+    this.DrawRes.Layer = 5;
 
     //this.CreateParticles();
   }
+
+
   Update(felapsed){
     this.AddParticle();
+    let index = 0;
 
     let vec = GetVectorFromAngle(this.Player.Rigidbody.Orien);
-    vec.Mult(-1 * 50);
+    vec.Mult(-1 * 100);
 
     for (let i = 0; i < this.Particles.length; i++){
       let item = this.Particles[i];
 
-      item.DrawRes.Opacity = Lerp(0,1,item.Lifetime);
+      item.DrawRes.Opacity = Lerp(0,2,item.Lifetime);
       item.Lifetime -= felapsed;
 
       if (item.Lifetime < 0){item.Restart(this.Rigidbody.Pos, copyInstance(vec));}

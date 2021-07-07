@@ -95,6 +95,10 @@ function Lerp(x, y, a){
   return x * (1 - a) + y * a;
 }
 
+function Dot(vec1, vec2){
+  return (vec1.X * vec2.X) + (vec1.Y * vec2.Y);
+}
+
 function GetVectorFromAngle(other){
   let vec = new Vec2(0,0);
   vec.X = Math.cos(-other);
@@ -123,4 +127,23 @@ function AngleBetweenVec(vec1, vec2){
 function RandomVecInCircle(){
   let theta = getRandomFloat();
   return GetVectorFromAngle(theta);
+}
+
+function Truncate(vector, maxlength){
+  if (vector.MagSqrt() > maxlength){
+    vector.Normalize();
+    vector.Mult(maxlength);
+  }
+}
+function rTruncate(vector, maxlength){
+  if (vector.MagSqrt() > maxlength){
+    let vec = vector.Normal();
+    vec.Mult(maxlength);
+    return vec;
+  }
+}
+
+function Cross2D(vec1, vec2){
+  let scaler = (vec1.X * vec2.Y) - (vec1.Y * vec2.X);
+  return scaler;
 }

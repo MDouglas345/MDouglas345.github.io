@@ -26,7 +26,7 @@ class Astroid extends Shootable{
 
   EarlyUpdate(felapsed){
     this.Rigidbody.Vel.Mult(0.99);
-    this.Rigidbody.AngVel *= 0.999;
+    this.Rigidbody.AngVel *= 0.993;
   }
 
   OnHit(object){
@@ -36,11 +36,18 @@ class Astroid extends Shootable{
     force = force.MagSqrt();
 
     for (let i = 0; i < 4; i++){
+      let chance = getRandomFloat(1);
 
       let randomsize = getRandomFloat(0.4) + 0.2;
       randomsize *= this.size;
 
-      var p = new Astroid(randomsize);
+
+      var p;
+      if (chance < 0.4){ p = new AstroidBAT(randomsize);}
+      else {p = new Astroid(randomsize); p.DrawRes.SpriteID = 10;}
+
+
+
       let f = RandomVecInCircle();
       f.Mult(force);
 
@@ -53,5 +60,12 @@ class Astroid extends Shootable{
     }
 
     this.NeedsDelete = true;
+  }
+}
+
+class AstroidBAT extends Astroid{
+  constructor(size){
+    super(size);
+    this.DrawRes.SpriteID = 11;
   }
 }

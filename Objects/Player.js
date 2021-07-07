@@ -9,6 +9,10 @@ class Player extends Shootable
   constructor(){
     super();
     this.Name = "Player";
+
+    this.MaxHP = 50;
+    this.HP = this.MaxHP;
+
     this.Rigidbody = new Rigidbody();
     this.Rigidbody.Enable();
     this.Rigidbody.Pos = new Vec2(0,300);
@@ -19,13 +23,19 @@ class Player extends Shootable
     this.CollisionLayer = 0;
 
     this.DrawRes = new PlayerRes();
-    this.DrawRes.Dimensions = new Vec2(175,200);
+    this.DrawRes.Dimensions = new Vec2(275,300);
     this.Rigidbody.Mass = 5;
     this.Fired = false;
 
-  
+    this.Shield = new PlayerShieldV1(new Vec2(300,300), 0);
+    this.Shield.Rigidbody.ConnectToParent(this);
+
+  //  this.Shield.Rigidbody = this.Rigidbody;
+    Game.AddObject(this.Shield);
 
 
+
+    /*
     this.LeftThruster = new psPlayerThruster(this, new Vec2(-40,-40));
     this.RightThruster = new psPlayerThruster(this, new Vec2(-40,43));
 
@@ -34,6 +44,11 @@ class Player extends Shootable
 
     Game.AddObject(this.LeftThruster);
     Game.AddObject(this.RightThruster);
+    */
+
+    this.Thruster = new psPlayerThruster(this, new Vec2(-50,5));
+    this.Thruster.Rigidbody.SetParent(this);
+    Game.AddObject(this.Thruster);
 
   }
 
@@ -49,12 +64,10 @@ class Player extends Shootable
       //this.Rigidbody.Orien += 5 * felapsed;
       this.Rigidbody.AddAngVel(5 * felapsed);
     }
-    if (Global.InputSystem.GetKeyState(' ') == "keydown"){
-      this.FireBullet();
-    }
+
     if (Global.InputSystem.GetKeyState('W') == "keydown"){
       let Dir = GetVectorFromAngle(this.Rigidbody.Orien);
-      this.Rigidbody.AddVel(Dir.rMult(15));
+      this.Rigidbody.AddVel(Dir.rMult(8));
 
     }
 
@@ -65,6 +78,12 @@ class Player extends Shootable
 
 Update(){
   //console.log(this.Rigidbody.Pos);
+  }
+
+  LateUpdate(felapsed){
+    if (Global.InputSystem.GetKeyState(' ') == "keydown"){
+      this.FireBullet();
+    }
   }
 
   Firing(){
@@ -83,10 +102,37 @@ Update(){
   async FireBullet(){
     if (!this.Fired){
       this.Fired = true;
-      let b = new Projectile(this.Center(), copyInstance(this.Rigidbody));
+      let b = new pPlayerBlasterT1(this.Center(), copyInstance(this.Rigidbody));
       Game.AddObject(b);
       this.Shots++;
       let r = await this.Firing();
     }
+  }
+
+  OnHit(object){
+    let MassRatio = object.Rigidbody.Mass / this.Rigidbody.Mass;
+    let Dir = object.Rigidbody.Vel.Normal();
+    let DesiredVel = Dir.rMult(50);
+    this.Rigidbody.AddVel(DesiredVel);
+    this.HP -= object.Damage;
+
+    if (this.HP <= 0){ this.TriggerDeath();}
+    console.log("hit");
+  }
+
+  CleanUp(){
+    this.Thruster.NeedsDelete = true;
+    this.Shield.NeedsDelete = true;
+  }
+
+  async TriggerDeath(){
+    this.CleanUp();
+    //this.NeedsDelete = true;
+    //Instead of Deleting the player (causes numerous issues) change the player to a dead state where no input is accepted to control ship
+
+  }
+
+  OnCollide(){
+
   }
 }

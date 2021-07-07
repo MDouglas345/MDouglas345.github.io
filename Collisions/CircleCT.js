@@ -3,5 +3,7 @@ class CircleCollider extends CollisionType{
     super();
     this.TypeID = 1;
     this.Radius = radius;
+
+    this.Enable();
   }
 }

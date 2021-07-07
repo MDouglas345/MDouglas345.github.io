@@ -4,4 +4,7 @@ class NoCollider extends CollisionType{
     this.TypeID = 0;
   }
 
+  IsActive(){
+    return false;
+  }
 }

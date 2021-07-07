@@ -68,7 +68,7 @@ class Renderer{
     */
 
     //this.AddImage("Resources/brave-lion.png");
-    this.AddImage("Resources/playerv1n.png");
+    this.AddImage("Resources/playerv2.png");
     this.AddImage("Resources/laserBullet.png");
     this.AddImage("Resources/BG/Demo/l1.png");
     this.AddImage("Resources/BG/Demo/l2.png")
@@ -78,6 +78,12 @@ class Renderer{
     this.AddImage("Resources/earth.png");
     this.AddImage("Resources/Cryptopolidv1.png")
     this.AddImage("Resources/Astroid V1.png");
+    this.AddImage("Resources/Astroid V2.png");
+    this.AddImage("Resources/AstroidCrystal V1.png");
+    this.AddImage("Resources/scouterv1.png");
+    this.AddImage("Resources/shield.png");
+    this.AddImage("Resources/b1.png");
+    this.AddImage("Resources/b2.png");
   }
 
   Update(){

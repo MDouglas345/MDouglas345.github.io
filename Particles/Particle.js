@@ -29,7 +29,7 @@ class PlayerThrusterParticle extends Particle{
     super();
     this.Name = "Player Thrust Particle";
     this.DrawRes = new PlayerThrusterRes();
-    this.Life = 0.25;
+    this.Life = 0.115;
     this.Lifetime = this.Life;
     this.Rigidbody.Mass = 10;
   }

@@ -99,7 +99,6 @@ class PlaceHolderDrawFunction extends DrawFunction{
   constructor(color){
     super();
     this.Color = color;
-    console.log(this.Color)
   }
 
   Draw(context, image, Pos, scale, rot){
