@@ -11,10 +11,12 @@ class psPlayerThruster extends ParticleSystem{
     this.ParticleType = PlayerThrusterParticle;
 
     //this.DrawRes = new PlayerThrusterRes();
-    this.DrawRes.Layer = 4;
+    this.DrawRes.Layer = 5;
 
     //this.CreateParticles();
   }
+
+
   Update(felapsed){
     this.AddParticle();
     let index = 0;

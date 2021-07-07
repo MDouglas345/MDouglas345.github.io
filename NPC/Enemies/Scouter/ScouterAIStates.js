@@ -9,10 +9,45 @@ class ScouterAIState extends NPCAIState{
     this.Target;
     this.TargetLocation;
     this.StateSpeed;
+
+    this.AngleToTarget;
+    this.Forward;
+    this.ToTarget;
+
+    this.FrictionPercent;
+    this.TurnSpeed;
+
   }
 
   Init(){
     this.Target = this.Master.Target.Rigidbody.Pos;
+  }
+
+  SeekAlt(felapsed){
+
+    let Forward = GetVectorFromAngle(this.RigidbodyRef.Orien);
+    let ToTarget = this.TargetLocation.rSub(this.PosRef);
+
+    this.Forward = copyInstance(Forward);
+    this.ToTarget = copyInstance(ToTarget);
+
+    ToTarget.Normalize();
+    Forward.Normalize();
+
+    let cross = Cross2D(Forward, ToTarget);
+
+    this.RigidbodyRef.AddTorq(cross * this.TurnSpeed);
+
+    this.AngleToTarget = AngleBetweenVec(ToTarget, Forward);
+
+    if (Dot(ToTarget, Forward) > this.ThrustRadius){this.Thrust(Forward, felapsed);}
+
+    this.RigidbodyRef.AngVel *= this.FrictionPercent;
+
+  }
+
+  Thrust(forward, felapsed){
+    this.RigidbodyRef.AddVel(forward.rMult(this.StateSpeed * felapsed));
   }
 
   Seek(){
@@ -56,9 +91,11 @@ class ScouterWanderState extends ScouterAIState{
 
   Update(felapsed){
 
-    let steering = this.Seek();
+    let steering = this.SeekAlt(felapsed);
 
+    return;
     this.RigidbodyRef.AddVel(steering.rMult(felapsed));
+
 
     if (Math.abs(AngleBetweenVec(steering, this.VelRef)) > 3){
       this.VelRef.Mult(0.99);
@@ -74,7 +111,7 @@ class ScouterWanderState extends ScouterAIState{
     let dist = this.PosRef.rSub(this.Target);
 
     if (dist.MagSqrt() < this.Master.DetectPlayerRadius){
-      this.Master.SwitchStates("Attack");
+      //this.Master.SwitchStates("Attack");
     }
   }
 
@@ -103,31 +140,31 @@ class ScouterWanderState extends ScouterAIState{
   }
 }
 
-class ScouterAttackStateAlt extends ScouterAIState{
+class ScouterWanderStateAlt extends ScouterWanderState{
   constructor(Master){
     super(Master);
-    this.ShootingRange = 700;
-    this.TurnSpeed = 0.5;
-    this.Angle = this.Master.Rigidbody.Orien;
-    this.TargetAngle;
+    this.TargetLocation;
+    this.RandomDistance;
 
-  }
+    this.FrictionPercent = 0.9;
+    this.TurnSpeed = 5;
+    this.ThrustRadius = 0.02;
 
-  Init(){
-    super.Init();
-    this.StateSpeed = this.Master.ChaseSpeed;
+    this.FindNewTargetLocation();
   }
 
   Update(felapsed){
-    let toTarget = this.Target.rSub(this.PosRef);
-    let TargetAngle = GetAngleFromVector(toTarget)
-    let AngleDiff = this.Angle - TargetAngle;
-        console.log(AngleDiff);
-    AngleDiff *= (1/AngleDiff) * this.TurnSpeed * felapsed;
+    this.SeekAlt(felapsed);
 
-    //this.RigidbodyRef.AddAngVel(AngleDiff);
+    if (this.OnTarget()){
+      this.FindNewTargetLocation();
+    }
+
+    let dist = this.PosRef.rSub(this.Target);
+    if (dist.MagSqrt() < this.Master.DetectPlayerRadius){
+      this.Master.SwitchStates("Attack");
+    }
   }
-
 }
 
 class ScouterAttackState extends ScouterAIState{
@@ -193,4 +230,52 @@ class ScouterAttackState extends ScouterAIState{
       let r = await this.ShootAtPlayer();
     }
   }
+}
+
+
+class ScouterAttackStateAlt extends ScouterAttackState{
+  constructor(Master){
+    super(Master);
+    this.ShootingRange = 1000;
+    this.TargetDistance = 200;
+    this.TurnSpeed = 0.5;
+    this.Angle = this.Master.Rigidbody.Orien;
+    this.TargetAngle;
+
+    this.FrictionPercent = 0.9;
+    this.TurnSpeed = 30;
+    this.ThrustRadius = 0.7;
+
+  }
+
+  Init(){
+    super.Init();
+    this.StateSpeed = this.Master.ChaseSpeed;
+  }
+
+  Update(felapsed){
+
+    let toTarget = this.PosRef.rSub(this.Target);
+    this.TargetLocation = toTarget.Normal();
+    this.TargetLocation.Mult(this.TargetDistance);
+    this.TargetLocation.Add(this.Target);
+
+    this.SeekAlt(felapsed);
+
+    let dist = toTarget.MagSqrt();
+
+    let ToTarget = this.Target.rSub(this.PosRef);
+    ToTarget.Normalize();
+    let dot = Dot(ToTarget, this.Forward);
+
+
+
+    if (dot > 0.6){this.Firing();}
+
+    if (dist > this.Master.DetectPlayerRadius){
+      this.Master.SwitchStates("Wander");
+    }
+
+  }
+
 }

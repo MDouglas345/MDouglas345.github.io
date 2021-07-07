@@ -9,6 +9,10 @@ class Player extends Shootable
   constructor(){
     super();
     this.Name = "Player";
+
+    this.MaxHP = 50;
+    this.HP = this.MaxHP;
+
     this.Rigidbody = new Rigidbody();
     this.Rigidbody.Enable();
     this.Rigidbody.Pos = new Vec2(0,300);
@@ -42,7 +46,7 @@ class Player extends Shootable
     Game.AddObject(this.RightThruster);
     */
 
-    this.Thruster = new psPlayerThruster(this, new Vec2(-40,0));
+    this.Thruster = new psPlayerThruster(this, new Vec2(-50,5));
     this.Thruster.Rigidbody.SetParent(this);
     Game.AddObject(this.Thruster);
 
@@ -60,9 +64,7 @@ class Player extends Shootable
       //this.Rigidbody.Orien += 5 * felapsed;
       this.Rigidbody.AddAngVel(5 * felapsed);
     }
-    if (Global.InputSystem.GetKeyState(' ') == "keydown"){
-      this.FireBullet();
-    }
+
     if (Global.InputSystem.GetKeyState('W') == "keydown"){
       let Dir = GetVectorFromAngle(this.Rigidbody.Orien);
       this.Rigidbody.AddVel(Dir.rMult(8));
@@ -76,6 +78,12 @@ class Player extends Shootable
 
 Update(){
   //console.log(this.Rigidbody.Pos);
+  }
+
+  LateUpdate(felapsed){
+    if (Global.InputSystem.GetKeyState(' ') == "keydown"){
+      this.FireBullet();
+    }
   }
 
   Firing(){
@@ -99,6 +107,29 @@ Update(){
       this.Shots++;
       let r = await this.Firing();
     }
+  }
+
+  OnHit(object){
+    let MassRatio = object.Rigidbody.Mass / this.Rigidbody.Mass;
+    let Dir = object.Rigidbody.Vel.Normal();
+    let DesiredVel = Dir.rMult(50);
+    this.Rigidbody.AddVel(DesiredVel);
+    this.HP -= object.Damage;
+
+    if (this.HP <= 0){ this.TriggerDeath();}
+    console.log("hit");
+  }
+
+  CleanUp(){
+    this.Thruster.NeedsDelete = true;
+    this.Shield.NeedsDelete = true;
+  }
+
+  async TriggerDeath(){
+    this.CleanUp();
+    //this.NeedsDelete = true;
+    //Instead of Deleting the player (causes numerous issues) change the player to a dead state where no input is accepted to control ship
+
   }
 
   OnCollide(){

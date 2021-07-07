@@ -7,18 +7,19 @@ class EnemyScouter extends Enemy{
     this.MotherShip = mom;
     this.ThrustForce = 300;
     this.MaxVel = 500;
+
     this.States = {
       "default" : new ScouterAIState(this),
-      "Wander" : new ScouterWanderState(this),
-      "Attack" : new ScouterAttackState(this)
+      "Wander" : new ScouterWanderStateAlt(this),
+      "Attack" : new ScouterAttackStateAlt(this)
     };
 
 
     this.SwitchStates("Wander");
 
-    this.PatrolSpeed = 100;
-    this.ChaseSpeed = 200;
-    this.FleeSpeed = 300;
+    this.PatrolSpeed = 200;
+    this.ChaseSpeed = 550;
+    this.FleeSpeed = 800;
 
     this.FireRate = 0.7;
 
@@ -35,6 +36,8 @@ class EnemyScouter extends Enemy{
 
     this.CollisionType = new CircleCollider(100);
     this.CollisionLayer = 3;
+
+
 
     this.DetectPlayerRadius = 2500;
     this.Target;
@@ -64,11 +67,20 @@ class EnemyScouter extends Enemy{
     this.Rigidbody.Orien = GetAngleFromVector(lookAt);
   }
 
+  CleanUp(){
+    this.Shields.NeedsDelete = true;
+    this.Shields = null;
+    this.States = null;
+  }
+
   OnHit(object){
     let MassRatio = object.Rigidbody.Mass / this.Rigidbody.Mass;
     let Dir = object.Rigidbody.Vel.Normal();
     let DesiredVel = Dir.rMult(50);
     this.Rigidbody.AddVel(DesiredVel);
+    this.HP -= object.Damage;
+
+    if (this.HP <= 0){ this.TriggerDeath();}
     console.log("hit");
   }
 
