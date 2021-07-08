@@ -30,6 +30,8 @@ class Player extends Shootable
     this.Shield = new PlayerShieldV1(new Vec2(300,300), 0);
     this.Shield.Rigidbody.ConnectToParent(this);
 
+    this.HitSound = new SoundObject("ShipHit");
+
   //  this.Shield.Rigidbody = this.Rigidbody;
     Game.AddObject(this.Shield);
 
@@ -110,6 +112,7 @@ Update(){
   }
 
   OnHit(object){
+    this.HitSound.Play();
     let MassRatio = object.Rigidbody.Mass / this.Rigidbody.Mass;
     let Dir = object.Rigidbody.Vel.Normal();
     let DesiredVel = Dir.rMult(50);

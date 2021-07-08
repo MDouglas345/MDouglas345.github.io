@@ -41,6 +41,8 @@ class EnemyScouter extends Enemy{
 
     this.DetectPlayerRadius = 2500;
     this.Target;
+
+    this.HitSound = new SoundObject("ShipHit");
   }
 
   Init(){
@@ -73,7 +75,14 @@ class EnemyScouter extends Enemy{
     this.States = null;
   }
 
+  Delete(){
+    this.Shields.NeedsDelete = true;
+    this.Shields = null;
+    this.States = null;
+  }
+
   OnHit(object){
+    super.OnHit();
     let MassRatio = object.Rigidbody.Mass / this.Rigidbody.Mass;
     let Dir = object.Rigidbody.Vel.Normal();
     let DesiredVel = Dir.rMult(50);
@@ -84,4 +93,37 @@ class EnemyScouter extends Enemy{
     console.log("hit");
   }
 
+  async TriggerDeath(){
+
+    //let force = this.Rigidbody.Vel.rSub(object.Rigidbody.Vel);
+
+    let force = 10;
+
+    for (let i = 0; i < 4; i++){
+      let chance = getRandomFloat(1);
+
+      let randomsize = getRandomFloat(0.4) + 0.2;
+      randomsize *= this.size;
+
+
+      var p;
+      if (chance < 0.4){ p = new AstroidBAT(randomsize);}
+      else {p = new Astroid(randomsize); p.DrawRes.SpriteID = 10;}
+
+
+
+      let f = RandomVecInCircle();
+      f.Mult(force);
+
+
+      p.Rigidbody.Pos = copyInstance(this.Rigidbody.Pos);
+      p.Rigidbody.Vel = f.rMult(0.4);
+      p.Rigidbody.AngVel = getRandomFloat(10) - 5;
+
+      Game.AddObject(p);
+    }
+
+    this.NeedsDelete = true;
+    //this.CleanUp();
+  }
 }

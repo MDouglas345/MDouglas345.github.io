@@ -6,6 +6,8 @@ class Projectile extends Shootable{
     this.Rigidbody.Enable();
     //this.DrawRes = new DefaultProjectile();
     this.DrawRes = new PlaceholderRes(new Vec2(15,5), 3, "#FFA300");
+
+    this.FireSound;
     //this.DrawRes.Dimensions = new Vec2(25,10);
 
     this.CollisionType = new CircleCollider(10);
@@ -22,6 +24,8 @@ class Projectile extends Shootable{
     dir.Mult(this.Speed);
 
     this.Rigidbody.Vel = dir.rAdd(ori.Vel);
+
+
 
     this.AutoDelete();
 
@@ -60,13 +64,19 @@ class Projectile extends Shootable{
 
     this.OnHit(object);
   }
+
+  Delete(){
+    this.FireSound.Delete();
+    this.FireSound = null;
+  }
 }
 
 class pPlayerBlasterT1 extends Projectile{
   constructor(pos, ori){
     super(pos, ori, 10, 1000);
     this.DrawRes = new BulletRes(14);
-
+    this.FireSound = new SoundObject("Laser1");
+    this.FireSound.Play();
   }
 }
 
@@ -77,5 +87,7 @@ class pBlasterT1 extends Projectile{
     this.CollisionLayer = 3;
     //this.DrawRes = new PlaceholderRes(new Vec2(15,5), 3, "#FF0000");
     this.DrawRes = new BulletRes(15);
+    this.FireSound = new SoundObject("Laser2");
+    this.FireSound.Play();
   }
 }

@@ -1,5 +1,6 @@
 
 class Astroid extends Shootable{
+  static AstroidHit;
   constructor(size){
     super();
     this.size;
@@ -22,6 +23,8 @@ class Astroid extends Shootable{
     this.Rigidbody.Orien = getRandomInt();
     this.RotSpeed = 2;
 
+    this.AstroidHit = new SoundObject("ShipHit");
+
   }
 
   EarlyUpdate(felapsed){
@@ -30,6 +33,7 @@ class Astroid extends Shootable{
   }
 
   OnHit(object){
+    this.AstroidHit.Play();
     if (this.DrawRes.Dimensions.Mag() < 99999){this.NeedsDelete = true; return;}
 
     let force = this.Rigidbody.Vel.rSub(object.Rigidbody.Vel);

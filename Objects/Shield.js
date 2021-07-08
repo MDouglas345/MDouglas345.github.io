@@ -15,6 +15,11 @@ class Shield extends Shootable{
     this.CollisionType = new CircleCollider((dim.MagSqrt() / 2) * 0.9);
     this.CollisionLayer = ColLayer;
 
+    this.ShieldDownSound = new SoundObject("Shield1Down");
+    this.ShieldUpSound = new SoundObject("Shield1Up");
+
+    this.ShieldHitSound = new SoundObject("ShieldHit");
+
   }
 
   Init(){
@@ -43,6 +48,18 @@ class Shield extends Shootable{
     this.ActiveState.ExitState();
     this.ActiveState = this.States[string];
     this.ActiveState.EnterState();
+  }
+
+  Delete(){
+    this.Rigidbody = null;
+    this.DrawRes = null;
+    this.CollisionType = null;
+    this.CollisionLayer = null;
+    this.ShieldDownSound = null;
+    this.ShieldUpSound = null;
+    this.ShieldHitSound = null;
+    this.ActiveState = null;
+    this.States = null;
   }
 
 }
@@ -127,6 +144,7 @@ class ShieldVisible extends ShieldState{
   }
 
   OnHit(object){
+    this.Master.ShieldHitSound.Play();
     this.CurrentTime = this.Master.TimeToFade;
     this.Master.HP -= object.Damage;
   }
@@ -155,6 +173,7 @@ class ShieldInVisible extends ShieldState{
   }
 
   OnHit(object){
+      this.Master.ShieldHitSound.Play();
       this.Master.HP -= object.Damage;
       this.Master.SwitchState("Visible");
   }
@@ -197,10 +216,12 @@ class ShieldDisabled extends ShieldState{
     this.StartedRecover = false;
     this.DrawResRef.Opacity = 0;
     this.Master.CollisionType.Disable();
+    this.Master.ShieldDownSound.Play();
   }
 
   ExitState(){
     this.StartedRecover = false;
     this.Master.CollisionType.Enable();
+    this.Master.ShieldUpSound.Play();
   }
 }

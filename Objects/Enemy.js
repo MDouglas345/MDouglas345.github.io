@@ -7,10 +7,16 @@ class Enemy extends Shootable{
     this.States = null;
     this.ActiveState = null;
     this.Target = null;
+
+    this.HitSound;
   }
 
   SwitchStates(name){
     this.ActiveState = this.States[name];
+  }
+
+  OnHit(){
+    this.HitSound.Play();
   }
 
   CleanUp(){
