@@ -84,6 +84,9 @@ class Renderer{
     this.AddImage("Resources/shield.png");
     this.AddImage("Resources/b1.png");
     this.AddImage("Resources/b2.png");
+    this.AddImage("Resources/shipdebris1.png");
+    this.AddImage("Resources/shipdebris2.png");
+    this.AddImage("Resources/shipdebris3.png");
   }
 
   Update(){

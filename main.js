@@ -9,6 +9,7 @@ window.addEventListener('DOMContentLoaded', Init, false);
 var GameSystem;
 var RenderSystem;
 var InputSystem;
+var SoundSystem;
 var OManager;
 
 var Global = window || global;
@@ -45,9 +46,11 @@ document.addEventListener("keydown", function(event){
 
 function Init(){
   OManager = new ObjectManager();
+  SoundSystem = new Sound();
   RenderSystem = new Renderer();
   GameSystem = new Game();
   InputSystem = new Controller();
+
 
   RenderSystem.SetCamera(GameSystem.m_Camera);
   RenderSystem.SetEntities(GameSystem.Entities);
@@ -96,6 +99,7 @@ function mainloop(timestep){
   GameSystem.LateUpdate(ElapsedTime);
 
   RenderSystem.Update();
+  SoundSystem.Play();
   //RenderSystem.Debug();
 
 

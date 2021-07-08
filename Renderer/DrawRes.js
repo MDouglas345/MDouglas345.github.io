@@ -132,6 +132,20 @@ class BulletRes extends DrawRes{
     this.SpriteID = id;
     this.DrawFunc = new BRotatedDrawFunction();
     this.Dimensions = new Vec2(30,10);
-    this.Layer = 3;
+    this.Layer = 2;
+  }
+}
+
+class ShipDebrisRes extends DrawRes{
+  constructor(){
+     let chance = getRandomFloat(1);
+     if (chance < 0.3){ this.SpriteID = 17;}
+     else if (chance < 0.6) { this.SpriteID = 18;}
+     else{this.SpriteID = 19;}
+
+     this.DrawFunc = new BRotatedDrawFunction();
+     this.Dimensions = new Vec2(100,100);
+     this.Layer = 3;
+
   }
 }
