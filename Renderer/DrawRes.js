@@ -138,14 +138,33 @@ class BulletRes extends DrawRes{
 
 class ShipDebrisRes extends DrawRes{
   constructor(){
+    super();
      let chance = getRandomFloat(1);
-     if (chance < 0.3){ this.SpriteID = 17;}
-     else if (chance < 0.6) { this.SpriteID = 18;}
-     else{this.SpriteID = 19;}
+     if (chance < 0.3){ this.SpriteID = 16;}
+     else if (chance < 0.6) { this.SpriteID = 17;}
+     else{this.SpriteID = 18;}
 
      this.DrawFunc = new BRotatedDrawFunction();
      this.Dimensions = new Vec2(100,100);
      this.Layer = 3;
 
+  }
+}
+
+class UIRes extends DrawRes{
+  constructor(){
+    super();
+    this.ScreenLocation = new Vec2(0,0);
+    this.Layer = 5;
+  }
+}
+
+class UITextRes extends UIRes{
+  constructor(Text, loc, font){
+    super();
+    this.TextToDisplay = Text;
+    this.ScreenLocation = loc;
+    this.Font = font;
+    this.DrawFunc = new UITextDrawFunction(this);
   }
 }

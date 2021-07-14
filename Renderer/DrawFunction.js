@@ -110,3 +110,16 @@ class PlaceHolderDrawFunction extends DrawFunction{
     context.restore();
   }
 }
+
+class UITextDrawFunction extends DrawFunction{
+  constructor(UIRes){
+    super();
+    this.UIRes = UIRes;
+  }
+  Draw(context, image, Pos, scale, rot){
+    context.font = this.UIRes.Font;
+    context.strokeStyle = "#FFFFFF";
+    context.strokeText(this.UIRes.TextToDisplay, this.UIRes.ScreenLocation.X, this.UIRes.ScreenLocation.Y);
+
+  }
+}

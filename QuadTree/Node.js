@@ -30,7 +30,7 @@ class NodeEmptyState extends NodeState{
     //console.log(this.NodeMaster.ObjectCount, Node.ObjectLimit);
 
     //console.log(this.NodeMaster.Bounds.Dimensions.Mag());
-    if (this.NodeMaster.ObjectCount > Node.ObjectLimit && this.NodeMaster.Bounds.Dimensions.Mag() > 1000){
+    if (this.NodeMaster.ObjectCount > Node.ObjectLimit && this.NodeMaster.Bounds.Dimensions.Mag() > 999999){
       //console.log("here");
       this.NodeMaster.AllocateChildren();
       this.NodeMaster.RelocateEntities();
@@ -109,7 +109,7 @@ class NodeFillState extends NodeState{
 }
 
 class Node{
-  static ObjectLimit = 5;
+  static ObjectLimit = 20;
   constructor(orig, Dim){
     //console.log(orig);
 
@@ -128,7 +128,7 @@ class Node{
 
     //this.ObjectRepresentative = new NodeRep(orig.rAdd(Dim.rDivide(2)), Dim);
 
-    //Game.AddObject(this.ObjectRepresentative)
+  //  Game.AddObject(this.ObjectRepresentative)
 
 
   }

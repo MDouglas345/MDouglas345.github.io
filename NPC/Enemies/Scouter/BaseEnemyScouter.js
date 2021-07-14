@@ -8,6 +8,8 @@ class EnemyScouter extends Enemy{
     this.ThrustForce = 300;
     this.MaxVel = 500;
 
+    this.SurroundTrigger = new Trigger(this, new CircleCollider(400), 5);
+
     this.States = {
       "default" : new ScouterAIState(this),
       "Wander" : new ScouterWanderStateAlt(this),
@@ -97,7 +99,7 @@ class EnemyScouter extends Enemy{
 
     //let force = this.Rigidbody.Vel.rSub(object.Rigidbody.Vel);
 
-    let force = 10;
+    let force = 700;
 
     for (let i = 0; i < 4; i++){
       let chance = getRandomFloat(1);
@@ -107,8 +109,7 @@ class EnemyScouter extends Enemy{
 
 
       var p;
-      if (chance < 0.4){ p = new AstroidBAT(randomsize);}
-      else {p = new Astroid(randomsize); p.DrawRes.SpriteID = 10;}
+      p = new ShipDebris();
 
 
 

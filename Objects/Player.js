@@ -10,6 +10,8 @@ class Player extends Shootable
     super();
     this.Name = "Player";
 
+    this.BATCounter = 0;
+
     this.MaxHP = 50;
     this.HP = this.MaxHP;
 
@@ -31,6 +33,10 @@ class Player extends Shootable
     this.Shield.Rigidbody.ConnectToParent(this);
 
     this.HitSound = new SoundObject("ShipHit");
+
+    this.UIBATCounter = new UITextElement(this.BATCounter, 'italic 32px sans-serif', new Vec2(30,30) );
+    console.log(this.UIBATCounter);
+    Game.AddObject(this.UIBATCounter);
 
   //  this.Shield.Rigidbody = this.Rigidbody;
     Game.AddObject(this.Shield);

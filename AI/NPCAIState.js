@@ -1,6 +1,6 @@
 class NPCAIState {
-  constructor(){
-
+  constructor(Master){
+    this.Master = Master;
   }
 
   EnterState(felapsed){

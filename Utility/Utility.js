@@ -70,10 +70,14 @@ class Vec2{
   }
 
   Normal(){
-    return this.rDivide(this.MagSqrt());
+    let mag = this.MagSqrt();
+    if (mag <= 0){mag = 1;}
+    return this.rDivide(mag);
   }
   Normalize(){
-    this.Divide(this.MagSqrt());
+    let mag = this.MagSqrt();
+    if (mag <= 0){mag = 1;}
+    this.Divide(mag);
   }
 }
 
