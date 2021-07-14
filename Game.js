@@ -24,7 +24,7 @@ class Game{
 
 
 
-    this.BGMaster = new DemoBGMaster(this.m_Player);
+    //this.BGMaster = new DemoBGMaster(this.m_Player);
 
     this.BGMaster = new SpaceBackground();
 
@@ -36,14 +36,14 @@ class Game{
 
     this.CollisionHandler = new CollisionHandler(this.QuadTree);
 
-    this.EnemyDemo = new EnemyScouter();
+    //this.EnemyDemo = new EnemyScouter();
 
     this.m_Camera = new Camera(this.m_Player);
 
     this.StarSystem = new psStarParallax(100,this.m_Player);
 
 
-
+    this.BattleTest();
   }
 
   Init(){
@@ -54,7 +54,7 @@ class Game{
     //Game.AddObject(this.PlanetDemo)
     Game.AddObject(this.Cryptopolid);
     Game.AddObject(this.Astroids);
-    Game.AddObject(this.EnemyDemo);
+    //Game.AddObject(this.EnemyDemo);
     Game.AddObject(this.StarSystem);
 
 
@@ -64,8 +64,13 @@ class Game{
       });
     });
 
+  }
 
-
+  BattleTest(){
+    for (let i = 0; i < 4; i++){
+      let p = new EnemyScouter();
+      Game.AddObject(p);
+    }
   }
 
   EarlyUpdate(elapsed){

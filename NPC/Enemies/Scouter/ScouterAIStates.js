@@ -1,7 +1,6 @@
 class ScouterAIState extends NPCAIState{
   constructor(Master){
-    super();
-    this.Master = Master;
+    super(Master);
     this.PosRef = this.Master.Rigidbody.Pos;
     this.VelRef = this.Master.Rigidbody.Vel;
     this.RigidbodyRef = this.Master.Rigidbody;
@@ -25,24 +24,46 @@ class ScouterAIState extends NPCAIState{
 
   SeekAlt(felapsed){
 
+    let Surrounding = this.Master.SurroundTrigger.GetDetected();
+    //console.log(Surrounding);
+    let Avoidance = new Vec2(0,0);
+    let Urgency = 1;
+
+    Surrounding.forEach((item) => {
+      let weight = this.PosRef.rSub(item.Rigidbody.Pos);
+      //let weight = item.Rigidbody.Pos.rSub(this.PosRef);
+      //if (weight.Mag() < 1000){Urgency += 0.01;}
+      Avoidance.Add(weight);
+    });
+  //  console.log(Avoidance);
+    Avoidance.Normalize();
+    //Avoidance.Mult(10);
+
+
     let Forward = GetVectorFromAngle(this.RigidbodyRef.Orien);
     let ToTarget = this.TargetLocation.rSub(this.PosRef);
+
 
     this.Forward = copyInstance(Forward);
     this.ToTarget = copyInstance(ToTarget);
 
     ToTarget.Normalize();
+    //ToTarget.Add(RandomVecInCircle());
+    ToTarget.Add(Avoidance);
     Forward.Normalize();
 
     let cross = Cross2D(Forward, ToTarget);
+    //console.log(Forward, ToTarget);
 
-    this.RigidbodyRef.AddTorq(cross * this.TurnSpeed);
+    this.RigidbodyRef.AddTorq(cross * this.TurnSpeed * Urgency);
 
     this.AngleToTarget = AngleBetweenVec(ToTarget, Forward);
 
     if (Dot(ToTarget, Forward) > this.ThrustRadius){this.Thrust(Forward, felapsed);}
 
     this.RigidbodyRef.AngVel *= this.FrictionPercent;
+
+    //console.log(this.Master.SurroundTrigger.GetDetected());
 
   }
 
@@ -244,7 +265,7 @@ class ScouterAttackStateAlt extends ScouterAttackState{
 
     this.FrictionPercent = 0.9;
     this.TurnSpeed = 30;
-    this.ThrustRadius = 0.7;
+    this.ThrustRadius = 0.02;
 
   }
 

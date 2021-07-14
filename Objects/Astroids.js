@@ -33,6 +33,7 @@ class Astroid extends Shootable{
   }
 
   OnHit(object){
+    if (this.NeedsDelete){return;}
     this.AstroidHit.Play();
     if (this.DrawRes.Dimensions.Mag() < 99999){this.NeedsDelete = true; return;}
 
@@ -42,7 +43,7 @@ class Astroid extends Shootable{
     for (let i = 0; i < 4; i++){
       let chance = getRandomFloat(1);
 
-      let randomsize = getRandomFloat(0.4) + 0.2;
+      let randomsize = (getRandomFloat(0.4) + 0.2);
       randomsize *= this.size;
 
 
@@ -71,5 +72,19 @@ class AstroidBAT extends Astroid{
   constructor(size){
     super(size);
     this.DrawRes.SpriteID = 11;
+  }
+
+  OnHit(object){
+
+    let BATAmount = getRandomInt(5) + 1;
+    for (let i = 0; i < BATAmount; i++){
+      let B = new BATPickUp();
+      B.Rigidbody.Pos = copyInstance(this.Rigidbody.Pos);
+      let f = RandomVecInCircle();
+
+      B.Rigidbody.Vel = f.rMult(100);
+      Game.AddObject(B);
+    }
+    this.NeedsDelete = true;
   }
 }

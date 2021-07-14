@@ -33,7 +33,7 @@ class Projectile extends Shootable{
 
   OnHit(object){
     this.NeedsDelete = true;
-    object.OnHit(this)
+    if (object instanceof Shootable){object.OnHit(this);}
   }
 
   Deleting(){
@@ -45,7 +45,7 @@ class Projectile extends Shootable{
         //let b = new Projectile(this.Rigidbody.Pos.rSub(new Vec2(this.DrawRes.Dimensions.X/2, this.DrawRes.Dimensions.Y/2)), copyInstance(this.Rigidbody));
         if (this){this.NeedsDelete = true;}
         //console.log(this.Shots);
-      }, 4000)
+      }, 2000)
     });
   }
 
@@ -73,7 +73,7 @@ class Projectile extends Shootable{
 
 class pPlayerBlasterT1 extends Projectile{
   constructor(pos, ori){
-    super(pos, ori, 10, 1000);
+    super(pos, ori, 10, 2000);
     this.DrawRes = new BulletRes(14);
     this.FireSound = new SoundObject("Laser1");
     this.FireSound.Play();
@@ -82,9 +82,9 @@ class pPlayerBlasterT1 extends Projectile{
 
 class pBlasterT1 extends Projectile{
   constructor(pos, ori,){
-    super(pos, ori, 10, 1000);
+    super(pos, ori, 10, 2000);
 
-    this.CollisionLayer = 3;
+    this.CollisionLayer = 4;
     //this.DrawRes = new PlaceholderRes(new Vec2(15,5), 3, "#FF0000");
     this.DrawRes = new BulletRes(15);
     this.FireSound = new SoundObject("Laser2");
