@@ -25,12 +25,16 @@ class ScouterAIState extends NPCAIState{
   SeekAlt(felapsed){
 
     let Surrounding = this.Master.SurroundTrigger.GetDetected();
+    console.log(Surrounding);
     //console.log(Surrounding);
     let Avoidance = new Vec2(0,0);
     let Urgency = 1;
 
     Surrounding.forEach((item) => {
       let weight = this.PosRef.rSub(item.Rigidbody.Pos);
+      if (weight.Mag() <= 0.2){weight = RandomVecInCircle();}
+
+
       //let weight = item.Rigidbody.Pos.rSub(this.PosRef);
       //if (weight.Mag() < 1000){Urgency += 0.01;}
       Avoidance.Add(weight);
