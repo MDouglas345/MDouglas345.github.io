@@ -43,7 +43,7 @@ class Astroid extends Shootable{
     for (let i = 0; i < 4; i++){
       let chance = getRandomFloat(1);
 
-      let randomsize = (getRandomFloat(0.4) + 0.2);
+      let randomsize = (getRandomFloat(0.4) + 0.4);
       randomsize *= this.size;
 
 

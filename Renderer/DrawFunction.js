@@ -119,7 +119,7 @@ class UITextDrawFunction extends DrawFunction{
   Draw(context, image, Pos, scale, rot){
     context.font = this.UIRes.Font;
     context.strokeStyle = "#FFFFFF";
-    context.strokeText(this.UIRes.TextToDisplay, this.UIRes.ScreenLocation.X, this.UIRes.ScreenLocation.Y);
+    context.strokeText(this.UIRes.TextToDisplay.variable, this.UIRes.ScreenLocation.X, this.UIRes.ScreenLocation.Y);
 
   }
 }

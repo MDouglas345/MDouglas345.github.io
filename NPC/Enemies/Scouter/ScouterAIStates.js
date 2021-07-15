@@ -25,12 +25,25 @@ class ScouterAIState extends NPCAIState{
   SeekAlt(felapsed){
 
     let Surrounding = this.Master.SurroundTrigger.GetDetected();
-    console.log(Surrounding);
     //console.log(Surrounding);
     let Avoidance = new Vec2(0,0);
     let Urgency = 1;
 
+    var found = 0;
+    for (let i = 0; i < Surrounding.length; i++){
+      if (i > 2){continue;}
+      let weight = this.PosRef.rSub(Surrounding[i].Rigidbody.Pos);
+      if (weight.Mag() <= 0.2){weight = RandomVecInCircle();}
+
+
+      //let weight = item.Rigidbody.Pos.rSub(this.PosRef);
+      //if (weight.Mag() < 1000){Urgency += 0.01;}
+      Avoidance.Add(weight);
+    }
+    /*
     Surrounding.forEach((item) => {
+      if (found > 3){continue;}
+      found++;
       let weight = this.PosRef.rSub(item.Rigidbody.Pos);
       if (weight.Mag() <= 0.2){weight = RandomVecInCircle();}
 
@@ -39,6 +52,7 @@ class ScouterAIState extends NPCAIState{
       //if (weight.Mag() < 1000){Urgency += 0.01;}
       Avoidance.Add(weight);
     });
+    */
   //  console.log(Avoidance);
     Avoidance.Normalize();
     //Avoidance.Mult(10);

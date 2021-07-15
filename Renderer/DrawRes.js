@@ -168,3 +168,13 @@ class UITextRes extends UIRes{
     this.DrawFunc = new UITextDrawFunction(this);
   }
 }
+
+class BATPickUpRes extends DrawRes{
+  constructor(){
+    super();
+    this.SpriteID = 19;
+    this.DrawFunc = new BRotatedDrawFunction();
+    this.Dimensions = new Vec2(50,50);
+    this.Layer = 4;
+  }
+}
