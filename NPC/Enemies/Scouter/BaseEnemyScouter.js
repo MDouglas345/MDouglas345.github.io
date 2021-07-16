@@ -27,15 +27,14 @@ class EnemyScouter extends Enemy{
 
     this.ShootersSpot;
 
-    this.Shields = new EnemyShieldV1(new Vec2(300,300), 3);
+    this.Shields = new EnemyShieldV1(new Vec2(300,300), 7);
     this.Shields.Rigidbody.ConnectToParent(this);
     //this.Shields.Rigidbody.Pos = copyInstance(this.Rigidbody.Pos);
     //this.Shields.Rigidbody.SetParent(this);
     //this.Shields.Rigidbody= this.Rigidbody;
 
     Game.AddObject(this.Shields);
-    console.log(this.Shields);
-
+  
     this.CollisionType = new CircleCollider(100);
     this.CollisionLayer = 3;
 

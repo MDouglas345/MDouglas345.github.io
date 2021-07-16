@@ -1,15 +1,17 @@
 class BATPickUp extends PickUpable{
   constructor(){
     super();
-    this.DrawRes = new PlaceholderRes(new Vec2(50,50), 5, "#800080");
-    this.CollisionType = new CircleCollider(20);
+    //this.DrawRes = new PlaceholderRes(new Vec2(50,50), 5, "#800080");
+    this.DrawRes = new BATPickUpRes();
+    this.CollisionType = new CircleCollider(40);
     this.CollisionLayer = 6;
     this.Rigidbody.Enable();
 
   }
 
   OnPickUp(object){
-    object.BATCounter++;
+    console.log(object);
+    object.BATCounter.variable++;
     this.NeedsDelete = true;
   }
 

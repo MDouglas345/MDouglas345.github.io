@@ -13,6 +13,7 @@
   4 = Enemy Projectiles
   5 = Trigger for Detecting other Enemy AI
   6 = Trigger for Player PickUp
+  7 =
 
 
   By convention :
@@ -83,7 +84,7 @@ class CollisionMatrix{
 
     //Needs to be customied per game Needs
     CollisionMatrix.LayersMatrix = {
-      0 : {
+      0 : { // Player
         0 : false,
         1 : false,
         2 : true,
@@ -91,7 +92,7 @@ class CollisionMatrix{
         4 : false,
         5 : false,
         6 : true
-      },
+      }, // Player Projectiles
       1 : {
         0 : false,
         1 : false,
@@ -99,7 +100,7 @@ class CollisionMatrix{
         3 : true,
         4 : true,
         5 : false
-      },
+      }, // Astroids / envirnment
       2 : {
         0 : true,
         1 : true,
@@ -108,7 +109,7 @@ class CollisionMatrix{
         4 : true,
         5 : false
       },
-      3 : {
+      3 : { // Enemy
         0 : true,
         1 : true,
         2 : true,
@@ -116,15 +117,18 @@ class CollisionMatrix{
         4 : false,
         5 : true
       },
-      4 : {
+      4 : { // Enemy Projectile
         0 : true,
         1 : true,
         2 : true,
         3 : false,
         4 : false,
-        5 : false
+        5 : false,
+        6 : false,
+        7 : false,
+        8 : true
       },
-      5 :{
+      5 :{ // Trigger for Scouter AI
         0 : false,
         1 : false,
         2 : false,
@@ -132,14 +136,36 @@ class CollisionMatrix{
         4 : false,
         5 : false
       },
-      6 : {
+      6 : { // Trigger for BAT pickup
         0 : true,
         1 : false,
         2 : false,
         3 : false,
         4 : false,
         5 : false,
-        6 : false
+        6 : false,
+        7 : false
+      },
+      7 : { // ?
+        0 : true,
+        1 : true,
+        2 : false,
+        3 : false,
+        4 : false,
+        5 : false,
+        6 : false,
+        7: false
+      },
+      8 : { // Player Shields
+        0 :false,
+        1 : false,
+        2 : true,
+        3 : true,
+        4 : true,
+        5 : false,
+        6 : false,
+        7 : false,
+        8 : false
       }
     };
 

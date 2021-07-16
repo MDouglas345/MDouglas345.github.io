@@ -10,10 +10,13 @@ class Player extends Shootable
     super();
     this.Name = "Player";
 
-    this.BATCounter = 0;
+    this.HP = new UIReferenceVariable(100);
+    this.MaxHP = new UIReferenceVariable(100);
 
-    this.MaxHP = 50;
-    this.HP = this.MaxHP;
+
+
+    this.BATCounter = new UIReferenceVariable(0);
+
 
     this.Rigidbody = new Rigidbody();
     this.Rigidbody.Enable();
@@ -29,14 +32,20 @@ class Player extends Shootable
     this.Rigidbody.Mass = 5;
     this.Fired = false;
 
-    this.Shield = new PlayerShieldV1(new Vec2(300,300), 0);
+    this.Shield = new PlayerShield(new Vec2(300,300), 8);
     this.Shield.Rigidbody.ConnectToParent(this);
 
     this.HitSound = new SoundObject("ShipHit");
 
-    this.UIBATCounter = new UITextElement(this.BATCounter, 'italic 32px sans-serif', new Vec2(30,30) );
+    this.UIBATCounter = new UITextElement(this.BATCounter, 'italic 32px sans-serif', new Vec2(30,130) );
+    this.UIHealthBar = new UIHealthBarElement(new Vec2(40,40), this.HP, this.MaxHP, 0);
+    this.UIShieldBar = new UIShieldBarElement(new Vec2(40,60), this.Shield.uiHP, this.Shield.uiMaxHP, 0);
+
     console.log(this.UIBATCounter);
+
     Game.AddObject(this.UIBATCounter);
+    Game.AddObject(this.UIHealthBar);
+    Game.AddObject(this.UIShieldBar);
 
   //  this.Shield.Rigidbody = this.Rigidbody;
     Game.AddObject(this.Shield);
@@ -123,9 +132,9 @@ Update(){
     let Dir = object.Rigidbody.Vel.Normal();
     let DesiredVel = Dir.rMult(50);
     this.Rigidbody.AddVel(DesiredVel);
-    this.HP -= object.Damage;
+    this.HP.variable -= object.Damage;
 
-    if (this.HP <= 0){ this.TriggerDeath();}
+    if (this.HP.variable <= 0){ this.TriggerDeath();}
     console.log("hit");
   }
 

@@ -168,3 +168,29 @@ class UITextRes extends UIRes{
     this.DrawFunc = new UITextDrawFunction(this);
   }
 }
+
+class UIBarRes extends UIRes{
+  constructor(Pos, CurrentValue, MaxValue, MinValue, width, height, ForegroundBarColor, BackgroundColor){
+    super();
+    this.CurrentValue = CurrentValue;
+    this.MaxValue = MaxValue;
+    this.MinValue = MinValue;
+    this.ForegroundColor = ForegroundBarColor;
+    this.BackgroundColor = BackgroundColor;
+    this.ScreenLocation = Pos;
+    this.Width = width;
+    this.Height = height;
+
+    this.DrawFunc = new UIBarDrawFunctionBasic(this);
+  }
+}
+
+class BATPickUpRes extends DrawRes{
+  constructor(){
+    super();
+    this.SpriteID = 19;
+    this.DrawFunc = new BRotatedDrawFunction();
+    this.Dimensions = new Vec2(50,50);
+    this.Layer = 4;
+  }
+}

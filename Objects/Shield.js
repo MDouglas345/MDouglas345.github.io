@@ -87,6 +87,28 @@ class PlayerShieldV1 extends Shield{
   }
 }
 
+class PlayerShield extends Shield{
+  constructor(dim, Col){
+    super(dim, Col);
+    this.MaxHP = 50;
+    this.HP = this.MaxHP;
+    this.uiHP = new UIReferenceVariable(this.HP);
+    this.uiMaxHP = new UIReferenceVariable(this.MaxHP);
+    this.RechargeRate = 15;
+    this.TimeToFade = 1;
+  }
+
+  OnHit(object){
+    super.OnHit(object);
+
+  }
+
+  LateUpdate(felapsed){
+      this.uiHP.variable = this.HP;
+  }
+}
+
+
 
 
 

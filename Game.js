@@ -67,7 +67,7 @@ class Game{
   }
 
   BattleTest(){
-    for (let i = 0; i < 4; i++){
+    for (let i = 0; i < 5; i++){
       let p = new EnemyScouter();
       Game.AddObject(p);
     }
