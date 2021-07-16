@@ -34,8 +34,7 @@ class EnemyScouter extends Enemy{
     //this.Shields.Rigidbody= this.Rigidbody;
 
     Game.AddObject(this.Shields);
-    console.log(this.Shields);
-
+  
     this.CollisionType = new CircleCollider(100);
     this.CollisionLayer = 3;
 

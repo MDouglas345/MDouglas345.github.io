@@ -79,6 +79,7 @@ class BGBlack extends DrawFunction{
   }
 
   Draw(context, image, Pos, scale, rot){
+    context.fillStyle = "#000000";
     context.fillRect(0, 0, scale.X, scale.Y);
   }
 }
@@ -121,5 +122,29 @@ class UITextDrawFunction extends DrawFunction{
     context.strokeStyle = "#FFFFFF";
     context.strokeText(this.UIRes.TextToDisplay.variable, this.UIRes.ScreenLocation.X, this.UIRes.ScreenLocation.Y);
 
+  }
+}
+class UIBarDrawFunctionBasic extends DrawFunction{
+  constructor(UIRes){
+    super();
+    this.UIRes = UIRes;
+    console.log(this.UIRes);
+
+  }
+  Draw(context, image, Pos, scale, rot){
+
+    let fillpercent = InvLerp(this.UIRes.MinValue,this.UIRes.MaxValue.variable, this.UIRes.CurrentValue.variable);
+    //console.log(this.UIRes.MinValue,this.UIRes.MaxValue.variable, this.UIRes.CurrentValue.variable);
+    //console.log(fillpercent);
+    context.fillStyle = this.UIRes.ForegroundColor;
+    context.fillRect(this.UIRes.ScreenLocation.X, this.UIRes.ScreenLocation.Y, fillpercent * this.UIRes.Width, this.UIRes.Height);
+  }
+}
+
+class UIBarDrawFunction extends DrawFunction{
+  constructor(UIRes){
+    this.UIRes = UIRes;
+  }
+  Draw(context, image, Pos, scale, rot){
   }
 }

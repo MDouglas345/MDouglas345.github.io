@@ -169,6 +169,22 @@ class UITextRes extends UIRes{
   }
 }
 
+class UIBarRes extends UIRes{
+  constructor(Pos, CurrentValue, MaxValue, MinValue, width, height, ForegroundBarColor, BackgroundColor){
+    super();
+    this.CurrentValue = CurrentValue;
+    this.MaxValue = MaxValue;
+    this.MinValue = MinValue;
+    this.ForegroundColor = ForegroundBarColor;
+    this.BackgroundColor = BackgroundColor;
+    this.ScreenLocation = Pos;
+    this.Width = width;
+    this.Height = height;
+
+    this.DrawFunc = new UIBarDrawFunctionBasic(this);
+  }
+}
+
 class BATPickUpRes extends DrawRes{
   constructor(){
     super();

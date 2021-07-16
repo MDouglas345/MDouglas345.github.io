@@ -99,6 +99,10 @@ function Lerp(x, y, a){
   return x * (1 - a) + y * a;
 }
 
+function InvLerp(x, y, a){
+  return (a - x) / (y - x);
+}
+
 function Dot(vec1, vec2){
   return (vec1.X * vec2.X) + (vec1.Y * vec2.Y);
 }
