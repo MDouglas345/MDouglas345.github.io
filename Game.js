@@ -21,6 +21,7 @@ class Game{
 
   //  this.PlanetDemo = new Earth();
     this.Cryptopolid = new Cryptopolid();
+    this.Nightly = new PlanetNightly();
 
 
 
@@ -53,6 +54,7 @@ class Game{
     Game.AddObject(this.BGMaster);
     //Game.AddObject(this.PlanetDemo)
     Game.AddObject(this.Cryptopolid);
+    Game.AddObject(this.Nightly);
     Game.AddObject(this.Astroids);
     //Game.AddObject(this.EnemyDemo);
     Game.AddObject(this.StarSystem);

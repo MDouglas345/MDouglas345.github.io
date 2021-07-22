@@ -10,6 +10,11 @@ class EnemyScouter extends Enemy{
 
     this.SurroundTrigger = new Trigger(this, new CircleCollider(400), 5);
 
+    this.Identifier;
+
+    if (this.MotherShip != null){this.Identifier = this.MotherShip.GetChildID();}
+
+
     this.States = {
       "default" : new ScouterAIState(this),
       "Wander" : new ScouterWanderStateAlt(this),
@@ -34,7 +39,7 @@ class EnemyScouter extends Enemy{
     //this.Shields.Rigidbody= this.Rigidbody;
 
     Game.AddObject(this.Shields);
-  
+
     this.CollisionType = new CircleCollider(100);
     this.CollisionLayer = 3;
 

@@ -16,7 +16,7 @@ class Sound{
   static AudioChannels = [];
 
   static VolumeSettings = {
-    "Master"   : 1,
+    "Master"   : 0,
     "Effects"  : 0.2,
     "Music"    : 1
   };

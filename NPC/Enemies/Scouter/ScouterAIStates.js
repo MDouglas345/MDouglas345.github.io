@@ -5,6 +5,8 @@ class ScouterAIState extends NPCAIState{
     this.VelRef = this.Master.Rigidbody.Vel;
     this.RigidbodyRef = this.Master.Rigidbody;
 
+
+
     this.Target;
     this.TargetLocation;
     this.StateSpeed;

@@ -6,10 +6,34 @@ class CarrierShip extends Enemy{
     this.ChildrenLimit = 15;
     this.Children = [];
 
+    this.CommandList = {
+      "Search" : 0,
+      "Retreat" : 1,
+      "Defend" : 2
+    }
+
     this.States = {
 
     };
-    
+
     this.ActiveState;
+  }
+
+  Update(felapsed){
+    thsi.ActiveState.Update(felapsed);
+  }
+
+  SendCommand(command){
+    this.Children.forEach(Child =>{
+      Child.Command(this.CommandList[command]);
+    });
+  }
+
+  DeleteChild(object){
+    this.Children.forEach(function(child, index, array){
+      if (child.Identifier == object.Identifier){
+        array.splice(index,1);
+      }
+    });
   }
 }

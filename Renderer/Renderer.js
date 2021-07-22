@@ -88,6 +88,7 @@ class Renderer{
     this.AddImage("Resources/shipdebris2.png");
     this.AddImage("Resources/shipdebris3.png");
     this.AddImage("Resources/BATPickUp.png");
+    this.AddImage("Resources/PlanetNightly.png");
   }
 
   Update(){
