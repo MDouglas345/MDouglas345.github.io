@@ -45,7 +45,7 @@ class Game{
     //this.StarSystem = new StarSystem(100);
 
 
-    this.BattleTest();
+    //this.BattleTest();
   }
 
   Init(){

@@ -139,6 +139,50 @@ class UITextDrawFunction extends DrawFunction{
 
   }
 }
+
+class UITextFillFunction extends DrawFunction{
+  constructor(UIRes){
+    super();
+    this.UIRes = UIRes;
+  }
+
+  Draw(context, image, Pos, scale, rot){
+    context.font = this.UIRes.Font;
+    context.fillStyle = this.UIRes.FillStyle;
+    context.fillText(this.UIRes.TextToDisplay.variable, this.UIRes.ScreenLocation.X, this.UIRes.ScreenLocation.Y);
+
+  }
+}
+
+class UITextFillStrokeFunction extends DrawFunction{
+  constructor(UIRes){
+    super();
+    this.UIRes = UIRes;
+  }
+
+  Draw(context, image, Pos, scale, rot){
+    context.font = this.UIRes.Font;
+    context.fillStyle = this.UIRes.FillStyle;
+    context.strokeStyle = this.UIRes.StrokeStyle;
+    context.lineWidth = this.UIRes.StrokeStrength;
+    context.fillText(this.UIRes.TextToDisplay.variable, this.UIRes.ScreenLocation.X, this.UIRes.ScreenLocation.Y);
+    context.strokeText(this.UIRes.TextToDisplay.variable, this.UIRes.ScreenLocation.X, this.UIRes.ScreenLocation.Y);
+
+  }
+}
+
+class UITitleDrawFunction extends DrawFunction{
+  constructor(UIRes){
+    super();
+    this.UIRes = UIRes;
+    this.FillStrokeFunc = new UITextFillStrokeFunction(this.UIRes);
+  }
+  Draw(context, image, Pos, scale, rot){
+    context.save();
+    context.globalAlpha = this.UIRes.TitleOpacity.variable;
+    this.FillStrokeFunc.Draw(context, image, Pos, scale, rot);
+  }
+}
 class UIBarDrawFunctionBasic extends DrawFunction{
   constructor(UIRes){
     super();

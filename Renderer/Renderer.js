@@ -90,6 +90,7 @@ class Renderer{
     this.AddImage("Resources/BATPickUp.png");
     this.AddImage("Resources/PlanetNightly.png");
     this.AddImage("Resources/brave.png");
+    this.AddImage("Resources/Credit.png");
   }
 
   Update(){

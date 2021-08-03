@@ -2,7 +2,7 @@ class PlayerUI extends GameObject{
   constructor(Player){
     super();
     this.PlayerRef = Player;
-    this.UIBATCounter = new UITextElement(this.PlayerRef.BATCounter, 'italic 32px sans-serif', new Vec2(55,130) );
+    this.UIBATCounter = new UITextElement(this.PlayerRef.BATCounter, '32px sans-serif', new Vec2(55,130) );
     this.UIHealthBar = new UIHealthBarElement(new Vec2(40,40), this.PlayerRef.HP, this.PlayerRef.MaxHP, 0);
     this.UIShieldBar = new UIShieldBarElement(new Vec2(40,60), this.PlayerRef.Shield.uiHP, this.PlayerRef.Shield.uiMaxHP, 0);
     this.Brave = new UIImage(21, new Vec2(20,30), new Vec2(50,50), 5);

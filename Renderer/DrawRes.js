@@ -175,7 +175,23 @@ class UITextRes extends UIRes{
     this.TextToDisplay = Text;
     this.ScreenLocation = loc;
     this.Font = font;
-    this.DrawFunc = new UITextDrawFunction(this);
+    this.FillStyle = "#FFFFFF";
+    this.StrokeStyle = "#FFFFFF";
+    this.StrokeStrength = 1;
+    this.DrawFunc = new UITextFillFunction(this);
+  }
+}
+
+class UITitleTextRes extends UIRes{
+  constructor(Text, loc, font){
+    super();
+    this.TextToDisplay = Text;
+    this.ScreenLocation = loc;
+    this.Font = font;
+    this.FillStyle = "#FB542B";
+    this.StrokeStyle = "#FFFFFF";
+    this.StrokeStrength = 4;
+    this.DrawFunc = new UITextFillStrokeFunction(this);
   }
 }
 
