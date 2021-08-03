@@ -1,3 +1,5 @@
+
+
 class DrawFunction{
   constructor(){
 
@@ -37,6 +39,19 @@ class BDrawFunction extends DrawFunction{
 
   Draw(context, imageRef, Pos, scale){
     context.drawImage(imageRef,Pos.X, Pos.Y, 100 * scale, 100 * scale);
+  }
+}
+
+class BackgroundFunction extends DrawFunction{
+  constructor(color){
+    super();
+    this.color = color;
+
+  }
+
+  Draw(context, imageRef, Pos, scale){
+    context.fillStyle = this.color;
+    context.fillRect(0,0,Global.RenderSystem.GetCanvasWidth(), Global.RenderSystem.GetCanvasHeight());
   }
 }
 
@@ -128,7 +143,7 @@ class UIBarDrawFunctionBasic extends DrawFunction{
   constructor(UIRes){
     super();
     this.UIRes = UIRes;
-    console.log(this.UIRes);
+
 
   }
   Draw(context, image, Pos, scale, rot){
@@ -146,5 +161,17 @@ class UIBarDrawFunction extends DrawFunction{
     this.UIRes = UIRes;
   }
   Draw(context, image, Pos, scale, rot){
+  }
+
+}
+
+class UIImageDraw extends DrawFunction{
+  constructor(res){
+    super();
+    this.UIRes = res;
+  }
+
+  Draw(context, image, Pos, scale, rot){
+    context.drawImage(image, this.UIRes.ScreenLocation.X, this.UIRes.ScreenLocation.Y, this.UIRes.Dimensions.X, this.UIRes.Dimensions.X );
   }
 }

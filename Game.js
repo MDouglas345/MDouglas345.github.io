@@ -41,7 +41,8 @@ class Game{
 
     this.m_Camera = new Camera(this.m_Player);
 
-    this.StarSystem = new psStarParallax(100,this.m_Player);
+    this.StarSystem = new psStarParallax(100,this.m_Camera);
+    //this.StarSystem = new StarSystem(100);
 
 
     this.BattleTest();

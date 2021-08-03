@@ -1,18 +1,15 @@
-class AstroidSystem extends ParticleSystem{
-  constructor(Target){
+class StarSystem extends ParticleSystem{
+  constructor(staramount){
     super();
-    this.Target = Target;
-    this.ParticleLimit = 200;
-    this.DrawRes.Layer = 3;
-
-    this.ParticleType = Astroid;
+    this.ParticleLimit = staramount;
 
     this.CreateParticles();
+
   }
 
   CreateParticles(){
     for (let i = 0; i < this.ParticleLimit; i++){
-      let p = new Astroid();
+      let p = new StarParticle();
       p.Rigidbody.Pos = new Vec2(getRandomFloat(20000) - 10000,getRandomFloat(20000) - 10000);
       this.Particles.push(p);
       Game.AddObject(p);

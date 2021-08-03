@@ -9,17 +9,29 @@ class Camera extends GameObject{
     super();
     this.Name = "mCamera";
     this.m_FocusPoint = Focus;
-    this.Zoom = 1;
-    this.ZOOMMIN = 0.25;
+    this.Zoom = 0.25;
+    this.ZOOMMIN = 0.2;
     this.ZOOMMAX = 3;
     this.RenderInstance;
     this.Dir;
 
     this.Rigidbody.Pos = new Vec2(0,0);
+    this.Rigidbody.Enable();
+
+    this.States = {
+      "Follow" : new FollowState(this),
+      "Start" : new GameStartState(this)
+    };
+
+    this.InitalState("Start");
 
 
   }
+
   Update(felapsed){
+    this.ActiveState.Update(felapsed);
+
+    /*
     if (Global.InputSystem.GetKeyState('-') == "keydown"){
       this.Zoom += 0.5 * felapsed;
     }
@@ -30,6 +42,7 @@ class Camera extends GameObject{
 
     let point = this.m_FocusPoint.Center();
     this.Dir = point.rSub(new Vec2((this.RenderInstance.GetCanvasWidth() / 2) * (1/this.Zoom) , (this.RenderInstance.GetCanvasHeight() /2 * (1/this.Zoom))));
+    */
   }
   LateUpdate(felapsed){
     /*
@@ -43,7 +56,8 @@ class Camera extends GameObject{
 
     //let dir = this.m_FocusPoint.rSub(new Vec2((this.RenderInstance.GetCanvasWidth() / 2) * (1/this.Zoom) , (this.RenderInstance.GetCanvasHeight() /2 * (1/this.Zoom))));
 
-    this.Rigidbody.Pos = this.Dir;
+    this.ActiveState.LateUpdate(felapsed);
+    //this.Rigidbody.Pos = this.Dir;
     //this.Rigidbody.Orien = this.m_FocusPoint.Rigidbody.Orien;
 
 
@@ -55,6 +69,22 @@ class Camera extends GameObject{
 
   Init(){
     this.RenderInstance = Global.RenderSystem;
+
+    for (var state in this.States){
+      this.States[state].Init();
+    }
+  }
+
+  InitalState(state){
+    this.ActiveState = this.States[state];
+    this.ActiveState.EnterState();
+  }
+
+  SwitchState(state){
+    this.ActiveState.ExitState();
+    this.ActiveState = this.States[state];
+    this.ActiveState.EnterState();
+
   }
 
   ObjectInView(object){

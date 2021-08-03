@@ -24,6 +24,16 @@ class SpaceParticle extends Particle{
   }
 }
 
+class StarParticle extends Particle{
+  constructor(){
+    super();
+    this.Name = "Star";
+    this.DistanceToPlayer = getRandomInt(10);
+    this.DrawRes = new StarRes();
+    this.DrawRes.Dimensions = new Vec2(10 * (1/this.DistanceToPlayer),10 * (1/this.DistanceToPlayer));
+  }
+}
+
 class PlayerThrusterParticle extends Particle{
   constructor(){
     super();

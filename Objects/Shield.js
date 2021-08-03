@@ -41,6 +41,7 @@ class Shield extends Shootable{
 
   OnHit(Object){
     this.ActiveState.OnHit(Object);
+    if (this.HP <= 0){this.HP = 0;}
 
   }
 
@@ -152,7 +153,7 @@ class ShieldVisible extends ShieldState{
   }
 
   Update(felapsed){
-    if (this.Master.HP < 0) {
+    if (this.Master.HP <= 0) {
       this.Master.SwitchState("Disable"); return;
     }
 
@@ -169,6 +170,7 @@ class ShieldVisible extends ShieldState{
     this.Master.ShieldHitSound.Play();
     this.CurrentTime = this.Master.TimeToFade;
     this.Master.HP -= object.Damage;
+
   }
 
   EnterState(){
@@ -186,7 +188,7 @@ class ShieldInVisible extends ShieldState{
   }
 
   Update(felapsed){
-    if (this.Master.HP < 0) {
+    if (this.Master.HP <= 0) {
       this.Master.SwitchState("Disable"); return;
     }
 
@@ -197,6 +199,7 @@ class ShieldInVisible extends ShieldState{
   OnHit(object){
       this.Master.ShieldHitSound.Play();
       this.Master.HP -= object.Damage;
+
       this.Master.SwitchState("Visible");
   }
 

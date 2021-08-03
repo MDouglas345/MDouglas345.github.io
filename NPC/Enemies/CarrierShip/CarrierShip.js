@@ -29,6 +29,17 @@ class CarrierShip extends Enemy{
     });
   }
 
+  SwitchState(state){
+    this.ActiveState.ExitState();
+    this.ActiveState = this.States[state];
+    this.ActiveState.EnterState();
+  }
+
+  InitState(state){
+    this.ActiveState = this.States[state];
+    this.ActiveState.EnterState();
+  }
+
   DeleteChild(object){
     this.Children.forEach(function(child, index, array){
       if (child.Identifier == object.Identifier){

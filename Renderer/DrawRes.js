@@ -33,7 +33,7 @@ class SpaceBlackRes extends DrawRes{
   constructor(){
     super();
     this.SpriteID = 0;
-    this.DrawFunc = new BGBlack();
+    this.DrawFunc = new BackgroundFunction("black");
     this.Layer = 0;
   }
 }
@@ -63,6 +63,16 @@ class AstroidRes extends DrawRes{
     this.DrawFunc = new BRotatedDrawFunction();
     this.Layer = 3;
     this.Dimensions = dim;
+  }
+}
+
+class StarRes extends DrawRes{
+  constructor(){
+    super();
+    this.SpriteID = 5;
+    this.DrawFunc = new BRotatedDrawFunction();
+    this.Layer = 1;
+    this.Dimensions;
   }
 }
 
@@ -182,6 +192,17 @@ class UIBarRes extends UIRes{
     this.Height = height;
 
     this.DrawFunc = new UIBarDrawFunctionBasic(this);
+  }
+}
+
+class UIImageRes extends UIRes{
+  constructor(spriteid, loc, dim){
+    super();
+    this.ScreenLocation = loc;
+    this.Dimensions = dim;
+    this.SpriteID = spriteid;
+
+    this.DrawFunc = new UIImageDraw(this);
   }
 }
 
