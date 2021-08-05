@@ -13,7 +13,7 @@ class AstroidSystem extends ParticleSystem{
   CreateParticles(){
     for (let i = 0; i < this.ParticleLimit; i++){
       let p = new Astroid();
-      p.Rigidbody.Pos = new Vec2(getRandomFloat(10000),getRandomFloat(10000));
+      p.Rigidbody.Pos = new Vec2(getRandomFloat(20000) - 10000,getRandomFloat(20000) - 10000);
       this.Particles.push(p);
       Game.AddObject(p);
     }

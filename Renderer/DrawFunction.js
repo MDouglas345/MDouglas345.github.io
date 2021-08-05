@@ -1,3 +1,5 @@
+
+
 class DrawFunction{
   constructor(){
 
@@ -37,6 +39,19 @@ class BDrawFunction extends DrawFunction{
 
   Draw(context, imageRef, Pos, scale){
     context.drawImage(imageRef,Pos.X, Pos.Y, 100 * scale, 100 * scale);
+  }
+}
+
+class BackgroundFunction extends DrawFunction{
+  constructor(color){
+    super();
+    this.color = color;
+
+  }
+
+  Draw(context, imageRef, Pos, scale){
+    context.fillStyle = this.color;
+    context.fillRect(0,0,Global.RenderSystem.GetCanvasWidth(), Global.RenderSystem.GetCanvasHeight());
   }
 }
 
@@ -124,11 +139,55 @@ class UITextDrawFunction extends DrawFunction{
 
   }
 }
+
+class UITextFillFunction extends DrawFunction{
+  constructor(UIRes){
+    super();
+    this.UIRes = UIRes;
+  }
+
+  Draw(context, image, Pos, scale, rot){
+    context.font = this.UIRes.Font;
+    context.fillStyle = this.UIRes.FillStyle;
+    context.fillText(this.UIRes.TextToDisplay.variable, this.UIRes.ScreenLocation.X, this.UIRes.ScreenLocation.Y);
+
+  }
+}
+
+class UITextFillStrokeFunction extends DrawFunction{
+  constructor(UIRes){
+    super();
+    this.UIRes = UIRes;
+  }
+
+  Draw(context, image, Pos, scale, rot){
+    context.font = this.UIRes.Font;
+    context.fillStyle = this.UIRes.FillStyle;
+    context.strokeStyle = this.UIRes.StrokeStyle;
+    context.lineWidth = this.UIRes.StrokeStrength;
+    context.fillText(this.UIRes.TextToDisplay.variable, this.UIRes.ScreenLocation.X, this.UIRes.ScreenLocation.Y);
+    context.strokeText(this.UIRes.TextToDisplay.variable, this.UIRes.ScreenLocation.X, this.UIRes.ScreenLocation.Y);
+
+  }
+}
+
+class UITitleDrawFunction extends DrawFunction{
+  constructor(UIRes){
+    super();
+    this.UIRes = UIRes;
+    this.FillStrokeFunc = new UITextFillStrokeFunction(this.UIRes);
+  }
+  Draw(context, image, Pos, scale, rot){
+    context.save();
+    context.globalAlpha = this.UIRes.TitleOpacity.variable;
+    this.FillStrokeFunc.Draw(context, image, Pos, scale, rot);
+  }
+}
 class UIBarDrawFunctionBasic extends DrawFunction{
   constructor(UIRes){
     super();
     this.UIRes = UIRes;
-    console.log(this.UIRes);
+
 
   }
   Draw(context, image, Pos, scale, rot){
@@ -146,5 +205,17 @@ class UIBarDrawFunction extends DrawFunction{
     this.UIRes = UIRes;
   }
   Draw(context, image, Pos, scale, rot){
+  }
+
+}
+
+class UIImageDraw extends DrawFunction{
+  constructor(res){
+    super();
+    this.UIRes = res;
+  }
+
+  Draw(context, image, Pos, scale, rot){
+    context.drawImage(image, this.UIRes.ScreenLocation.X, this.UIRes.ScreenLocation.Y, this.UIRes.Dimensions.X, this.UIRes.Dimensions.X );
   }
 }

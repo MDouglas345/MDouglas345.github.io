@@ -5,10 +5,20 @@ class Planet extends GameObject{
     this.Focus;
     this.Rigidbody = new Rigidbody();
     this.Rigidbody.Enable();
+
+    this.EnemiesToSpawn = 5;
   }
 
   Init(){
     this.Focus = Game.GetObjectByName("Player");
+
+    for (let i = 0; i < this.EnemiesToSpawn; i++){
+      let e = new EnemyScouter();
+      //e.Rigidbody.Pos = copyInstance(this.Rigidbody.Pos);
+      e.NewStartPos(this.Rigidbody.Pos);
+
+      Game.AddObject(e);
+    }
   }
 
   Update(){

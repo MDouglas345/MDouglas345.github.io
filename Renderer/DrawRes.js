@@ -33,7 +33,7 @@ class SpaceBlackRes extends DrawRes{
   constructor(){
     super();
     this.SpriteID = 0;
-    this.DrawFunc = new BGBlack();
+    this.DrawFunc = new BackgroundFunction("black");
     this.Layer = 0;
   }
 }
@@ -63,6 +63,16 @@ class AstroidRes extends DrawRes{
     this.DrawFunc = new BRotatedDrawFunction();
     this.Layer = 3;
     this.Dimensions = dim;
+  }
+}
+
+class StarRes extends DrawRes{
+  constructor(){
+    super();
+    this.SpriteID = 5;
+    this.DrawFunc = new BRotatedDrawFunction();
+    this.Layer = 1;
+    this.Dimensions;
   }
 }
 
@@ -165,7 +175,23 @@ class UITextRes extends UIRes{
     this.TextToDisplay = Text;
     this.ScreenLocation = loc;
     this.Font = font;
-    this.DrawFunc = new UITextDrawFunction(this);
+    this.FillStyle = "#FFFFFF";
+    this.StrokeStyle = "#FFFFFF";
+    this.StrokeStrength = 1;
+    this.DrawFunc = new UITextFillFunction(this);
+  }
+}
+
+class UITitleTextRes extends UIRes{
+  constructor(Text, loc, font){
+    super();
+    this.TextToDisplay = Text;
+    this.ScreenLocation = loc;
+    this.Font = font;
+    this.FillStyle = "#FB542B";
+    this.StrokeStyle = "#FFFFFF";
+    this.StrokeStrength = 4;
+    this.DrawFunc = new UITextFillStrokeFunction(this);
   }
 }
 
@@ -185,6 +211,17 @@ class UIBarRes extends UIRes{
   }
 }
 
+class UIImageRes extends UIRes{
+  constructor(spriteid, loc, dim){
+    super();
+    this.ScreenLocation = loc;
+    this.Dimensions = dim;
+    this.SpriteID = spriteid;
+
+    this.DrawFunc = new UIImageDraw(this);
+  }
+}
+
 class BATPickUpRes extends DrawRes{
   constructor(){
     super();
@@ -192,5 +229,15 @@ class BATPickUpRes extends DrawRes{
     this.DrawFunc = new BRotatedDrawFunction();
     this.Dimensions = new Vec2(50,50);
     this.Layer = 4;
+  }
+}
+
+class StarFieldRes extends DrawRes{
+  constructor(){
+    super();
+    this.SpriteID = 23;
+    this.Layer = 2;
+    this.Dimensions = new Vec2(100000,100000);
+    this.DrawFunc = new BRotatedDrawFunction();
   }
 }

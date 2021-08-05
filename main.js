@@ -57,10 +57,6 @@ function Init(){
 
   Global.InputSystem = InputSystem;
 
-
-  GameSystem.m_Camera.Init();
-
-
   ResizeTrigger();
 
   GameSystem.Init();

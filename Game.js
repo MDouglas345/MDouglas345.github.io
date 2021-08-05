@@ -21,12 +21,14 @@ class Game{
 
   //  this.PlanetDemo = new Earth();
     this.Cryptopolid = new Cryptopolid();
+    this.Nightly = new PlanetNightly();
 
 
 
     //this.BGMaster = new DemoBGMaster(this.m_Player);
 
     this.BGMaster = new SpaceBackground();
+    this.Stars = new StarField();
 
     this.Astroids = new AstroidSystem(this.m_Player);
 
@@ -40,10 +42,11 @@ class Game{
 
     this.m_Camera = new Camera(this.m_Player);
 
-    this.StarSystem = new psStarParallax(100,this.m_Player);
+    this.StarSystem = new psStarParallax(10,this.m_Camera);
+    //this.StarSystem = new StarSystem(20);
 
 
-    this.BattleTest();
+    //this.BattleTest();
   }
 
   Init(){
@@ -51,8 +54,10 @@ class Game{
     Game.AddObject(this.m_Camera);
     //Game.AddObject(this.DebugObject);
     Game.AddObject(this.BGMaster);
+    Game.AddObject(this.Stars);
     //Game.AddObject(this.PlanetDemo)
     Game.AddObject(this.Cryptopolid);
+    Game.AddObject(this.Nightly);
     Game.AddObject(this.Astroids);
     //Game.AddObject(this.EnemyDemo);
     Game.AddObject(this.StarSystem);

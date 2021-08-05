@@ -99,6 +99,33 @@ function Lerp(x, y, a){
   return x * (1 - a) + y * a;
 }
 
+function LerpVec(x,y,a){
+  let newVec = new Vec2(x.X,x.Y);
+  newVec.X = Lerp(newVec.X, y.X, a);
+  newVec.Y = Lerp(newVec.Y, y.Y, a);
+  return newVec;
+}
+
+function Slerp(vec1, vec2, per){
+  let dot = Dot(vec1, vec2);
+
+  dot = Clamp(dot, -1, 1);
+
+  let theta = Math.acos(dot) * per;
+
+  let v3 = vec1.rMult(dot);
+  let relative = vec2.rSub(v3);
+  relative.Normalize();
+
+  let v4 = vec1.rMult(Math.cos(theta));
+  relative.Mult(Math.sin(theta));
+
+  let sum = relative.rAdd(v4);
+  return sum;
+
+
+}
+
 function InvLerp(x, y, a){
   return (a - x) / (y - x);
 }

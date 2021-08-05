@@ -6,8 +6,14 @@ class NPCAIState {
   EnterState(felapsed){
 
   }
+  EarlyUpdate(felapsed){
+
+  }
   Update(felapsed){
 
+  }
+  LateUpdate(felapsed){
+    
   }
   ExitState(felapsed){
 

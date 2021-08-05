@@ -1,6 +1,7 @@
 class EnemyScouter extends Enemy{
   constructor(mom){
     super();
+
     this.Rigidbody.Enable();
     this.Rigidbody.Mass = 2;
     this.DrawRes = new ScouterRes();
@@ -9,6 +10,11 @@ class EnemyScouter extends Enemy{
     this.MaxVel = 500;
 
     this.SurroundTrigger = new Trigger(this, new CircleCollider(400), 5);
+
+    this.Identifier;
+
+    if (this.MotherShip != null){this.Identifier = this.MotherShip.GetChildID();}
+
 
     this.States = {
       "default" : new ScouterAIState(this),
@@ -34,7 +40,7 @@ class EnemyScouter extends Enemy{
     //this.Shields.Rigidbody= this.Rigidbody;
 
     Game.AddObject(this.Shields);
-  
+
     this.CollisionType = new CircleCollider(100);
     this.CollisionLayer = 3;
 
@@ -52,6 +58,15 @@ class EnemyScouter extends Enemy{
     for (let item in this.States){
       this.States[item].Init();
     }
+  }
+
+  NewStartPos(pos){
+    this.Rigidbody.Pos = copyInstance(pos);
+
+    for (let item in this.States){
+      this.States[item].PosRef = this.Rigidbody.Pos;
+    }
+
   }
 
   Update(felapsed){

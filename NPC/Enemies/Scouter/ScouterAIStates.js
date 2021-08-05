@@ -5,6 +5,8 @@ class ScouterAIState extends NPCAIState{
     this.VelRef = this.Master.Rigidbody.Vel;
     this.RigidbodyRef = this.Master.Rigidbody;
 
+
+
     this.Target;
     this.TargetLocation;
     this.StateSpeed;
@@ -317,4 +319,83 @@ class ScouterAttackStateAlt extends ScouterAttackState{
 
   }
 
+}
+
+class ScouterGaurdAI extends ScouterWanderStateAlt{
+  constructor(master){
+    super(master);
+    this.GaurdPoint = new Vec2(0,0);
+    this.AllowedDistToPoint = 2000;
+
+    this.FindNewTargetLocation();
+
+  }
+
+  InitGaurdPoint(pos){
+    this.GaurdPoint = pos;
+
+
+  }
+
+  Update(felapsed){
+    this.SeekAlt();
+
+    if (this.OnTarget()){
+      this.FindNewTargetLocation();
+    }
+
+    let dist = this.PosRef.rSub(this.Target);
+
+    if (dist.MagSqrt() < this.Master.DetectPlayerRadius){
+      this.Master.SwitchStates("GaurdAttack");
+    }
+
+    dist = this.PosRef.rSub(this.GaurdPoint);
+
+    if (dist.MagSqrt() < this.AllowedDistToPoint){
+      this.Master.SwitchStates("Return");
+    }
+  }
+}
+
+class ScouterGaurdAttackAI extends ScouterAttackStateAlt{
+  constructor(master){
+    super(master);
+  }
+
+  Update(felapsed){
+    let toTarget = this.PosRef.rSub(this.Target);
+    this.TargetLocation = toTarget.Normal();
+    this.TargetLocation.Mult(this.TargetDistance);
+    this.TargetLocation.Add(this.Target);
+
+    this.SeekAlt(felapsed);
+
+    let dist = toTarget.MagSqrt();
+
+    let ToTarget = this.Target.rSub(this.PosRef);
+    ToTarget.Normalize();
+    let dot = Dot(ToTarget, this.Forward);
+
+
+
+    if (dot > 0.6){this.Firing();}
+
+    if (dist > this.Master.DetectPlayerRadius){
+      this.Master.SwitchStates("GaurdWander");
+    }
+
+  }
+}
+
+class ScouterGaurdReturnAI extends ScouterWanderStateAlt{
+  constructor(master){
+    super(master);
+  }
+  EnterState(){
+    this.TargetLocation ;
+  }
+  Update(felasped){
+
+  }
 }

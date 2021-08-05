@@ -68,7 +68,7 @@ class Renderer{
     */
 
     //this.AddImage("Resources/brave-lion.png");
-    this.AddImage("Resources/playerv2.png");
+    this.AddImage("Resources/playerv1n.png");
     this.AddImage("Resources/laserBullet.png");
     this.AddImage("Resources/BG/Demo/l1.png");
     this.AddImage("Resources/BG/Demo/l2.png")
@@ -88,6 +88,10 @@ class Renderer{
     this.AddImage("Resources/shipdebris2.png");
     this.AddImage("Resources/shipdebris3.png");
     this.AddImage("Resources/BATPickUp.png");
+    this.AddImage("Resources/PlanetNightly.png");
+    this.AddImage("Resources/brave.png");
+    this.AddImage("Resources/Credit.png");
+    this.AddImage("Resources/starfield.png")
   }
 
   Update(){

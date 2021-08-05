@@ -16,7 +16,7 @@ class Sound{
   static AudioChannels = [];
 
   static VolumeSettings = {
-    "Master"   : 1,
+    "Master"   : 0.5,
     "Effects"  : 0.2,
     "Music"    : 1
   };
@@ -26,7 +26,7 @@ class Sound{
 
 
   constructor(){
-    Sound.NumOfChannels = 30;
+    Sound.NumOfChannels = 12;
     this.AudioChannels = Sound.AudioChannels;
     this.GenerateAudioChannels();
 
@@ -84,7 +84,7 @@ class Sound{
 
   static CreateAudioSource(){
     Sound.SoundObjectCount++;
-    let i = Sound.SoundObjectCount % Sound.NumOfChannels;
+    let i = Sound.SoundObjectCount % (Sound.NumOfChannels-1);
     return Sound.AudioChannels[i];
     return document.createElement("audio");
   }
