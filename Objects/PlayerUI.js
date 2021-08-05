@@ -8,14 +8,14 @@ class PlayerUI extends GameObject{
     this.Brave = new UIImage(21, new Vec2(20,30), new Vec2(50,50), 5);
     this.BAT = new UIImage(19, new Vec2(20,102), new Vec2(30,30), 5);
 
-    this.TitleScreen = new TitleScreen();
+    //this.TitleScreen = new TitleScreen();
 
     Game.AddObject(this.UIBATCounter);
     Game.AddObject(this.UIHealthBar);
     Game.AddObject(this.UIShieldBar);
     Game.AddObject(this.Brave);
     Game.AddObject(this.BAT);
-    Game.AddObject(this.TitleScreen);
+    //Game.AddObject(this.TitleScreen);
 
   }
 }

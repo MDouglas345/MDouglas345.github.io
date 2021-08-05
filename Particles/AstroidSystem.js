@@ -2,7 +2,7 @@ class AstroidSystem extends ParticleSystem{
   constructor(Target){
     super();
     this.Target = Target;
-    this.ParticleLimit = 200;
+    this.ParticleLimit = 100;
     this.DrawRes.Layer = 3;
 
     this.ParticleType = Astroid;

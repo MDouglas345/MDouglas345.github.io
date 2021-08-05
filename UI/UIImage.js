@@ -5,3 +5,10 @@ constructor(spriteid, loc, dim, layer){
   this.DrawRes.Layer = layer;
   }
 }
+
+class UITitleImage extends UIImage{
+  constructor(spriteid, loc, dim, layer){
+    super();
+    
+  }
+}

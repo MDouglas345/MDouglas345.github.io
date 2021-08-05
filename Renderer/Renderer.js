@@ -91,6 +91,7 @@ class Renderer{
     this.AddImage("Resources/PlanetNightly.png");
     this.AddImage("Resources/brave.png");
     this.AddImage("Resources/Credit.png");
+    this.AddImage("Resources/starfield.png")
   }
 
   Update(){

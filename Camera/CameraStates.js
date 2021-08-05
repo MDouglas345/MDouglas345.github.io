@@ -71,7 +71,7 @@ class FollowState extends CameraState{
     let v1 = this.Master.Rigidbody.Pos.rAdd(new Vec2((this.Master.RenderInstance.GetCanvasWidth() / 2) * (1/this.Master.Zoom) , (this.Master.RenderInstance.GetCanvasHeight() /2 * (1/this.Master.Zoom))));
     let Push = this.Master.m_FocusPoint.Rigidbody.Pos.rSub(v1);
 
-    
+
 
     let D = Push.MagSqrt();
     let S = (D / 100) * 150;
@@ -137,6 +137,11 @@ class GameStartState extends CameraState{
 
   EnterState(){
     this.Master.Rigidbody.Pos = new Vec2(-1000, 17000);
+  }
+
+  ExitState(){
+    this.Master.TitleScreen = new TitleScreen();
+    Game.AddObject(this.Master.TitleScreen);
   }
 
   AddPoint(vec){

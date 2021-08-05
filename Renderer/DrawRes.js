@@ -231,3 +231,13 @@ class BATPickUpRes extends DrawRes{
     this.Layer = 4;
   }
 }
+
+class StarFieldRes extends DrawRes{
+  constructor(){
+    super();
+    this.SpriteID = 23;
+    this.Layer = 2;
+    this.Dimensions = new Vec2(100000,100000);
+    this.DrawFunc = new BRotatedDrawFunction();
+  }
+}

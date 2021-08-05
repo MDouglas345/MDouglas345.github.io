@@ -28,6 +28,7 @@ class Game{
     //this.BGMaster = new DemoBGMaster(this.m_Player);
 
     this.BGMaster = new SpaceBackground();
+    this.Stars = new StarField();
 
     this.Astroids = new AstroidSystem(this.m_Player);
 
@@ -41,8 +42,8 @@ class Game{
 
     this.m_Camera = new Camera(this.m_Player);
 
-    this.StarSystem = new psStarParallax(100,this.m_Camera);
-    //this.StarSystem = new StarSystem(100);
+    this.StarSystem = new psStarParallax(10,this.m_Camera);
+    //this.StarSystem = new StarSystem(20);
 
 
     //this.BattleTest();
@@ -53,6 +54,7 @@ class Game{
     Game.AddObject(this.m_Camera);
     //Game.AddObject(this.DebugObject);
     Game.AddObject(this.BGMaster);
+    Game.AddObject(this.Stars);
     //Game.AddObject(this.PlanetDemo)
     Game.AddObject(this.Cryptopolid);
     Game.AddObject(this.Nightly);

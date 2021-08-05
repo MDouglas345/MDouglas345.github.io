@@ -18,6 +18,9 @@ class Camera extends GameObject{
     this.Rigidbody.Pos = new Vec2(0,0);
     this.Rigidbody.Enable();
 
+
+    this.TitleScreen;
+
     this.States = {
       "Follow" : new FollowState(this),
       "Start" : new GameStartState(this)
