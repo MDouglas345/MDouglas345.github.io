@@ -136,7 +136,7 @@ class GameStartState extends CameraState{
   }
 
   EnterState(){
-    this.Master.Rigidbody.Pos = new Vec2(-1000, 17000);
+    this.Master.Rigidbody.Pos = new Vec2(-1000, 25000);
   }
 
   ExitState(){
