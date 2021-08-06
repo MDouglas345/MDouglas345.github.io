@@ -9,6 +9,10 @@ A Fan Game created by the Cayman Interns with support and love from the Cayman O
 	A     : Rotate left
 	D     : Rotate right 
 	Space : Shoot
+	
+# How To Run
+
+Open `index.html` 
 
 
 
