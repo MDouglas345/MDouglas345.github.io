@@ -1,4 +1,4 @@
-# BraveGame
+# Roar
 
 A Fan Game created by the Cayman Interns with support and love from the Cayman Office!
 
