@@ -1,13 +1,15 @@
-class UITextElement extends UIElement{
+import * as UI from './UIElement.js';
+import * as DR from '../Renderer/DrawRes.js';
+export class UITextElement extends UI.UIElement{
   constructor(Text, font, loc){
     super();
-    this.DrawRes = new UITextRes(Text, loc, font);
+    this.DrawRes = new DR.UITextRes(Text, loc, font);
   }
 }
 
-class UITitleTextElement extends UITextElement{
+export class UITitleTextElement extends UITextElement{
   constructor(Text, font, loc){
     super();
-    this.DrawRes = new UITitleTextRes(Text, loc, font);
+    this.DrawRes = new DR.UITitleTextRes(Text, loc, font);
   }
 }

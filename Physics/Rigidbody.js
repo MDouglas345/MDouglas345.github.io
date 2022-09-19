@@ -1,8 +1,9 @@
-class Rigidbody{
+import * as U from '../Utility/Utility.js';
+export class Rigidbody{
   constructor(){
-    this.Pos = new Vec2(0,0);
-    this.Vel = new Vec2(0,0);
-    this.Acc = new Vec2(0,0);
+    this.Pos = new U.Vec2(0,0);
+    this.Vel = new U.Vec2(0,0);
+    this.Acc = new U.Vec2(0,0);
 
     this.Orien = 0;
     this.AngAcc = 0;
@@ -116,8 +117,8 @@ class PhysicsState{
   }
 
   Update(elapsed){
-    this.RigidMaster.Vel = new Vec2(0,0);
-    this.RigidMaster.Acc = new Vec2(0,0);
+    this.RigidMaster.Vel = new U.Vec2(0,0);
+    this.RigidMaster.Acc = new U.Vec2(0,0);
     this.RigidMaster.AngVel = 0;
     this.RigidMaster.AngAcc = 0;
   }
@@ -137,21 +138,22 @@ class ActivePhysicsState extends PhysicsState{
   }
 }
 
-class ConnectedToParent extends PhysicsState{
+export class ConnectedToParent extends PhysicsState{
   constructor(Rigid){
     super(Rigid);
     //let angdiff = this.RigidMaster.Parent.Rigidbody.Pos.rSub(this.RigidMaster.Pos);
 
     let angdiff = this.RigidMaster.Pos.rSub(this.RigidMaster.Parent.Center());
 
-    this.AngleOffset = GetAngleFromVector(angdiff);
+    this.AngleOffset = U.GetAngleFromVector(angdiff);
 
+    
 
     this.MagnitudeDiff = angdiff.MagSqrt();
   }
   Update(elapsed){
     let currentangle = this.RigidMaster.Parent.Rigidbody.Orien  - this.AngleOffset ;
-    let pos = GetVectorFromAngle(currentangle);
+    let pos = U.GetVectorFromAngle(currentangle);
     pos.Mult(this.MagnitudeDiff);
     this.RigidMaster.Pos = pos.rAdd(this.RigidMaster.Parent.Rigidbody.Pos);
 
@@ -159,7 +161,7 @@ class ConnectedToParent extends PhysicsState{
   }
 }
 
-class PartOfPartent extends PhysicsState{
+export class PartOfPartent extends PhysicsState{
   constructor(Rigid){
     super(Rigid);
 
@@ -171,7 +173,7 @@ class PartOfPartent extends PhysicsState{
   }
 }
 
-class NoRigidbody extends Rigidbody{
+export class NoRigidbody extends Rigidbody{
   constructor(){
     super();
   }

@@ -1,4 +1,5 @@
-class Enemy extends Shootable{
+import * as S from './Shootable.js'
+export class Enemy extends S.Shootable{
   constructor(){
     super();
     this.HP = 50;

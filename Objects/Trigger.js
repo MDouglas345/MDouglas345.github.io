@@ -1,4 +1,7 @@
-class Trigger extends GameObject{
+import * as GO from './GameObject.js'
+import * as M from '../main.js'
+
+export class Trigger extends GO.GameObject{
   constructor(Master, collider, layer){
     super();
     this.Rigidbody.ConnectToParent(Master);
@@ -6,7 +9,7 @@ class Trigger extends GameObject{
     this.DetectedObject = [];
     this.CollisionType = collider;
     this.CollisionLayer = layer;
-    Game.AddObject(this);
+    M.GameSystem.AddObject(this);
 
   }
   OnCollide(object){

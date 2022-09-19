@@ -1,4 +1,9 @@
-class ScouterAIState extends NPCAIState{
+import * as AI from '../../../AI/NPCAIState.js'
+import * as U from '../../../Utility/Utility.js'
+import * as M from '../../../main.js'
+import * as Pr from '../../../Objects/Projectile.js'
+
+export class ScouterAIState extends AI.NPCAIState{
   constructor(Master){
     super(Master);
     this.PosRef = this.Master.Rigidbody.Pos;
@@ -28,14 +33,14 @@ class ScouterAIState extends NPCAIState{
 
     let Surrounding = this.Master.SurroundTrigger.GetDetected();
     //console.log(Surrounding);
-    let Avoidance = new Vec2(0,0);
+    let Avoidance = new U.Vec2(0,0);
     let Urgency = 1;
 
     var found = 0;
     for (let i = 0; i < Surrounding.length; i++){
       if (i > 2){continue;}
       let weight = this.PosRef.rSub(Surrounding[i].Rigidbody.Pos);
-      if (weight.Mag() <= 0.2){weight = RandomVecInCircle();}
+      if (weight.Mag() <= 0.2){weight = U.RandomVecInCircle();}
 
 
       //let weight = item.Rigidbody.Pos.rSub(this.PosRef);
@@ -60,26 +65,26 @@ class ScouterAIState extends NPCAIState{
     //Avoidance.Mult(10);
 
 
-    let Forward = GetVectorFromAngle(this.RigidbodyRef.Orien);
+    let Forward = U.GetVectorFromAngle(this.RigidbodyRef.Orien);
     let ToTarget = this.TargetLocation.rSub(this.PosRef);
 
 
-    this.Forward = copyInstance(Forward);
-    this.ToTarget = copyInstance(ToTarget);
+    this.Forward = U.copyInstance(Forward);
+    this.ToTarget = U.copyInstance(ToTarget);
 
     ToTarget.Normalize();
     //ToTarget.Add(RandomVecInCircle());
     ToTarget.Add(Avoidance);
     Forward.Normalize();
 
-    let cross = Cross2D(Forward, ToTarget);
+    let cross = U.Cross2D(Forward, ToTarget);
     //console.log(Forward, ToTarget);
 
     this.RigidbodyRef.AddTorq(cross * this.TurnSpeed * Urgency);
 
-    this.AngleToTarget = AngleBetweenVec(ToTarget, Forward);
+    this.AngleToTarget = U.AngleBetweenVec(ToTarget, Forward);
 
-    if (Dot(ToTarget, Forward) > this.ThrustRadius){this.Thrust(Forward, felapsed);}
+    if (U.Dot(ToTarget, Forward) > this.ThrustRadius){this.Thrust(Forward, felapsed);}
 
     this.RigidbodyRef.AngVel *= this.FrictionPercent;
 
@@ -172,16 +177,16 @@ class ScouterWanderState extends ScouterAIState{
   }
 
   FindNewTargetLocation(){
-    let Dir = RandomVecInCircle();
+    let Dir = U.RandomVecInCircle();
     //console.log(Dir);
-    this.RandomDistance = getRandomFloat(4000) + 5000;
+    this.RandomDistance = U.getRandomFloat(4000) + 5000;
     Dir.Mult(this.RandomDistance);
 
     this.TargetLocation = Dir.rAdd(this.PosRef);
   }
 }
 
-class ScouterWanderStateAlt extends ScouterWanderState{
+export class ScouterWanderStateAlt extends ScouterWanderState{
   constructor(Master){
     super(Master);
     this.TargetLocation;
@@ -208,7 +213,7 @@ class ScouterWanderStateAlt extends ScouterWanderState{
   }
 }
 
-class ScouterAttackState extends ScouterAIState{
+export class ScouterAttackState extends ScouterAIState{
   constructor(Master){
     super(Master);
     this.ShootingRange = 700;
@@ -230,7 +235,7 @@ class ScouterAttackState extends ScouterAIState{
     let steering = this.Seek();
 
 
-    let angle = Math.abs(AngleBetweenVec(steering, this.VelRef));
+    let angle = Math.abs(U.AngleBetweenVec(steering, this.VelRef));
     //console.log(angle, steering);
     if (angle > 0.2){
       this.VelRef.Mult(0.99);
@@ -265,8 +270,8 @@ class ScouterAttackState extends ScouterAIState{
   async Firing(){
     if (!this.Fired){
       this.Fired = true;
-      let b = new pBlasterT1(this.Master.Center(), copyInstance(this.Master.Rigidbody));
-      Game.AddObject(b);
+      let b = new Pr.pBlasterT1(this.Master.Center(), U.copyInstance(this.Master.Rigidbody));
+      M.GameSystem.AddObject(b);
       this.Shots++;
       let r = await this.ShootAtPlayer();
     }
@@ -274,7 +279,7 @@ class ScouterAttackState extends ScouterAIState{
 }
 
 
-class ScouterAttackStateAlt extends ScouterAttackState{
+export class ScouterAttackStateAlt extends ScouterAttackState{
   constructor(Master){
     super(Master);
     this.ShootingRange = 1000;
@@ -307,7 +312,7 @@ class ScouterAttackStateAlt extends ScouterAttackState{
 
     let ToTarget = this.Target.rSub(this.PosRef);
     ToTarget.Normalize();
-    let dot = Dot(ToTarget, this.Forward);
+    let dot = U.Dot(ToTarget, this.Forward);
 
 
 
@@ -321,10 +326,10 @@ class ScouterAttackStateAlt extends ScouterAttackState{
 
 }
 
-class ScouterGaurdAI extends ScouterWanderStateAlt{
+export class ScouterGaurdAI extends ScouterWanderStateAlt{
   constructor(master){
     super(master);
-    this.GaurdPoint = new Vec2(0,0);
+    this.GaurdPoint = new U.Vec2(0,0);
     this.AllowedDistToPoint = 2000;
 
     this.FindNewTargetLocation();
@@ -358,7 +363,7 @@ class ScouterGaurdAI extends ScouterWanderStateAlt{
   }
 }
 
-class ScouterGaurdAttackAI extends ScouterAttackStateAlt{
+export class ScouterGaurdAttackAI extends ScouterAttackStateAlt{
   constructor(master){
     super(master);
   }
@@ -375,7 +380,7 @@ class ScouterGaurdAttackAI extends ScouterAttackStateAlt{
 
     let ToTarget = this.Target.rSub(this.PosRef);
     ToTarget.Normalize();
-    let dot = Dot(ToTarget, this.Forward);
+    let dot = U.Dot(ToTarget, this.Forward);
 
 
 
@@ -388,7 +393,7 @@ class ScouterGaurdAttackAI extends ScouterAttackStateAlt{
   }
 }
 
-class ScouterGaurdReturnAI extends ScouterWanderStateAlt{
+export class ScouterGaurdReturnAI extends ScouterWanderStateAlt{
   constructor(master){
     super(master);
   }

@@ -1,8 +1,10 @@
-class NodeRep extends GameObject{
+import * as GO from '../Objects/GameObject.js'
+import * as DR from '../Renderer/DrawRes.js'
+export class NodeRep extends GO.GameObject{
   constructor(orig, dim){
     super();
     this.Rigidbody.Pos = orig;
     this.Rigidbody.Disable();
-    this.DrawRes = new QuadTreeNodeRes(dim);
+    this.DrawRes = new DR.QuadTreeNodeRes(dim);
   }
 }

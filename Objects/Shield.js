@@ -1,4 +1,12 @@
-class Shield extends Shootable{
+import * as S from './Shootable.js';
+import * as R from '../Physics/Rigidbody.js';
+import * as DR from '../Renderer/DrawRes.js';
+import * as CC from '../Collisions/CircleCT.js';
+import * as AI from '../AI/NPCAIState.js';
+import * as So from '../Sound/SoundObject.js';
+import * as UIR from '../UI/UIReferenceVariable.js';
+import * as U from '../Utility/Utility.js'
+export class Shield extends S.Shootable{
   constructor(dim, ColLayer){
     super();
     this.HP;
@@ -6,19 +14,19 @@ class Shield extends Shootable{
     this.RechargeRate;
     this.TimeToFade;
 
-    this.Rigidbody = new Rigidbody();
-    this.DrawRes = new ShieldRes(dim);
+    this.Rigidbody = new R.Rigidbody();
+    this.DrawRes = new DR.ShieldRes(dim);
 
     this.States;
     this.ActiveState;
 
-    this.CollisionType = new CircleCollider((dim.MagSqrt() / 2) * 0.9);
+    this.CollisionType = new CC.CircleCollider((dim.MagSqrt() / 2) * 0.9);
     this.CollisionLayer = ColLayer;
 
-    this.ShieldDownSound = new SoundObject("Shield1Down");
-    this.ShieldUpSound = new SoundObject("Shield1Up");
+    this.ShieldDownSound = new So.SoundObject("Shield1Down");
+    this.ShieldUpSound = new So.SoundObject("Shield1Up");
 
-    this.ShieldHitSound = new SoundObject("ShieldHit");
+    this.ShieldHitSound = new So.SoundObject("ShieldHit");
 
   }
 
@@ -65,7 +73,7 @@ class Shield extends Shootable{
 
 }
 
-class EnemyShieldV1 extends Shield{
+export class EnemyShieldV1 extends Shield{
   constructor(dim, ColLayer){
     super(dim, ColLayer);
 
@@ -76,7 +84,7 @@ class EnemyShieldV1 extends Shield{
   }
 }
 
-class PlayerShieldV1 extends Shield{
+export class PlayerShieldV1 extends Shield{
   constructor(dim, ColLayer){
     super(dim, ColLayer);
 
@@ -88,13 +96,13 @@ class PlayerShieldV1 extends Shield{
   }
 }
 
-class PlayerShield extends Shield{
+export class PlayerShield extends Shield{
   constructor(dim, Col){
     super(dim, Col);
     this.MaxHP = 50;
     this.HP = this.MaxHP;
-    this.uiHP = new UIReferenceVariable(this.HP);
-    this.uiMaxHP = new UIReferenceVariable(this.MaxHP);
+    this.uiHP = new UIR.UIReferenceVariable(this.HP);
+    this.uiMaxHP = new UIR.UIReferenceVariable(this.MaxHP);
     this.RechargeRate = 15;
     this.TimeToFade = 1;
   }
@@ -125,7 +133,7 @@ class PlayerShield extends Shield{
 
 
 
-class ShieldState extends NPCAIState{
+class ShieldState extends AI.NPCAIState{
   constructor(Master){
     super();
     this.Master = Master;
@@ -158,7 +166,7 @@ class ShieldVisible extends ShieldState{
     }
 
 
-    this.DrawResRef.Opacity = Lerp(0, this.Master.TimeToFade, this.CurrentTime);
+    this.DrawResRef.Opacity = U.Lerp(0, this.Master.TimeToFade, this.CurrentTime);
 
     this.CurrentTime -= felapsed;
 

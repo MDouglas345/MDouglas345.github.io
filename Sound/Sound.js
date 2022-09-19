@@ -9,7 +9,7 @@
   The more layers the better obviously. These layers are not the same as the Renderer's layers, Sound Layers are more like potential channels types of sound can access.
 */
 
-class Sound{
+export class Sound{
   static SoundSrc = {};
   static SoundObjectCount;
   static NumOfChannels;

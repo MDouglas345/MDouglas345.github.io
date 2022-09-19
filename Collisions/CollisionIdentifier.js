@@ -1,4 +1,4 @@
-class CollisionIdentifier{
+export class CollisionIdentifier{
   constructor(objectA, objectB, point){
       this.ObjectA = objectA;
       this.ObjectB = objectB;

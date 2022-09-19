@@ -1,4 +1,4 @@
-class Earth extends Planet{
+export class Earth extends Planet{
   constructor(){
     super();
     this.DrawRes = new DrawRes();

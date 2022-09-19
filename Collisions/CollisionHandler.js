@@ -1,11 +1,13 @@
-class CollisionHandler{
+import * as CM from './CollisionMatrix.js'
+import * as CHM from './CollisionHandlerModes.js'
+export class CollisionHandler{
   constructor(QuadTree){
     this.QuadTreeRef = QuadTree;
     this.CollisionsDetected = [];
 
-    this.CollisionMatrix = new CollisionMatrix()
+    this.CollisionMatrix = new CM.CollisionMatrix()
 
-    this.CollisionMode = new CHSingleThreaded();
+    this.CollisionMode = new CHM.CHSingleThreaded();
   }
 
   CheckCollisions(){

@@ -1,7 +1,10 @@
-class UIImage extends UIElement{
+import * as UI from './UIElement.js';
+import * as DR from '../Renderer/DrawRes.js';
+
+export class UIImage extends UI.UIElement{
 constructor(spriteid, loc, dim, layer){
   super();
-  this.DrawRes = new UIImageRes(spriteid, loc, dim);
+  this.DrawRes = new DR.UIImageRes(spriteid, loc, dim);
   this.DrawRes.Layer = layer;
   }
 }

@@ -1,16 +1,22 @@
-class Projectile extends Shootable{
+import * as S from './Shootable.js'
+import * as R from '../Physics/Rigidbody.js'
+import * as DR from '../Renderer/DrawRes.js'
+import * as CT from '../Collisions/CircleCT.js'
+import * as U from '../Utility/Utility.js'
+import * as So from '../Sound/SoundObject.js'
+export class Projectile extends S.Shootable{
   constructor(pos, ori, damage, speed){
     super();
     this.Name = "Projectile";
-    this.Rigidbody = new Rigidbody();
+    this.Rigidbody = new R.Rigidbody();
     this.Rigidbody.Enable();
     //this.DrawRes = new DefaultProjectile();
-    this.DrawRes = new PlaceholderRes(new Vec2(15,5), 3, "#FFA300");
+    this.DrawRes = new DR.PlaceholderRes(new U.Vec2(15,5), 3, "#FFA300");
 
     this.FireSound;
     //this.DrawRes.Dimensions = new Vec2(25,10);
 
-    this.CollisionType = new CircleCollider(10);
+    this.CollisionType = new CT.CircleCollider(10);
     this.CollisionLayer = 1;
 
     this.Rigidbody.Mass = 1;
@@ -20,7 +26,7 @@ class Projectile extends Shootable{
     this.Damage = damage;
     this.Speed = speed;
 
-    let dir = GetVectorFromAngle(this.Rigidbody.Orien);
+    let dir = U.GetVectorFromAngle(this.Rigidbody.Orien);
     dir.Mult(this.Speed);
 
     this.Rigidbody.Vel = dir.rAdd(ori.Vel);
@@ -33,7 +39,7 @@ class Projectile extends Shootable{
 
   OnHit(object){
     this.NeedsDelete = true;
-    if (object instanceof Shootable){object.OnHit(this);}
+    if (object instanceof S.Shootable){object.OnHit(this);}
   }
 
   Deleting(){
@@ -71,23 +77,23 @@ class Projectile extends Shootable{
   }
 }
 
-class pPlayerBlasterT1 extends Projectile{
+export class pPlayerBlasterT1 extends Projectile{
   constructor(pos, ori){
     super(pos, ori, 10, 2000);
-    this.DrawRes = new BulletRes(14);
-    this.FireSound = new SoundObject("Laser1");
+    this.DrawRes = new DR.BulletRes(14);
+    this.FireSound = new So.SoundObject("Laser1");
     this.FireSound.Play();
   }
 }
 
-class pBlasterT1 extends Projectile{
+export class pBlasterT1 extends Projectile{
   constructor(pos, ori,){
     super(pos, ori, 10, 2000);
 
     this.CollisionLayer = 4;
     //this.DrawRes = new PlaceholderRes(new Vec2(15,5), 3, "#FF0000");
-    this.DrawRes = new BulletRes(15);
-    this.FireSound = new SoundObject("Laser2");
+    this.DrawRes = new DR.BulletRes(15);
+    this.FireSound = new So.SoundObject("Laser2");
     this.FireSound.Play();
   }
 }

@@ -1,10 +1,11 @@
-Global = window || global;
+import * as M from '../main.js'
+import * as U from '../Utility/Utility.js'
 
-class PhysicsSystem{
+export class PhysicsSystem{
   constructor(){
-    this.m_gravity = new Vec2(0,0);
-    this.m_GlobalForces = new Vec2(0,0);
-    this.ObjectHandleInstance = Global.OManager;
+    this.m_gravity = new U.Vec2(0,0);
+    this.m_GlobalForces = new U.Vec2(0,0);
+    this.ObjectHandleInstance = M.OManager;
 
   }
 

@@ -2,11 +2,16 @@
 //For the sake of sanity, the structure of these Entities will be identical to the Renderer's version of all objects.
 
 //Need to abstract all GameObject Data from the Game and Renderer files to here
+import *  as Main from '../main.js';
 
-class ObjectManager{
+export class ObjectManager{
   static Entities = [];
+  static Layers = [];
   constructor(){
     this.m_Entities = ObjectManager.Entities;
+    this.m_TwoLayers = ObjectManager.Layers;
+
+    this.TwoContext = Main.TwoContext;
 
     this.AddLayer();
     this.AddLayer();
@@ -14,6 +19,8 @@ class ObjectManager{
     this.AddLayer();
     this.AddLayer();
     this.AddLayer();
+
+    
 
   }
 
@@ -21,15 +28,16 @@ class ObjectManager{
 
   }
 
-  static AddObject(object){
-    this.Entities[object.DrawRes.Layer].push(object);
+   AddObject(object){
+    this.m_Entities[object.DrawRes.Layer].push(object);
+    //this.m_TwoLayers[object.DrawRes.layer].add(object.TwoObject);
   }
 
-  static GetObjectByName(name){
-    for (let i = 0; i < this.Entities.length; i++){
-      for (let x = 0; x < this.Entities[i].length; x++){
-        if (this.Entities[i][x].Name === name){
-          return this.Entities[i][x];
+   GetObjectByName(name){
+    for (let i = 0; i < this.m_Entities.length; i++){
+      for (let x = 0; x < this.m_Entities[i].length; x++){
+        if (this.m_Entities[i][x].Name === name){
+          return this.m_Entities[i][x];
         }
       }
     }
@@ -39,6 +47,7 @@ class ObjectManager{
 
   AddLayer(){
     this.m_Entities.push([]);
+    this.m_TwoLayers.push(this.TwoContext.makeGroup());
   }
 
   CleanUp(){

@@ -1,4 +1,4 @@
-class NPCAIState {
+export class NPCAIState {
   constructor(Master){
     this.Master = Master;
   }

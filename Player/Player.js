@@ -1,47 +1,62 @@
-var Global = window || global;
+
 
 /*
   Script that controls the player. Lots of magic can happen here. Especially with encapsulation!
 */
+import * as S from '../Objects/Shootable.js';
+import * as UIR from '../UI/UIReferenceVariable.js';
+import * as R from '../Physics/Rigidbody.js';
+import * as Vec from '../Utility/Utility.js';
+import * as CC from '../Collisions/CircleCT.js';
+import * as DR from '../Renderer/DrawRes.js';
+import * as So from '../Sound/SoundObject.js';
+import * as Sh from '../Objects/Shield.js';
+import * as M from '../main.js';
+import * as PUI from '../Objects/PlayerUI.js';
+import * as TUI from '../UI/UITextElement.js';
+import * as PTS from '../Particles/psPlayerThruster.js'
+import * as U from '../Utility/Utility.js'
+import * as PS from './PlayerStates.js'
+import * as Pr from '../Objects/Projectile.js'
 
-class Player extends Shootable
+export class Player extends S.Shootable
 {
   constructor(){
     super();
     this.Name = "Player";
 
-    this.HP = new UIReferenceVariable(100);
-    this.MaxHP = new UIReferenceVariable(100);
+    this.HP = new UIR.UIReferenceVariable(100);
+    this.MaxHP = new UIR.UIReferenceVariable(100);
 
-    this.BATCounter = new UIReferenceVariable(0);
+    this.BATCounter = new UIR.UIReferenceVariable(0);
 
-    this.BoostLimit = new UIReferenceVariable(50);
-    this.BoostCurrent = new UIReferenceVariable(50);
+    this.BoostLimit = new UIR.UIReferenceVariable(50);
+    this.BoostCurrent = new UIR.UIReferenceVariable(50);
     this.BoostSpeed = 3;
     this.Speed = 8;
 
 
 
-    this.Rigidbody = new Rigidbody();
+    this.Rigidbody = new R.Rigidbody();
     this.Rigidbody.Enable();
-    this.Rigidbody.Pos = new Vec2(0,300);
+    this.Rigidbody.Pos = new Vec.Vec2(0,300);
 
 
 
     this.Shots = 0;
 
-    this.CollisionType = new CircleCollider(100);
+    this.CollisionType = new CC.CircleCollider(100);
     this.CollisionLayer = 0;
 
-    this.DrawRes = new PlayerRes();
-    this.DrawRes.Dimensions = new Vec2(275,300);
+    this.DrawRes = new DR.PlayerRes();
+    this.DrawRes.Dimensions = new Vec.Vec2(275,300);
     this.Rigidbody.Mass = 5;
     this.Fired = false;
 
-    this.Shield = new PlayerShield(new Vec2(300,300), 8);
+    this.Shield = new Sh.PlayerShield(new Vec.Vec2(300,300), 8);
     this.Shield.Rigidbody.ConnectToParent(this);
 
-    this.HitSound = new SoundObject("ShipHit");
+    this.HitSound = new So.SoundObject("ShipHit");
 
     this.Weapons = [];
 
@@ -64,19 +79,19 @@ class Player extends Shootable
     */
 
   //  this.Shield.Rigidbody = this.Rigidbody;
-    Game.AddObject(this.Shield);
+    M.GameSystem.AddObject(this.Shield);
 
-      this.PlayerUI = new PlayerUI(this);
+      this.PlayerUI = new PUI.PlayerUI(this);
 
 
-    this.LeftThruster = new psPlayerThruster(this, new Vec2(-50,-60));
-    this.RightThruster = new psPlayerThruster(this, new Vec2(-50,63));
+    this.LeftThruster = new PTS.psPlayerThruster(this, new U.Vec2(-50,-60));
+    this.RightThruster = new PTS.psPlayerThruster(this, new U.Vec2(-50,63));
 
     this.LeftThruster.Rigidbody.SetParent(this);
     this.RightThruster.Rigidbody.SetParent(this);
 
-    Game.AddObject(this.LeftThruster);
-    Game.AddObject(this.RightThruster);
+    M.GameSystem.AddObject(this.LeftThruster);
+    M.GameSystem.AddObject(this.RightThruster);
 
 
     //this.Thruster = new psPlayerThruster(this, new Vec2(-50,5));
@@ -84,7 +99,7 @@ class Player extends Shootable
     //Game.AddObject(this.Thruster);
 
     this.States = {
-      "Normal" : new PlayerNormalState(this)
+      "Normal" : new PS.PlayerNormalState(this)
     };
     this.ActiveState;
 
@@ -152,8 +167,8 @@ Update(felapsed){
   async FireBullet(){
     if (!this.Fired){
       this.Fired = true;
-      let b = new pPlayerBlasterT1(this.Center(), copyInstance(this.Rigidbody));
-      Game.AddObject(b);
+      let b = new Pr.pPlayerBlasterT1(this.Center(), U.copyInstance(this.Rigidbody));
+      M.GameSystem.AddObject(b);
       this.Shots++;
       let r = await this.Firing();
     }
@@ -179,7 +194,7 @@ Update(felapsed){
 
   async TriggerDeath(){
     this.CleanUp();
-    console.log("dead");
+    //console.log("dead");
     //this.NeedsDelete = true;
     //Instead of Deleting the player (causes numerous issues) change the player to a dead state where no input is accepted to control ship
 

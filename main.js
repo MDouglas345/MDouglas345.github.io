@@ -2,20 +2,39 @@
 
 /* Function is called when document is loaded*/
 
+import Two from './Two/two.min.js';
+
+import * as OM from './ObjectManager/ObjectManager.js';
+import * as S from './Sound/Sound.js';
+import * as R from './Renderer/Renderer.js';
+import * as G from './Game.js';
+import * as I from './Controller/Controller.js';
+import * as TR from './Renderer/TwoRenderer.js'
+
+
+
+
+export var TwoContext = new Two({
+  type : Two.Types.webgl,
+  fullscreen : true,
+  autostart : true
+}).appendTo(document.body);
+
 window.addEventListener('DOMContentLoaded', Init, false);
 
 /*The controller merges different aspects of the Game */
 
-var GameSystem;
-var RenderSystem;
-var InputSystem;
-var SoundSystem;
-var OManager;
+export var GameSystem;
+export var RenderSystem;
+export var InputSystem;
+export var SoundSystem;
+export var OManager;
 
-var Global = window || global;
 
 var PrevTime;
 var ElapsedTime;
+
+
 
 
 window.addEventListener('resize', ResizeTrigger);
@@ -27,14 +46,7 @@ document.addEventListener("keyup", function(event){
   }
 },true);
 
-function copyInstance(original){
-  var copied = Object.assign(
-    Object.create(
-      Object.getPrototypeOf(original)
-    ), original
-  );
-  return copied;
-}
+
 
 document.addEventListener("keydown", function(event){
 
@@ -45,21 +57,26 @@ document.addEventListener("keydown", function(event){
 
 
 function Init(){
-  OManager = new ObjectManager();
-  SoundSystem = new Sound();
-  RenderSystem = new Renderer();
-  GameSystem = new Game();
-  InputSystem = new Controller();
+  
+  
+  OManager = new OM.ObjectManager();
+  SoundSystem = new S.Sound();
+  RenderSystem = new R.Renderer();
+  GameSystem = new G.Game();
+  InputSystem = new I.Controller();
+
+  
+  GameSystem.Init();
 
 
   RenderSystem.SetCamera(GameSystem.m_Camera);
   RenderSystem.SetEntities(GameSystem.Entities);
 
-  Global.InputSystem = InputSystem;
+  
 
   ResizeTrigger();
 
-  GameSystem.Init();
+  
 
   PrevTime = 0;
   ElapsedTime = 0;

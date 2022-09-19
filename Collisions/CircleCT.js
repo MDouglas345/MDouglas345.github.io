@@ -1,4 +1,6 @@
-class CircleCollider extends CollisionType{
+import * as CT from './CollisionTypes.js';
+
+export class CircleCollider extends CT.CollisionType{
   constructor(radius){
     super();
     this.TypeID = 1;

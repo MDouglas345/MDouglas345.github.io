@@ -2,7 +2,7 @@
   This class handles all input from the keyboard and makes it easily accessible anywhere else.
   A simple map that links an easy to use string with its key code value.
 */
-class Controller{
+export class Controller{
   constructor(){
     this.KeyStates = [];
     this.KeyMap = new Map();

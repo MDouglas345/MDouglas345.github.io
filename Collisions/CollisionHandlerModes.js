@@ -1,10 +1,10 @@
-var Global = window || global;
+import * as CM from './CollisionMatrix.js'
 
 
-class CollisionMode{
+export class CollisionMode{
   constructor(){
-    this.CollisionMatrixRef = CollisionMatrix.FuncMatrix;
-    this.LayerMatrix = CollisionMatrix.LayersMatrix;
+    this.CollisionMatrixRef = CM.CollisionMatrix.FuncMatrix;
+    this.LayerMatrix = CM.CollisionMatrix.LayersMatrix;
   }
 
   CheckCollisions(objectzones){
@@ -13,7 +13,7 @@ class CollisionMode{
 }
 
 
-class CHSingleThreaded extends CollisionMode{
+export class CHSingleThreaded extends CollisionMode{
   constructor(){
     super();
   }

@@ -1,4 +1,4 @@
-class CollisionType{
+export class CollisionType{
   constructor(){
     this.TypeID = -1;
     this.States = {
@@ -23,7 +23,7 @@ class CollisionType{
 }
 
 
-class CollisionTypeState{
+export class CollisionTypeState{
   constructor(){
 
   }
@@ -33,7 +33,7 @@ class CollisionTypeState{
   }
 }
 
-class CollisionTypeActive extends CollisionTypeState{
+export class CollisionTypeActive extends CollisionTypeState{
   constructor(){
     super();
   }
@@ -43,7 +43,7 @@ class CollisionTypeActive extends CollisionTypeState{
   }
 }
 
-class CollisionTypeInactive extends CollisionTypeState{
+export class CollisionTypeInactive extends CollisionTypeState{
   constructor(){
     super();
   }
