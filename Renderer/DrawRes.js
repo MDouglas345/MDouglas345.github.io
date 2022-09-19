@@ -5,13 +5,16 @@
   A reference to a class that handles the actual rendering keyCode
   A Dimensions which mirrors the in game size of an object.
 */
+import * as DF from './DrawFunction.js';
+import * as Vec from '../Utility/Utility.js';
+import * as U from '../Utility/Utility.js'
 
-class DrawRes{
+export class DrawRes{
   constructor(){
     this.SpriteID = -1;
-    this.DrawFunc = new DrawFunction();
+    this.DrawFunc = new DF.DrawFunction();
     this.Layer = 0;
-    this.Dimensions = new Vec2(1,1);
+    this.Dimensions = new Vec.Vec2(1,1);
     this.Opacity = 1;
   }
 
@@ -20,156 +23,156 @@ class DrawRes{
   }
 }
 
-class DebugSquareRes extends DrawRes{
+export class DebugSquareRes extends DrawRes{
   constructor(){
     super();
     this.SpriteID = 0;
-    this.DrawFunc = new DebugSquareFunction();
+    this.DrawFunc = new DF.DebugSquareFunction();
     this.Layer = 0;
   }
 }
 
-class SpaceBlackRes extends DrawRes{
+export class SpaceBlackRes extends DrawRes{
   constructor(){
     super();
     this.SpriteID = 0;
-    this.DrawFunc = new BackgroundFunction("black");
+    this.DrawFunc = new DF.BackgroundFunction("black");
     this.Layer = 0;
   }
 }
 
-class PlayerRes extends DrawRes{
+export class PlayerRes extends DrawRes{
   constructor(){
     super();
     this.SpriteID = 0;
-    this.DrawFunc = new BRotatedDrawFunction();
+    this.DrawFunc = new DF.BRotatedDrawFunction();
     this.Layer = 3;
   }
 }
 
-class DefaultProjectile extends DrawRes{
+export class DefaultProjectile extends DrawRes{
   constructor(){
     super();
     this.SpriteID = 1;
-    this.DrawFunc = new BRotatedDrawFunction();
+    this.DrawFunc = new DF.BRotatedDrawFunction();
     this.Layer = 2;
   }
 }
 
-class AstroidRes extends DrawRes{
+export class AstroidRes extends DrawRes{
   constructor(dim){
     super();
     this.SpriteID = 9;
-    this.DrawFunc = new BRotatedDrawFunction();
+    this.DrawFunc = new DF.BRotatedDrawFunction();
     this.Layer = 3;
     this.Dimensions = dim;
   }
 }
 
-class StarRes extends DrawRes{
+export class StarRes extends DrawRes{
   constructor(){
     super();
     this.SpriteID = 5;
-    this.DrawFunc = new BRotatedDrawFunction();
+    this.DrawFunc = new DF.BRotatedDrawFunction();
     this.Layer = 1;
     this.Dimensions;
   }
 }
 
-class DebugObjectSprite extends DrawRes{
+export class DebugObjectSprite extends DrawRes{
   constructor(){
     super();
     this.SpriteID = 1;
-    this.DrawFunc = new BRotatedDrawFunction();
+    this.DrawFunc = new DF.BRotatedDrawFunction();
     this.Layer = 2;
   }
 }
 
-class PlayerThrusterRes extends DrawRes{
+export class PlayerThrusterRes extends DrawRes{
   constructor(){
     super();
     this.SpriteID = 6;
-    this.DrawFunc = new RotatedOpacityDrawFunction();
-    this.Dimensions =new Vec2(15,15);
+    this.DrawFunc = new DF.RotatedOpacityDrawFunction();
+    this.Dimensions =new Vec.Vec2(15,15);
     this.Layer = 3;
   }
 }
 
-class QuadTreeNodeRes extends DrawRes{
+export class QuadTreeNodeRes extends DrawRes{
   constructor(dim){
     super();
     this.SpriteID = 0;
-    this.DrawFunc = new NodeDrawFunction();
+    this.DrawFunc = new DF.NodeDrawFunction();
     this.Dimensions = dim;
     this.Layer = 5;
   }
 }
 
-class PlaceholderRes extends DrawRes{
+export class PlaceholderRes extends DrawRes{
   constructor(dim, layer, color){
     super();
     this.SpriteID = 0;
-    this.DrawFunc = new PlaceHolderDrawFunction(color);
+    this.DrawFunc = new DF.PlaceHolderDrawFunction(color);
     this.Dimensions = dim;
     this.Layer = layer;
   }
 }
 
-class ScouterRes extends DrawRes{
+export class ScouterRes extends DrawRes{
   constructor(){
     super();
     this.SpriteID = 12;
-    this.DrawFunc = new BRotatedDrawFunction();
-    this.Dimensions = new Vec2(250, 275);
+    this.DrawFunc = new DF.BRotatedDrawFunction();
+    this.Dimensions = new Vec.Vec2(250, 275);
     this.Layer = 3;
   }
 }
 
-class ShieldRes extends DrawRes{
+export class ShieldRes extends DrawRes{
   constructor(dim){
     super();
     this.SpriteID = 13;
-    this.DrawFunc = new RotatedOpacityDrawFunction();
+    this.DrawFunc = new DF.RotatedOpacityDrawFunction();
     this.Dimensions = dim;
     this.Layer = 3;
     this.Opacity = 0;
   }
 }
 
-class BulletRes extends DrawRes{
+export class BulletRes extends DrawRes{
   constructor(id){
     super();
     this.SpriteID = id;
-    this.DrawFunc = new BRotatedDrawFunction();
-    this.Dimensions = new Vec2(30,10);
+    this.DrawFunc = new DF.BRotatedDrawFunction();
+    this.Dimensions = new U.Vec2(30,10);
     this.Layer = 2;
   }
 }
 
-class ShipDebrisRes extends DrawRes{
+export class ShipDebrisRes extends DrawRes{
   constructor(){
     super();
-     let chance = getRandomFloat(1);
+     let chance = U.getRandomFloat(1);
      if (chance < 0.3){ this.SpriteID = 16;}
      else if (chance < 0.6) { this.SpriteID = 17;}
      else{this.SpriteID = 18;}
 
-     this.DrawFunc = new BRotatedDrawFunction();
-     this.Dimensions = new Vec2(100,100);
+     this.DrawFunc = new DF.BRotatedDrawFunction();
+     this.Dimensions = new U.Vec2(100,100);
      this.Layer = 3;
 
   }
 }
 
-class UIRes extends DrawRes{
+export class UIRes extends DrawRes{
   constructor(){
     super();
-    this.ScreenLocation = new Vec2(0,0);
+    this.ScreenLocation = new Vec.Vec2(0,0);
     this.Layer = 5;
   }
 }
 
-class UITextRes extends UIRes{
+export class UITextRes extends UIRes{
   constructor(Text, loc, font){
     super();
     this.TextToDisplay = Text;
@@ -178,11 +181,11 @@ class UITextRes extends UIRes{
     this.FillStyle = "#FFFFFF";
     this.StrokeStyle = "#FFFFFF";
     this.StrokeStrength = 1;
-    this.DrawFunc = new UITextFillFunction(this);
+    this.DrawFunc = new DF.UITextFillFunction(this);
   }
 }
 
-class UITitleTextRes extends UIRes{
+export class UITitleTextRes extends UIRes{
   constructor(Text, loc, font){
     super();
     this.TextToDisplay = Text;
@@ -191,11 +194,11 @@ class UITitleTextRes extends UIRes{
     this.FillStyle = "#FB542B";
     this.StrokeStyle = "#FFFFFF";
     this.StrokeStrength = 4;
-    this.DrawFunc = new UITextFillStrokeFunction(this);
+    this.DrawFunc = new DF.UITextFillStrokeFunction(this);
   }
 }
 
-class UIBarRes extends UIRes{
+export class UIBarRes extends UIRes{
   constructor(Pos, CurrentValue, MaxValue, MinValue, width, height, ForegroundBarColor, BackgroundColor){
     super();
     this.CurrentValue = CurrentValue;
@@ -207,37 +210,37 @@ class UIBarRes extends UIRes{
     this.Width = width;
     this.Height = height;
 
-    this.DrawFunc = new UIBarDrawFunctionBasic(this);
+    this.DrawFunc = new DF.UIBarDrawFunctionBasic(this);
   }
 }
 
-class UIImageRes extends UIRes{
+export class UIImageRes extends UIRes{
   constructor(spriteid, loc, dim){
     super();
     this.ScreenLocation = loc;
     this.Dimensions = dim;
     this.SpriteID = spriteid;
 
-    this.DrawFunc = new UIImageDraw(this);
+    this.DrawFunc = new DF.UIImageDraw(this);
   }
 }
 
-class BATPickUpRes extends DrawRes{
+export class BATPickUpRes extends DrawRes{
   constructor(){
     super();
     this.SpriteID = 19;
-    this.DrawFunc = new BRotatedDrawFunction();
-    this.Dimensions = new Vec2(50,50);
+    this.DrawFunc = new DF.BRotatedDrawFunction();
+    this.Dimensions = new Vec.Vec2(50,50);
     this.Layer = 4;
   }
 }
 
-class StarFieldRes extends DrawRes{
+export class StarFieldRes extends DrawRes{
   constructor(){
     super();
     this.SpriteID = 23;
     this.Layer = 2;
-    this.Dimensions = new Vec2(100000,100000);
-    this.DrawFunc = new BRotatedDrawFunction();
+    this.Dimensions = new Vec.Vec2(100000,100000);
+    this.DrawFunc = new DF.BRotatedDrawFunction();
   }
 }

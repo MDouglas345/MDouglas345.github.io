@@ -2,9 +2,12 @@
   Focus is always going to be a Vec2
 */
 
-var Global = window || global;
+import * as GO from '../Objects/GameObject.js'
+import * as U from '../Utility/Utility.js'
+import * as CS from './CameraStates.js'
+import * as M from '../main.js'
 
-class Camera extends GameObject{
+export class Camera extends GO.GameObject{
   constructor(Focus){
     super();
     this.Name = "mCamera";
@@ -15,15 +18,15 @@ class Camera extends GameObject{
     this.RenderInstance;
     this.Dir;
 
-    this.Rigidbody.Pos = new Vec2(0,0);
+    this.Rigidbody.Pos = new U.Vec2(0,0);
     this.Rigidbody.Enable();
 
 
     this.TitleScreen;
 
     this.States = {
-      "Follow" : new FollowState(this),
-      "Start" : new GameStartState(this)
+      "Follow" : new CS.FollowState(this),
+      "Start" : new CS.GameStartState(this)
     };
 
     this.InitalState("Start");
@@ -71,7 +74,7 @@ class Camera extends GameObject{
   }
 
   Init(){
-    this.RenderInstance = Global.RenderSystem;
+    this.RenderInstance = M.RenderSystem;
 
     for (var state in this.States){
       this.States[state].Init();

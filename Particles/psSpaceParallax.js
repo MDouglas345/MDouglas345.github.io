@@ -1,9 +1,13 @@
-class psStarParallax extends ParticleSystem{
+import * as PS from './ParticleSystem.js'
+import * as U from '../Utility/Utility.js'
+import * as P from './Particle.js'
+import * as M from '../main.js'
+export class psStarParallax extends PS.ParticleSystem{
   constructor(starAmount, focus){
     super(starAmount);
 
     this.Focus = focus;
-    this.ParticleType = SpaceParticle;
+    this.ParticleType = P.SpaceParticle;
     this.Camera;
 
     this.CreateParticles();
@@ -14,17 +18,17 @@ class psStarParallax extends ParticleSystem{
   }
 
   Init(){
-    this.Camera = Game.GetObjectByName("mCamera");
+    this.Camera = M.GameSystem.GetObjectByName("mCamera");
   }
 
   RandomizePositions(){
     this.Particles.forEach(item =>{
-      item.Rigidbody.Pos = new Vec2(this.Focus.Rigidbody.Pos.X + (getRandomInt(7000) - 3500), this.Focus.Rigidbody.Pos.Y + (getRandomInt(7000) - 3500));
+      item.Rigidbody.Pos = new U.Vec2(this.Focus.Rigidbody.Pos.X + (U.getRandomInt(7000) - 3500), this.Focus.Rigidbody.Pos.Y + (U.getRandomInt(7000) - 3500));
     });
   }
 
   RandomizePosition(object){
-    object.Rigidbody.Pos = new Vec2(this.Focus.Rigidbody.Pos.X + (getRandomInt(7000) - 3500), this.Focus.Rigidbody.Pos.Y + (getRandomInt(7000) - 3500));
+    object.Rigidbody.Pos = new U.Vec2(this.Focus.Rigidbody.Pos.X + (U.getRandomInt(7000) - 3500), this.Focus.Rigidbody.Pos.Y + (U.getRandomInt(7000) - 3500));
   }
 
   Update(felapsed){

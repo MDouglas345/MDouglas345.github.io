@@ -1,5 +1,8 @@
+import * as U from '../Utility/Utility.js'
+import * as B from './Bounds.js'
+import * as QT from './QuadTree.js'
 
-class NodeState{
+export class NodeState{
   constructor(Parent){
     this.NodeMaster = Parent;
   }
@@ -17,7 +20,7 @@ class NodeState{
 }
 
 
-class NodeEmptyState extends NodeState{
+export class NodeEmptyState extends NodeState{
   constructor(Parent){
     super(Parent);
   }
@@ -59,7 +62,7 @@ class NodeEmptyState extends NodeState{
   }
 }
 
-class NodeFillState extends NodeState{
+export class NodeFillState extends NodeState{
   constructor(Parent){
     super(Parent);
   }
@@ -108,7 +111,7 @@ class NodeFillState extends NodeState{
 
 }
 
-class Node{
+export class Node{
   static ObjectLimit = 20;
   constructor(orig, Dim){
     //console.log(orig);
@@ -122,7 +125,7 @@ class Node{
 
     this.ObjectCount = 0;
 
-    this.Bounds = new Bounds(orig, Dim);
+    this.Bounds = new B.Bounds(orig, Dim);
 
     this.SubEntities = [];
 
@@ -145,7 +148,7 @@ class Node{
     let Diff = center.rSub(pos);
     //console.log(Diff);
 
-    if (Math.abs(Diff.X) > QuadTree.CoveredArea.X || Math.abs(Diff.Y) > QuadTree.CoveredArea.Y){ return -1;}
+    if (Math.abs(Diff.X) > QT.QuadTree.CoveredArea.X || Math.abs(Diff.Y) > QT.QuadTree.CoveredArea.Y){ return -1;}
 
     if (Diff.X > 0 && Diff.Y < 0){ //LowerLeft Quadrant
       //console.log("LowerLeft, center : " + center);
@@ -177,8 +180,8 @@ class Node{
     let center = this.Bounds.Origin.rAdd(Dim);
 
     this.UpperLeftNode = new Node(center.rSub(Dim), Dim);
-    this.UpperRightNode = new Node(new Vec2(center.X, center.Y - Dim.Y), Dim);
-    this.LowerLeftNode = new Node(new Vec2(center.X - Dim.X, center.Y), Dim);
+    this.UpperRightNode = new Node(new U.Vec2(center.X, center.Y - Dim.Y), Dim);
+    this.LowerLeftNode = new Node(new U.Vec2(center.X - Dim.X, center.Y), Dim);
     this.LowerRightNode = new Node(center, Dim);
   }
 

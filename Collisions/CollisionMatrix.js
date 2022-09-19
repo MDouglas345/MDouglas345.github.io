@@ -23,7 +23,9 @@
   2 = Trigger Collider
 */
 
-class CollisionMatrix{
+import * as CI from './CollisionIdentifier.js'
+
+export class CollisionMatrix{
   static FuncMatrix = null;
 
   static LayersMatrix = null;
@@ -38,7 +40,7 @@ class CollisionMatrix{
         point.Mult(Difference - objectA.CollisionType.Radius);
         point = objectB.Rigidbody.Pos.rAdd(point);
 
-        return new CollisionIdentifier(objectA,objectB, point)
+        return new CI.CollisionIdentifier(objectA,objectB, point)
       }
     }
 

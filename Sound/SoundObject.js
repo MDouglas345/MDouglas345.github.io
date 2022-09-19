@@ -1,11 +1,12 @@
 
-class SoundObject{
+import * as S from './Sound.js';
+export class SoundObject{
   constructor(ID){
-    this.AudioSource = Sound.CreateAudioSource();
-    this.SoundSrc = Sound.GetSource(ID);
+    this.AudioSource = S.Sound.CreateAudioSource();
+    this.SoundSrc = S.Sound.GetSource(ID);
     
     this.AudioSource.src = this.SoundSrc["source"];
-    this.SoundVolume = Sound.GetVolume(this.SoundSrc["type"]);
+    this.SoundVolume = S.Sound.GetVolume(this.SoundSrc["type"]);
     this.AudioSource.volume = this.SoundVolume;
 
 
@@ -20,6 +21,6 @@ class SoundObject{
 
   Delete(){
     this.AudioSource = null;
-    Sound.SoundObjectCount -= 1;
+    S.Sound.SoundObjectCount -= 1;
   }
 }

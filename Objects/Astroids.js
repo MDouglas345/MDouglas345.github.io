@@ -1,29 +1,36 @@
+import * as S from './Shootable.js';
+import * as U from '../Utility/Utility.js'
+import * as DR from '../Renderer/DrawRes.js'
+import * as CT from '../Collisions/CircleCT.js'
+import * as So from '../Sound/SoundObject.js'
+import * as M from '../main.js'
+import * as BPU from './BATPickUp.js'
 
-class Astroid extends Shootable{
+export class Astroid extends S.Shootable{
   static AstroidHit;
   constructor(size){
     super();
     this.size;
-
+    
     if (size){this.size = size;}
-    else{this.size = getRandomFloat(5) + 1;}
+    else{this.size = U.getRandomFloat(5) + 1;}
 
     this.Name = "Astroid";
     this.Rigidbody.Disable();
 
-    let RandomSize = new Vec2(100, 100);
+    let RandomSize = new U.Vec2(100, 100);
     RandomSize.Mult(this.size);
 
-    this.DrawRes = new AstroidRes(RandomSize);
+    this.DrawRes = new DR.AstroidRes(RandomSize);
 
-    this.CollisionType = new CircleCollider(RandomSize.MagSqrt() * 0.4);
+    this.CollisionType = new CT.CircleCollider(RandomSize.MagSqrt() * 0.4);
 
     this.CollisionLayer = 2;
 
-    this.Rigidbody.Orien = getRandomInt();
+    this.Rigidbody.Orien = U.getRandomInt();
     this.RotSpeed = 2;
 
-    this.AstroidHit = new SoundObject("ShipHit");
+    this.AstroidHit = new So.SoundObject("ShipHit");
 
 
 
@@ -62,9 +69,9 @@ class Astroid extends Shootable{
     force = force.MagSqrt();
 
     for (let i = 0; i < 4; i++){
-      let chance = getRandomFloat(1);
+      let chance = U.getRandomFloat(1);
 
-      let randomsize = (getRandomFloat(0.4) + 0.4);
+      let randomsize = (U.getRandomFloat(0.4) + 0.4);
       randomsize *= this.size;
 
 
@@ -75,22 +82,22 @@ class Astroid extends Shootable{
 
 
 
-      let f = RandomVecInCircle();
+      let f = U.RandomVecInCircle();
       f.Mult(force);
 
 
-      p.Rigidbody.Pos = copyInstance(this.Rigidbody.Pos);
+      p.Rigidbody.Pos = U.copyInstance(this.Rigidbody.Pos);
       p.Rigidbody.Vel = f.rMult(0.4);
-      p.Rigidbody.AngVel = getRandomFloat(10) - 5;
+      p.Rigidbody.AngVel = U.getRandomFloat(10) - 5;
 
-      Game.AddObject(p);
+      M.GameSystem.AddObject(p);
     }
 
     this.NeedsDelete = true;
   }
 }
 
-class AstroidBAT extends Astroid{
+export class AstroidBAT extends Astroid{
   constructor(size){
     super(size);
     this.DrawRes.SpriteID = 11;
@@ -98,14 +105,14 @@ class AstroidBAT extends Astroid{
 
   OnHit(object){
       this.AstroidHit.Play();
-    let BATAmount = getRandomInt(5) + 1;
+    let BATAmount = U.getRandomInt(5) + 1;
     for (let i = 0; i < BATAmount; i++){
-      let B = new BATPickUp();
-      B.Rigidbody.Pos = copyInstance(this.Rigidbody.Pos);
-      let f = RandomVecInCircle();
+      let B = new BPU.BATPickUp();
+      B.Rigidbody.Pos = U.copyInstance(this.Rigidbody.Pos);
+      let f = U.RandomVecInCircle();
 
       B.Rigidbody.Vel = f.rMult(100);
-      Game.AddObject(B);
+      M.GameSystem.AddObject(B);
     }
     this.NeedsDelete = true;
   }

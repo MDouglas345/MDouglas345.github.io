@@ -1,6 +1,7 @@
 
-
-class DrawFunction{
+import * as M from '../main.js'
+import * as U from '../Utility/Utility.js'
+export class DrawFunction{
   constructor(){
 
   }
@@ -10,7 +11,7 @@ class DrawFunction{
   }
 }
 
-class DebugSquareFunction extends DrawFunction{
+export class DebugSquareFunction extends DrawFunction{
   constructor(){
     super();
   }
@@ -20,7 +21,7 @@ class DebugSquareFunction extends DrawFunction{
   }
 }
 
-class NodeDrawFunction extends DrawFunction{
+export class NodeDrawFunction extends DrawFunction{
   constructor(){
     super();
   }
@@ -32,7 +33,7 @@ class NodeDrawFunction extends DrawFunction{
   }
 }
 
-class BDrawFunction extends DrawFunction{
+export class BDrawFunction extends DrawFunction{
   constructor(){
     super();
   }
@@ -42,7 +43,7 @@ class BDrawFunction extends DrawFunction{
   }
 }
 
-class BackgroundFunction extends DrawFunction{
+export class BackgroundFunction extends DrawFunction{
   constructor(color){
     super();
     this.color = color;
@@ -51,11 +52,11 @@ class BackgroundFunction extends DrawFunction{
 
   Draw(context, imageRef, Pos, scale){
     context.fillStyle = this.color;
-    context.fillRect(0,0,Global.RenderSystem.GetCanvasWidth(), Global.RenderSystem.GetCanvasHeight());
+    context.fillRect(0,0,M.RenderSystem.GetCanvasWidth(), M.RenderSystem.GetCanvasHeight());
   }
 }
 
-class BRotatedDrawFunction extends DrawFunction{
+export class BRotatedDrawFunction extends DrawFunction{
   constructor(){
     super();
   }
@@ -71,7 +72,7 @@ class BRotatedDrawFunction extends DrawFunction{
 
 
 
-class RotatedOpacityDrawFunction extends DrawFunction{
+export class RotatedOpacityDrawFunction extends DrawFunction{
   constructor(){
     super();
   }
@@ -88,7 +89,7 @@ class RotatedOpacityDrawFunction extends DrawFunction{
 
 }
 
-class BGBlack extends DrawFunction{
+export class BGBlack extends DrawFunction{
   constructor(){
     super();
   }
@@ -99,7 +100,7 @@ class BGBlack extends DrawFunction{
   }
 }
 
-class DebugPositionDrawFunc extends DrawFunction{
+export class DebugPositionDrawFunc extends DrawFunction{
   constructor(){
     super();
     this.DrawFunc1 = new DebugSquareFunction();
@@ -111,7 +112,7 @@ class DebugPositionDrawFunc extends DrawFunction{
   }
 }
 
-class PlaceHolderDrawFunction extends DrawFunction{
+export class PlaceHolderDrawFunction extends DrawFunction{
   constructor(color){
     super();
     this.Color = color;
@@ -127,7 +128,7 @@ class PlaceHolderDrawFunction extends DrawFunction{
   }
 }
 
-class UITextDrawFunction extends DrawFunction{
+export class UITextDrawFunction extends DrawFunction{
   constructor(UIRes){
     super();
     this.UIRes = UIRes;
@@ -140,7 +141,7 @@ class UITextDrawFunction extends DrawFunction{
   }
 }
 
-class UITextFillFunction extends DrawFunction{
+export class UITextFillFunction extends DrawFunction{
   constructor(UIRes){
     super();
     this.UIRes = UIRes;
@@ -154,7 +155,7 @@ class UITextFillFunction extends DrawFunction{
   }
 }
 
-class UITextFillStrokeFunction extends DrawFunction{
+export class UITextFillStrokeFunction extends DrawFunction{
   constructor(UIRes){
     super();
     this.UIRes = UIRes;
@@ -171,7 +172,7 @@ class UITextFillStrokeFunction extends DrawFunction{
   }
 }
 
-class UITitleDrawFunction extends DrawFunction{
+export class UITitleDrawFunction extends DrawFunction{
   constructor(UIRes){
     super();
     this.UIRes = UIRes;
@@ -183,7 +184,7 @@ class UITitleDrawFunction extends DrawFunction{
     this.FillStrokeFunc.Draw(context, image, Pos, scale, rot);
   }
 }
-class UIBarDrawFunctionBasic extends DrawFunction{
+export class UIBarDrawFunctionBasic extends DrawFunction{
   constructor(UIRes){
     super();
     this.UIRes = UIRes;
@@ -192,7 +193,7 @@ class UIBarDrawFunctionBasic extends DrawFunction{
   }
   Draw(context, image, Pos, scale, rot){
 
-    let fillpercent = InvLerp(this.UIRes.MinValue,this.UIRes.MaxValue.variable, this.UIRes.CurrentValue.variable);
+    let fillpercent = U.InvLerp(this.UIRes.MinValue,this.UIRes.MaxValue.variable, this.UIRes.CurrentValue.variable);
     //console.log(this.UIRes.MinValue,this.UIRes.MaxValue.variable, this.UIRes.CurrentValue.variable);
     //console.log(fillpercent);
     context.fillStyle = this.UIRes.ForegroundColor;
@@ -200,7 +201,7 @@ class UIBarDrawFunctionBasic extends DrawFunction{
   }
 }
 
-class UIBarDrawFunction extends DrawFunction{
+export class UIBarDrawFunction extends DrawFunction{
   constructor(UIRes){
     this.UIRes = UIRes;
   }
@@ -209,7 +210,7 @@ class UIBarDrawFunction extends DrawFunction{
 
 }
 
-class UIImageDraw extends DrawFunction{
+export class UIImageDraw extends DrawFunction{
   constructor(res){
     super();
     this.UIRes = res;

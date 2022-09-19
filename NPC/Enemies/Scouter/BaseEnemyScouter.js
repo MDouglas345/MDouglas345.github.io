@@ -1,15 +1,25 @@
-class EnemyScouter extends Enemy{
+import * as E from '../../../Objects/Enemy.js'
+import * as DR from '../../../Renderer/DrawRes.js'
+import * as SS from './ScouterAIStates.js'
+import * as CT from '../../../Collisions/CircleCT.js'
+import * as T from '../../../Objects/Trigger.js'
+import * as Sh from '../../../Objects/Shield.js'
+import * as M from '../../../main.js'
+import * as So from '../../../Sound/SoundObject.js'
+import * as U from '../../../Utility/Utility.js'
+import * as SD from '../../../Objects/ShipDebris.js'
+export class EnemyScouter extends E.Enemy{
   constructor(mom){
     super();
 
     this.Rigidbody.Enable();
     this.Rigidbody.Mass = 2;
-    this.DrawRes = new ScouterRes();
+    this.DrawRes = new DR.ScouterRes();
     this.MotherShip = mom;
     this.ThrustForce = 300;
     this.MaxVel = 500;
 
-    this.SurroundTrigger = new Trigger(this, new CircleCollider(400), 5);
+    this.SurroundTrigger = new T.Trigger(this, new CT.CircleCollider(400), 5);
 
     this.Identifier;
 
@@ -17,9 +27,9 @@ class EnemyScouter extends Enemy{
 
 
     this.States = {
-      "default" : new ScouterAIState(this),
-      "Wander" : new ScouterWanderStateAlt(this),
-      "Attack" : new ScouterAttackStateAlt(this)
+      "default" : new SS.ScouterAIState(this),
+      "Wander" : new SS.ScouterWanderStateAlt(this),
+      "Attack" : new SS.ScouterAttackStateAlt(this)
     };
 
 
@@ -33,15 +43,15 @@ class EnemyScouter extends Enemy{
 
     this.ShootersSpot;
 
-    this.Shields = new EnemyShieldV1(new Vec2(300,300), 7);
-    this.Shields.Rigidbody.ConnectToParent(this);
+    //this.Shields = new Sh.EnemyShieldV1(new U.Vec2(300,300), 7);
+    //this.Shields.Rigidbody.ConnectToParent(this);
     //this.Shields.Rigidbody.Pos = copyInstance(this.Rigidbody.Pos);
     //this.Shields.Rigidbody.SetParent(this);
     //this.Shields.Rigidbody= this.Rigidbody;
 
-    Game.AddObject(this.Shields);
+    //M.GameSystem.AddObject(this.Shields);
 
-    this.CollisionType = new CircleCollider(100);
+    this.CollisionType = new CT.CircleCollider(100);
     this.CollisionLayer = 3;
 
 
@@ -49,11 +59,11 @@ class EnemyScouter extends Enemy{
     this.DetectPlayerRadius = 2500;
     this.Target;
 
-    this.HitSound = new SoundObject("ShipHit");
+    this.HitSound = new So.SoundObject("ShipHit");
   }
 
   Init(){
-    this.Target = Game.GetObjectByName("Player");
+    this.Target = M.GameSystem.GetObjectByName("Player");
 
     for (let item in this.States){
       this.States[item].Init();
@@ -61,7 +71,7 @@ class EnemyScouter extends Enemy{
   }
 
   NewStartPos(pos){
-    this.Rigidbody.Pos = copyInstance(pos);
+    this.Rigidbody.Pos = U.copyInstance(pos);
 
     for (let item in this.States){
       this.States[item].PosRef = this.Rigidbody.Pos;
@@ -77,12 +87,12 @@ class EnemyScouter extends Enemy{
   }
 
   FaceVelocity(){
-    this.Rigidbody.Orien = GetAngleFromVector(this.Rigidbody.Vel);
+    this.Rigidbody.Orien = U.GetAngleFromVector(this.Rigidbody.Vel);
   }
 
   FaceTarget(){
     let lookAt = this.Target.Rigidbody.Pos.rSub(this.Rigidbody.Pos);
-    this.Rigidbody.Orien = GetAngleFromVector(lookAt);
+    this.Rigidbody.Orien = U.GetAngleFromVector(lookAt);
   }
 
   CleanUp(){
@@ -92,8 +102,8 @@ class EnemyScouter extends Enemy{
   }
 
   Delete(){
-    this.Shields.NeedsDelete = true;
-    this.Shields = null;
+    //this.Shields.NeedsDelete = true;
+    //this.Shields = null;
     this.States = null;
   }
 
@@ -116,26 +126,26 @@ class EnemyScouter extends Enemy{
     let force = 700;
 
     for (let i = 0; i < 4; i++){
-      let chance = getRandomFloat(1);
+      let chance = U.getRandomFloat(1);
 
-      let randomsize = getRandomFloat(0.4) + 0.2;
+      let randomsize = U.getRandomFloat(0.4) + 0.2;
       randomsize *= this.size;
 
 
       var p;
-      p = new ShipDebris();
+      p = new SD.ShipDebris();
 
 
 
-      let f = RandomVecInCircle();
+      let f = U.RandomVecInCircle();
       f.Mult(force);
 
 
-      p.Rigidbody.Pos = copyInstance(this.Rigidbody.Pos);
+      p.Rigidbody.Pos = U.copyInstance(this.Rigidbody.Pos);
       p.Rigidbody.Vel = f.rMult(0.4);
-      p.Rigidbody.AngVel = getRandomFloat(10) - 5;
+      p.Rigidbody.AngVel = U.getRandomFloat(10) - 5;
 
-      Game.AddObject(p);
+      M.GameSystem.AddObject(p);
     }
 
     this.NeedsDelete = true;

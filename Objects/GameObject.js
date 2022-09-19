@@ -6,18 +6,26 @@
   If an actual object (Player, for example) needs these data types, they will initalize them in their own constructor.
 
 */
-class GameObject{
+import * as RB from '../Physics/Rigidbody.js';
+import * as DR from '../Renderer/DrawRes.js';
+import * as Vec from '../Utility/Utility.js';
+import * as Col from '../Collisions/NoCollider.js';
+import * as U from '../Utility/Utility.js'
+
+export class GameObject{
   constructor(){
     this.Name = "Basic Object";
-    this.Rigidbody = new Rigidbody();
+    this.Rigidbody = new RB.Rigidbody();
     this.Rigidbody.Disable();
-    this.DrawRes = new DrawRes();
+    this.DrawRes = new DR.DrawRes();
     this.Children = [];
-    this.ParentOffset = new Vec2(0,0);
+    this.ParentOffset = new Vec.Vec2(0,0);
     this.NeedsDelete = false;
 
-    this.CollisionType = new NoCollider();
+    this.CollisionType = new Col.NoCollider();
     this.CollisionLayer = -1;
+
+    this.TwoObject;
 
   }
   Init(){
@@ -47,7 +55,7 @@ class GameObject{
 
   Center(){
     //return new Vec2(this.Rigidbody.Pos.X - (this.DrawRes.Dimensions.X/2), this.Rigidbody.Pos.Y - (this.DrawRes.Dimensions.Y/2));
-    return new Vec2(this.Rigidbody.Pos.X, this.Rigidbody.Pos.Y );
+    return new U.Vec2(this.Rigidbody.Pos.X, this.Rigidbody.Pos.Y );
   }
 
   OnCollide(object){

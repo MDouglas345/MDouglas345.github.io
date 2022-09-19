@@ -1,6 +1,10 @@
 
+import * as AI from '../AI/NPCAIState.js'
+import * as M from '../main.js'
+import * as U from '../Utility/Utility.js'
+import * as TS from '../Objects/TitleScreen.js'
 
-class CameraState extends NPCAIState{
+export class CameraState extends AI.NPCAIState{
   constructor(Master){
     super(Master);
   }
@@ -26,7 +30,7 @@ class CameraState extends NPCAIState{
   }
 }
 
-class FollowState extends CameraState{
+export class FollowState extends CameraState{
   constructor(Master){
     super(Master);
   }
@@ -37,15 +41,15 @@ class FollowState extends CameraState{
 
   Update(felapsed){
   //  this.ActiveState.Update(felapsed);
-    if (Global.InputSystem.GetKeyState('-') == "keydown"){
+    if (M.InputSystem.GetKeyState('-') == "keydown"){
       this.Master.Zoom += 0.5 * felapsed;
     }
-    if (Global.InputSystem.GetKeyState('+') == "keydown"){
+    if (M.InputSystem.GetKeyState('+') == "keydown"){
       this.Master.Zoom -= 0.5 * felapsed;
     }
 
 
-    this.Master.Zoom = Clamp(this.Master.Zoom, this.Master.ZOOMMIN, this.Master.ZOOMMAX);
+    this.Master.Zoom = U.Clamp(this.Master.Zoom, this.Master.ZOOMMIN, this.Master.ZOOMMAX);
     /*
     let v1 = this.Master.Rigidbody.Pos.rAdd(new Vec2((this.Master.RenderInstance.GetCanvasWidth() / 2) * (1/this.Master.Zoom) , (this.Master.RenderInstance.GetCanvasHeight() /2 * (1/this.Master.Zoom))));
     let Push = this.Master.m_FocusPoint.Rigidbody.Pos.rSub(v1);
@@ -68,7 +72,7 @@ class FollowState extends CameraState{
 
 
 
-    let v1 = this.Master.Rigidbody.Pos.rAdd(new Vec2((this.Master.RenderInstance.GetCanvasWidth() / 2) * (1/this.Master.Zoom) , (this.Master.RenderInstance.GetCanvasHeight() /2 * (1/this.Master.Zoom))));
+    let v1 = this.Master.Rigidbody.Pos.rAdd(new U.Vec2((this.Master.RenderInstance.GetCanvasWidth() / 2) * (1/this.Master.Zoom) , (this.Master.RenderInstance.GetCanvasHeight() /2 * (1/this.Master.Zoom))));
     let Push = this.Master.m_FocusPoint.Rigidbody.Pos.rSub(v1);
 
 
@@ -100,12 +104,12 @@ class FollowState extends CameraState{
   EnterState(){
 
     let point = this.Master.m_FocusPoint.Center();
-    this.Master.Dir = point.rSub(new Vec2((this.Master.RenderInstance.GetCanvasWidth() / 2) * (1/this.Master.Zoom) , (this.Master.RenderInstance.GetCanvasHeight() /2 * (1/this.Master.Zoom))));
+    this.Master.Dir = point.rSub(new U.Vec2((this.Master.RenderInstance.GetCanvasWidth() / 2) * (1/this.Master.Zoom) , (this.Master.RenderInstance.GetCanvasHeight() /2 * (1/this.Master.Zoom))));
 
   }
 }
 
-class GameStartState extends CameraState{
+export class GameStartState extends CameraState{
   constructor(Master){
     super(Master);
 
@@ -126,9 +130,9 @@ class GameStartState extends CameraState{
   }
 
   Init(){
-    let p = Game.GetObjectByName("Player");
-    let c = Game.GetObjectByName("Cryptopolid");
-    let n = Game.GetObjectByName("Nightly");
+    let p = M.GameSystem.GetObjectByName("Player");
+    let c = M.GameSystem.GetObjectByName("Cryptopolid");
+    let n = M.GameSystem.GetObjectByName("Nightly");
 
     this.AddPoint(n.Rigidbody.Pos);
     this.AddPoint(c.Rigidbody.Pos);
@@ -136,12 +140,12 @@ class GameStartState extends CameraState{
   }
 
   EnterState(){
-    this.Master.Rigidbody.Pos = new Vec2(-1000, 25000);
+    this.Master.Rigidbody.Pos = new U.Vec2(-1000, 25000);
   }
 
   ExitState(){
-    this.Master.TitleScreen = new TitleScreen();
-    Game.AddObject(this.Master.TitleScreen);
+    this.Master.TitleScreen = new TS.TitleScreen();
+    M.GameSystem.AddObject(this.Master.TitleScreen);
   }
 
   AddPoint(vec){
@@ -151,7 +155,7 @@ class GameStartState extends CameraState{
   }
 
   Update(felapsed){
-    let v1 = this.Master.Rigidbody.Pos.rAdd(new Vec2((this.Master.RenderInstance.GetCanvasWidth() / 2) * (1/this.Master.Zoom) , (this.Master.RenderInstance.GetCanvasHeight() /2 * (1/this.Master.Zoom))));
+    let v1 = this.Master.Rigidbody.Pos.rAdd(new U.Vec2((this.Master.RenderInstance.GetCanvasWidth() / 2) * (1/this.Master.Zoom) , (this.Master.RenderInstance.GetCanvasHeight() /2 * (1/this.Master.Zoom))));
     let Push = this.Targets[this.Current].rSub(v1);
 
 

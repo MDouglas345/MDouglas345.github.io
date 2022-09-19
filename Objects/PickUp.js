@@ -1,4 +1,6 @@
-class PickUpable extends GameObject{
+import * as GO from '../Objects/GameObject.js'
+
+export class PickUpable extends GO.GameObject{
   constructor(){
     super();
 

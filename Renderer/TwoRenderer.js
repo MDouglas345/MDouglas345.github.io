@@ -29,13 +29,18 @@
   TLDR : Objects that are meant to be in the forefront need to be at a higher Layer value i.e 3. Layer 0 is always going to be rendered first and things go on top.
 */
 import * as M from '../main.js';
+import Two from '../Two/two.min.js'
 
-export class Renderer{
-  static Gizmos = [];
+export class TwoRenderer{
+  
   constructor(){
+    this.TwoReference = M.TwoContext;
     
+    this.TextureRegistry = [];
+    this.Images = [];
+ 
 
-    
+    this.InitTextures()
 
     this.GameViewContext = document.getElementById("GameView").getContext("2d");
 
@@ -46,31 +51,17 @@ export class Renderer{
 
     this.Layers = M.OManager.m_Entities;
 
-    this.Gizmos = Renderer.Gizmos;
+    this.Gizmos = [];
 
 
     
 
 
-    //this.GameViewContext.scale(0.5,0.5);
+   
+   
+  }
 
-
-    this.Images = [];
-
-    //Should make adding images a function to save space and readability
-    /*
-    this.Images.push(new Image());
-    this.Images.push(new Image());
-    this.Images.push(new Image());
-    this.Images.push(new Image());
-
-    this.Images[0].src = "Resources/brave-lion@3x.jpeg";
-    this.Images[1].src = "Resources/laserBullet.png";
-    this.Images[2].src = "Resources/BG/Demo/l1.png";
-    this.Images[3].src = "Resources/BG/Demo/12.png";
-    */
-
-    //this.AddImage("Resources/brave-lion.png");
+  InitTextures(){
     this.AddImage("Resources/playerv1n.png");
     this.AddImage("Resources/laserBullet.png");
     this.AddImage("Resources/BG/Demo/l1.png");
@@ -95,6 +86,7 @@ export class Renderer{
     this.AddImage("Resources/brave.png");
     this.AddImage("Resources/Credit.png");
     this.AddImage("Resources/starfield.png")
+
   }
 
   Update(){
@@ -170,6 +162,8 @@ export class Renderer{
   AddImage(name){
     this.Images.push(new Image());
     this.Images[this.Images.length-1].src = name;
+
+    this.TextureRegistry.push(this.TwoReference.makeTexture(name));
 
   }
 

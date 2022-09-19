@@ -1,44 +1,48 @@
-class Particle extends GameObject{
+import * as GO from '../Objects/GameObject.js'
+import * as R from '../Physics/Rigidbody.js'
+import * as DR from '../Renderer/DrawRes.js'
+import * as U from '../Utility/Utility.js'
+export class Particle extends GO.GameObject{
   constructor(){
     super();
     this.Name = "Particle";
-    this.Rigidbody = new Rigidbody();
-    this.DrawRes = new DrawRes();
+    this.Rigidbody = new R.Rigidbody();
+    this.DrawRes = new DR.DrawRes();
   }
 }
 
-class SpaceParticle extends Particle{
+export class SpaceParticle extends Particle{
   constructor(){
     super();
     this.Name = "Space Particle";
-    this.DistanceToPlayer = getRandomInt(10);
-    this.DrawRes.Dimensions = new Vec2(10 * (1/this.DistanceToPlayer) + 20,10 * (1/this.DistanceToPlayer) + 20);
+    this.DistanceToPlayer = U.getRandomInt(10);
+    this.DrawRes.Dimensions = new U.Vec2(10 * (1/this.DistanceToPlayer) + 20,10 * (1/this.DistanceToPlayer) + 20);
     this.DrawRes.Layer = 1;
 
   }
 
   Debug(){
     this.DistanceToPlayer = 1;
-    this.DrawRes.Dimensions = new Vec2(10,10);
-    this.Rigidbody.Pos = new Vec2(0,0);
+    this.DrawRes.Dimensions = new U.Vec2(10,10);
+    this.Rigidbody.Pos = new U.Vec2(0,0);
   }
 }
 
-class StarParticle extends Particle{
+export class StarParticle extends Particle{
   constructor(){
     super();
     this.Name = "Star";
-    this.DistanceToPlayer = getRandomInt(10);
-    this.DrawRes = new StarRes();
-    this.DrawRes.Dimensions = new Vec2(10 * (1/this.DistanceToPlayer),10 * (1/this.DistanceToPlayer));
+    this.DistanceToPlayer = U.getRandomInt(10);
+    this.DrawRes = new DR.StarRes();
+    this.DrawRes.Dimensions = new U.Vec2(10 * (1/this.DistanceToPlayer),10 * (1/this.DistanceToPlayer));
   }
 }
 
-class PlayerThrusterParticle extends Particle{
+export class PlayerThrusterParticle extends Particle{
   constructor(){
     super();
     this.Name = "Player Thrust Particle";
-    this.DrawRes = new PlayerThrusterRes();
+    this.DrawRes = new DR.PlayerThrusterRes();
     this.Life = 0.115;
     this.Lifetime = this.Life;
     this.Rigidbody.Mass = 10;

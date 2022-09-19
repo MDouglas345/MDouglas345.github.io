@@ -1,5 +1,8 @@
 //connecting objects : Polar coordiantes, rotate then translate to object center
-class psPlayerThruster extends ParticleSystem{
+import * as PS from './ParticleSystem.js'
+import * as U from '../Utility/Utility.js'
+import * as P from './Particle.js'
+export class psPlayerThruster extends PS.ParticleSystem{
   constructor(Player, offset){
     super();
     this.Player = Player;
@@ -8,7 +11,7 @@ class psPlayerThruster extends ParticleSystem{
     this.Rigidbody.Pos = this.Player.Rigidbody.Pos.rAdd(this.Offset);
     this.ParticleLimit = 15;
 
-    this.ParticleType = PlayerThrusterParticle;
+    this.ParticleType = P.PlayerThrusterParticle;
 
     //this.DrawRes = new PlayerThrusterRes();
     this.DrawRes.Layer = 5;
@@ -21,16 +24,16 @@ class psPlayerThruster extends ParticleSystem{
     this.AddParticle();
     let index = 0;
 
-    let vec = GetVectorFromAngle(this.Player.Rigidbody.Orien);
+    let vec = U.GetVectorFromAngle(this.Player.Rigidbody.Orien);
     vec.Mult(-1 * 100);
 
     for (let i = 0; i < this.Particles.length; i++){
       let item = this.Particles[i];
 
-      item.DrawRes.Opacity = Lerp(0,2,item.Lifetime);
+      item.DrawRes.Opacity = U.Lerp(0,2,item.Lifetime);
       item.Lifetime -= felapsed;
 
-      if (item.Lifetime < 0){item.Restart(this.Rigidbody.Pos, copyInstance(vec));}
+      if (item.Lifetime < 0){item.Restart(this.Rigidbody.Pos, U.copyInstance(vec));}
 
     }
   }

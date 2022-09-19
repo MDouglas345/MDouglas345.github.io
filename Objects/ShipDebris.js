@@ -1,8 +1,10 @@
-class ShipDebris extends GameObject{
+import * as GO from './GameObject.js'
+import * as DR from '../Renderer/DrawRes.js'
+export class ShipDebris extends GO.GameObject{
   constructor(){
     super();
     this.Rigidbody.Enable();
-    this.DrawRes = new ShipDebrisRes();
+    this.DrawRes = new DR.ShipDebrisRes();
     this.TimedDelete();
   }
 

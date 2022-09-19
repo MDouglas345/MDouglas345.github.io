@@ -10,57 +10,71 @@
   Need to implement a quadtree to help with collision detection performance
 */
 
-var Global = window || global;
 
-class Game{
+import * as P from './Player/Player.js';
+import * as M from './main.js';
+import * as CP from './Objects/Cryptopolid.js'
+import * as NP from './Objects/PlanetNightly.js'
+import * as BG from './Objects/BG.js'
+import * as SF from './Objects/StarField.js'
+import * as AS from './Particles/AstroidSystem.js'
+import * as PS from './Physics/Physics.js'
+import * as QT from './QuadTree/QuadTree.js'
+import * as CH from './Collisions/CollisionHandler.js'
+import * as C from './Camera/Camera.js'
+import * as SPS from './Particles/psSpaceParallax.js'
+
+export class Game{
   //static Entities = ObjectManager.Entities;
   constructor(){
-    this.ObjectHandleInstance = Global.OManager;
+    
+  }
 
-    this.m_Player = new Player();
+  Init(){
+
+    this.ObjectHandleInstance = M.OManager;
+
+    this.m_Player = new P.Player();
 
   //  this.PlanetDemo = new Earth();
-    this.Cryptopolid = new Cryptopolid();
-    this.Nightly = new PlanetNightly();
+    this.Cryptopolid = new CP.Cryptopolid();
+    this.Nightly = new NP.PlanetNightly();
 
 
 
     //this.BGMaster = new DemoBGMaster(this.m_Player);
 
-    this.BGMaster = new SpaceBackground();
-    this.Stars = new StarField();
+    this.BGMaster = new BG.SpaceBackground();
+    this.Stars = new SF.StarField();
 
-    this.Astroids = new AstroidSystem(this.m_Player);
+    this.Astroids = new AS.AstroidSystem(this.m_Player);
 
-    this.Physics = new PhysicsSystem();
+    this.Physics = new PS.PhysicsSystem();
 
-    this.QuadTree = new QuadTree(this.m_Player);
+    this.QuadTree = new QT.QuadTree(this.m_Player);
 
-    this.CollisionHandler = new CollisionHandler(this.QuadTree);
+    this.CollisionHandler = new CH.CollisionHandler(this.QuadTree);
 
     //this.EnemyDemo = new EnemyScouter();
 
-    this.m_Camera = new Camera(this.m_Player);
+    this.m_Camera = new C.Camera(this.m_Player);
 
-    this.StarSystem = new psStarParallax(10,this.m_Camera);
+    this.StarSystem = new SPS.psStarParallax(10,this.m_Camera);
     //this.StarSystem = new StarSystem(20);
 
 
     //this.BattleTest();
-  }
-
-  Init(){
-    Game.AddObject(this.m_Player);
-    Game.AddObject(this.m_Camera);
+    M.GameSystem.AddObject(this.m_Player);
+    M.GameSystem.AddObject(this.m_Camera);
     //Game.AddObject(this.DebugObject);
-    Game.AddObject(this.BGMaster);
-    Game.AddObject(this.Stars);
+    M.GameSystem.AddObject(this.BGMaster);
+    M.GameSystem.AddObject(this.Stars);
     //Game.AddObject(this.PlanetDemo)
-    Game.AddObject(this.Cryptopolid);
-    Game.AddObject(this.Nightly);
-    Game.AddObject(this.Astroids);
+    M.GameSystem.AddObject(this.Cryptopolid);
+    M.GameSystem.AddObject(this.Nightly);
+    M.GameSystem.AddObject(this.Astroids);
     //Game.AddObject(this.EnemyDemo);
-    Game.AddObject(this.StarSystem);
+    M.GameSystem.AddObject(this.StarSystem);
 
 
     this.ObjectHandleInstance.m_Entities.forEach(layer =>{
@@ -144,7 +158,7 @@ class Game{
   }
 
 
-  static GetObjectByName(name){
+   GetObjectByName(name){
     /*
     this.Entities.forEach(item =>{
       if (item.Name === name){console.log(item);return item;}
@@ -159,15 +173,15 @@ class Game{
     return null;
     */
 
-    return ObjectManager.GetObjectByName(name);
+    return M.OManager.GetObjectByName(name);
   }
 
-  static AddObject(object){
+   AddObject(object){
     /*
     this.Entities.push(object);
     Renderer.AddObject(object);
     */
-    ObjectManager.AddObject(object);
+    M.OManager.AddObject(object);
 
 
 

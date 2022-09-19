@@ -6,17 +6,21 @@
   Depending on the type of effect you are trying to achieve (a stream or just an expanse) you will either only AddParticles in the Update()(for a stream) or call CreateParticles() in the constructor, or some blend of both
 */
 
-
-class ParticleSystem extends GameObject{
+import * as GO from '../Objects/GameObject.js'
+import * as DR from '../Renderer/DrawRes.js'
+import * as DF from '../Renderer/DrawFunction.js'
+import * as M from '../main.js'
+import * as P from './Particle.js'
+export class ParticleSystem extends GO.GameObject{
   constructor(starAmount){
     super();
     this.Particles = [];
     this.ParticleLimit = starAmount;
     this.Active = true;
-    this.DrawRes = new DrawRes();
+    this.DrawRes = new DR.DrawRes();
     this.ParticleCount = 0;
 
-    this.ParticleType = Particle;
+    this.ParticleType = P.Particle;
 
 
   }
@@ -25,7 +29,7 @@ class ParticleSystem extends GameObject{
     for (let i = 0; i < this.ParticleLimit; i++){
       let p = new this.ParticleType();
       this.Particles.push(p);
-      Game.AddObject(p);
+      M.GameSystem.AddObject(p);
     }
   }
 
@@ -33,7 +37,7 @@ class ParticleSystem extends GameObject{
     if (this.ParticleCount < this.ParticleLimit){
       let p = new this.ParticleType();
       this.Particles.push(p);
-      Game.AddObject(p);
+      M.GameSystem.AddObject(p);
       this.ParticleCount++;
     }
 
@@ -46,12 +50,12 @@ class ParticleSystem extends GameObject{
   }
   Disable(){
     this.Particles.forEach(item =>{
-      item.DrawRes.DrawFunc = new DrawFunction();
+      item.DrawRes.DrawFunc = new DF.DrawFunction();
     });
   }
   Enable(){
     this.Particles.forEach(item =>{
-      item.DrawRes.DrawFunc = new BRotatedDrawFunction();
+      item.DrawRes.DrawFunc = new DF.BRotatedDrawFunction();
     });
   }
 
